@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DWES - UD01 - Integració</title>
+    <!-- <script>
+        function mensaje(){
+            alert("idk");
+        }
+    </script> -->
+  </head>
+  <body>
+    <h1>Modificar CSS</h1>
+    <p id="miTexto">Cualquier texto</p>
+    <button type="button" onclick="miFrase();">Cambia frase</button>
+    <button type="button" onclick="miEstilo();">Cambia estilo</button>
+
+    <script>
+      function miEstilo() {
+        let miTexto = document.getElementById("miTexto");
+        if (miTexto.innerHTML.match("hola")) {
+          miTexto.style.color = "blue";
+          miTexto.style.fontSize = "25px";
+        } else {
+          miTexto.style.fontWeight = "700";
+          miTexto.innerHTML = "algo mas";
+        }
+        window.alert('cuidao');
+        document.write("<h2>TEXTO NUEVO</h2>");
+      }
+      function miFrase() {
+        let miTexto = document.getElementById("miTexto");
+        if (miTexto.innerHTML.match("Cualquier texto")) miTexto.innerHTML = "hola";
+        else miTexto.innerHTML = "Cualquier texto";
+      }
+    </script>
+
+    <!-- <h1>Modificando imágenes</h1>
+    <img
+      src="./img/pato1.jfif"
+      id="imagen1"
+      onclick="cambiaImg();"
+      width="100"
+      height="100"
+    />
+    <p>Haz click sobre las letras para cambiarlas</p>
+
+    <script>
+        function cambiaImg() {
+          let img = document.getElementById("imagen1");
+          if (img.src.match("pato1")) img.src = "./img/pato2.jfif";
+          else img.src = "./img/pato1.jfif";
+        }
+      </script> -->
+
+    <!-- <h1>Modificando el código HTML</h1>
+
+    <p id="prueba">Modificando el contenido</p>
+    
+    <button type="button" onclick="document.getElementById('prueba').innerHTML = 'CAMBIANDO EL CONTENIDO'">botoncito</button> -->
+
+    <!-- <script>
+        mensaje();
+    </script> -->
+
+    <!-- <p onclick="console.log('loksea')">Mensaje de prueba</p> -->
+    <noscript>
+      <p>permite javascript, rata.</p>
+    </noscript>
+  </body>
+  <!-- <script src="./js/script.js"></script> -->
+</html>
