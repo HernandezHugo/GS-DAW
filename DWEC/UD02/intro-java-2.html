@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reglas</title>
+
+    <button onclick="this.innerHTML=Date()">Pulsa para saber la hora</button>
+
+    <!-- <script src="./funciones.js"> -->
+    <script>
+      var persona = {
+        nombre: "Pepe",
+        edad: 23,
+        altura: 1.7,
+        saludar: function () {
+          console.log("Hola, soy " + this.nombre);
+        },
+      };
+
+      console.log(
+        "Esta persona se llama " +
+          persona.nombre +
+          " con edad " +
+          persona.edad +
+          " y altura " +
+          persona.altura
+      );
+
+      persona.saludar();
+
+      persona.despedir = function () {
+        console.log("me voy a cancun");
+      };
+
+      persona.despedir();
+
+      let a;
+      a = 10;
+
+      function suma() {
+        var b = 5;
+        c = 20;
+        return a + b;
+      }
+
+      console.log(suma());
+      console.log(c);
+
+      /*var s = "Hola";
+
+      var x = 23;
+      var pi = 3.141592;
+
+      var s1 = "dobles";
+      var s2 = "simples"; */
+
+      /* var fecha = new Date();
+      var fechaCadena = fecha.toDateString();
+      console.log(fecha); */
+
+      //   alert(s1);
+      //   alert(s2);
+
+      /* let arrJander = Array(5).fill("cadena");
+      console.log(arrJander[0]); */
+    </script>
+  </head>
+  <body></body>
+</html>
