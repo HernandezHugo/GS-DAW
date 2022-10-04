@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p id="fecha"></p>
+    <script>
+      /* document.getElementById("fecha").innerHTML = Date(); */
+      
+      let fecha = new Date();
+      let fecha2 = new Date("16 Jan 2016");
+      let fecha3 = new Date(2022,10,4,16,02,33,23);
+   /*    alert(fecha);
+      alert(fecha2);
+      alert(fecha3); */
+
+      /* toFixed(n) provides n length after the decimal point; toPrecision(x) provides x total length. */
+      var num = 9.9999;
+      console.log(num.toFixed(0));
+      console.log(num.toFixed(1));
+      console.log(num.toFixed(2));
+   
+      
+      var num = 9.999000;
+      
+      console.log(num.toPrecision(2));
+      console.log(num.toPrecision(3));
+      console.log(num.toPrecision(4));
+      
+    </script>
+  </body>
+</html>
