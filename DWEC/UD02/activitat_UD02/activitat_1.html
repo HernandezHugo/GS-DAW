@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>activitat 1</title>
+  </head>
+  <body>
+    <p id="numero"></p>
+    <button id="btn_entero">Entero</button>
+    <button id="btn_decimal">Decimal</button>
+    <button id="btn_cientifico">Cientifico</button>
+    <button id="btn_octal">Octal</button>
+    <button id="btn_hex">Hexadecimal</button>
+    <script>
+      let num = document.getElementById("numero");
+      let btn_entero = document.getElementById("btn_entero");
+      let btn_decimal = document.getElementById("btn_decimal");
+      let btn_cientifico = document.getElementById("btn_cientifico");
+      let btn_octal = document.getElementById("btn_octal");
+      let btn_hex = document.getElementById("btn_hex");
+
+      btn_entero.addEventListener("click", (e) => {
+        num.innerHTML = 74;
+      });
+
+      btn_decimal.addEventListener("click", (e) => {
+        num.innerHTML = 8.2;
+      });
+
+      btn_cientifico.addEventListener("click", (e) => {
+        num.innerHTML = 8e-6;
+      });
+
+      btn_octal.addEventListener("click", (e) => {
+        num.innerHTML = 065;
+      });
+
+      btn_hex.addEventListener("click", (e) => {
+        num.innerHTML = 0x2f4;
+      });
+    </script>
+  </body>
+</html>
