@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>activitat 2</title>
+  </head>
+  <body>
+    <input type="number" id="edad" placeholder="0"/>
+    <button id="btn_edad">action</button>
+    <script>
+      let input_edad = document.getElementById("edad");
+      let btn_edad = document.getElementById("btn_edad");
+
+      btn_edad.addEventListener("click", (e) => {
+        if (input_edad.value > 60) alert("Jubilat");
+        else if (input_edad.value <= 60 && input_edad.value >= 27)
+          alert("Adult");
+        else if (input_edad.value <= 26 && input_edad.value >= 13)
+          alert("Jove");
+        else if (input_edad.value <= 12 && input_edad.value >= 0) alert("Nen");
+      });
+
+      /* Autor: Hugo Hernandez */
+    </script>
+  </body>
+</html>
