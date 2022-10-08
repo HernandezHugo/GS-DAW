@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>activitat 2</title>
+  </head>
+  <body>
+    <p id="screen"></p>
+    <script>
+      let screen = document.getElementById("screen");
+
+      let initialTime = new Date();
+      initialTime.setHours(9);
+      initialTime.setMinutes(0);
+
+      for (let i = 0; i <= 25; i++) {
+        let isHalf = initialTime.getMinutes() == 30;
+        if (isHalf) {
+          document.write(
+            "<p>" +
+              initialTime.getHours() +
+              ":" +
+              initialTime.getMinutes() +
+              "</p>"
+          );
+        } else {
+          document.write(
+            "<p>" +
+              initialTime.getHours() +
+              ":" +
+              initialTime.getMinutes() +
+              " en punt </p>"
+          );
+        }
+
+        //Adds 30minutes each iteration
+        initialTime.setMinutes(initialTime.getMinutes() + 30);
+      }
+      /* Autor: Hugo Hernandez */
+    </script>
+  </body>
+</html>
