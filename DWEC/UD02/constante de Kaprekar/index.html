@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Constante de Kaprekar</title>
+  </head>
+  <body>
+    <input id="numero" type="number" />
+    <button id="btn">action</button>
+    <!-- <script src="./script.js"></script> -->
+    <script>
+      let numero = document.getElementById("numero");
+      let btn = document.getElementById("btn");
+      const final_result = 6174;
+
+      function Kaprekar() {
+        //make an array from value => sort value a>b and a<b => put them together => make them a number
+        let leftNum = Number(
+          numero.value
+            .split("")
+            .sort((a, b) => b.localeCompare(a))
+            .join("")
+        );
+        let rgtNum = Number(
+          numero.value
+            .split("")
+            .sort((a, b) => a.localeCompare(b))
+            .join("")
+        );
+
+        let aux = 0;
+
+        while (leftNum - rgtNum == final_result) {
+          aux += 1;
+        }
+
+        console.log(leftNum);
+        console.log(rgtNum);
+        console.log(leftNum - rgtNum);
+        console.log(aux);
+      }
+
+      btn.addEventListener("click", (e) => {
+        console.log(typeof numero.value);
+        Kaprekar();
+      });
+    </script>
+  </body>
+</html>
