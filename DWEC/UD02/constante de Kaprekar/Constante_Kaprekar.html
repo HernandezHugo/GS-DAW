@@ -17,31 +17,41 @@
 
       function Kaprekar(kaNum, depth) {
         if (kaNum == final_result) {
-          return 0;
+          return document.write(
+            "<p> Numero Kaprekar: " + final_result + "</p>"
+          );
         } else {
-          //make an array from value => sort value a>b and a<b => put them together => make them a number
-          let leftNum = Number(
+          depth += 1;
+          //make an array from value => sort array minor to greater and greater to minor => transform arrays to a string with join => string to a Number
+          let greater = Number(
             kaNum
-              .toString()
               .split("")
               .sort((a, b) => b.localeCompare(a))
               .join("")
           );
-          let rgtNum = Number(
+          let minor = Number(
             kaNum
-              .toString()
               .split("")
               .sort((a, b) => a.localeCompare(b))
               .join("")
           );
-          Kaprekar(leftNum - rgtNum, depth);
-          return console.log(depth += 1);
+          // Add a zero if our greater num isn't 4 digits longer
+          if (greater < 1000) greater *= 10;
+
+          let result = greater - minor;
+          document.write(
+            "<p>" + "Numero de iteración: " + depth + " - " + result + "</p>"
+          );
+          Kaprekar(result.toString(), depth);
         }
       }
-      
+
       btn.addEventListener("click", (e) => {
+        document.write("<p>Numero introducido: " + numero.value + "</p>");
         Kaprekar(numero.value, 0);
       });
+
+      //Hugo Hernandez Quimbay
     </script>
   </body>
 </html>
