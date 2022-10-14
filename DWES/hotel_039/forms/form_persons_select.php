@@ -41,7 +41,6 @@ include '../db/db_persons_select.php';
                 <div class="col">
                     <p>Posición</p>
                 </div>
-
             </div>
             <?php foreach ($person[0] as $person_data) : ?>
 
