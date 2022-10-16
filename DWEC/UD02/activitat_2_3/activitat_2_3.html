@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>activitat 2-3</title>
+  </head>
+  <body>
+    <script>
+      // ex. 1
+      /* 
+      let num = prompt("Escribe un numero para realizar la tabla de este.");
+      let count = 0;
+      while (count <= 10) {
+        document.write(
+          "<p>" + count + " x " + num + " = " + Number(num) * count + "</p>"
+        );
+        count += 1;
+      } 
+      */
+
+      //ex. 2
+      /* 
+      let count = 1;
+      while (count <= 6) {
+        document.write("<h" + count + ">JavaScript</h" + count + ">");
+        count += 1;
+      }
+        */
+      //ex. 3
+      /* 
+      let num = prompt("Escribe un numero para realizar la tabla de este.");
+      let result = Number(num);
+      document.write("<p>Tu numero es " + num + " y su factoriales son: </p>");
+      for (let i = Number(num); i > 0; i--) {
+        result *= i;
+        document.write("<p>" + i + "</p>");
+      }
+      document.write("<p>El resultado final es: " + result + "</p>");
+ */
+      //ex. 4
+      /* 
+      let cadena = prompt("Escribe un numero para realizar la tabla de este.");
+      let countUpperCase = 0;
+      let countLowerCase = 0;
+      for (let i = 0; i < cadena.length; i++) {
+        //check if is uppercase
+        if (cadena[i] == cadena[i].toUpperCase() && countUpperCase < 1) {
+          countUpperCase += 1;
+          continue;
+        }
+        //check if is lowercase
+        else if (cadena[i] == cadena[i].toLowerCase() && countLowerCase < 1) {
+          countLowerCase += 1;
+          continue;
+        }
+        //write msg if the string has at least 1 uppercase and 1 lowercase
+        else if (
+          i == cadena.length - 1 &&
+          countLowerCase > 0 &&
+          countUpperCase > 0
+        ) {
+          document.write(
+            "La cadena esta compuesta por minúsculas y mayúsculas."
+          );
+        }
+        //write msg if there're not uppercase
+        else if (i == cadena.length - 1 && countLowerCase > 0) {
+          document.write("La cadena esta compuesta solo por minúsculas.");
+        }
+        //write msg if there're not lowercase
+        else if (i == cadena.length - 1 && countUpperCase > 0) {
+          document.write("La cadena esta compuesta solo por mayúsculas.");
+        }
+      }
+ */
+
+      //ex. 5
+/* 
+      let lives = 4;
+      let hangedMan = [
+        "|",
+        "|       /\\",
+        "|      -|-",
+        "|      \tO",
+        "|-------|",
+      ];
+      let key = prompt("Parece oro, plata no es:");
+      while (key != "platano") {
+         console.log((hangedMan[lives]));
+        if (lives > 0) lives -= 1;
+        key = prompt("Intentalo de nuevo. Parece oro, plata no es:");
+      } */
+
+      //Hugo Hernandez
+
+
+
+
+    </script>
+  </body>
+</html>

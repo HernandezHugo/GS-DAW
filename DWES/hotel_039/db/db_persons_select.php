@@ -9,7 +9,8 @@ if (isset($_GET['submit'])) {
     $id_persons = mysqli_real_escape_string($conn, $_GET['ID_persons']);
 
     // write query
-    $sql = "SELECT * FROM 039_persons WHERE ID_persons = '$id_persons'";
+    //$sql = "SELECT * FROM 039_persons WHERE ID_persons = '$id_persons'";
+    $sql = "SELECT * FROM persons WHERE ID_persons = '$id_persons'";
 
     // make query and result
     $result = mysqli_query($conn, $sql);
