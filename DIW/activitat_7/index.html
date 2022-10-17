@@ -8,12 +8,14 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
     />
+    <link rel="stylesheet" href="styles/style.css" />
     <title>Establecimientos</title>
   </head>
-  <body>
-    <div class="container-fluid">
+  <body style="min-height: 100vh; margin: 0">
+    <!-- Header -->
+    <header class="container-fluid">
       <!-- Nav -->
-      <nav class="navbar navbar-expand my-3 bg-light">
+      <nav class="navbar navbar-expand mt-3 bg-light">
         <div class="container-fluid">
           <a href="#" class="navbar-brand">Navbar</a>
         </div>
@@ -30,7 +32,7 @@
         </ul>
       </nav>
       <!-- location finder -->
-      <div class="container my-3">
+      <div class="container mt-5">
         <form class="d-flex offset-2 col-8" role="search">
           <input
             class="form-control"
@@ -41,8 +43,10 @@
           <button class="btn btn-outline-primary" type="submit">Search</button>
         </form>
       </div>
-
-      <div class="container bg-light">
+    </header>
+    <!-- main -->
+    <main>
+      <div class="container mt-5 bg-light">
         <div class="row">
           <!-- tag finder -->
           <div class="col-3">
@@ -99,22 +103,296 @@
               Gluten free 2
             </button>
           </div>
-          <div class="col">
+          <div class="col-9">
             <div class="row">
               <!-- carousel most rated establishments -->
-              <div class="col-9 my-3">
-                <div class="d-flex bg-white">
-                  <div class="flex-shrink-0"><img src="" alt="" /></div>
-                  <div class="flex-grow-1 ms-3">??</div>
+              <div class="col my-3">
+                <div
+                  id="carouselExampleControls"
+                  class="carousel slide"
+                  data-bs-ride="carousel"
+                >
+                  <div class="carousel-inner">
+                    <div class="carousel-item active">
+                      <div class="card text-bg-dark" style="width: 18rem">
+                        <img
+                          class="card-img img-fluid"
+                          src="img/bambu-menorca-fondo.jpg"
+                          alt=""
+                        />
+                        <div class="row card-img-overlay">
+                          <div class="col-4">
+                            <img
+                              class="img-fluid"
+                              src="img/bambu.png"
+                              class="card-img-top"
+                              alt="..."
+                            />
+                          </div>
+                          <div class="text-white col-8 pt-0">
+                            <h6 class="card-title">Bambú Menorca</h6>
+                            <p class="m-0">4/5 (100)</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="carousel-item">
+                      <div class="card text-bg-dark" style="width: 18rem">
+                        <img
+                          class="card-img img-fluid"
+                          src="img/bambu-menorca-fondo.jpg"
+                          alt=""
+                        />
+                        <div class="row card-img-overlay">
+                          <div class="col-4">
+                            <img
+                              class="img-fluid"
+                              src="img/bambu.png"
+                              class="card-img-top"
+                              alt="..."
+                            />
+                          </div>
+                          <div class="text-white col-8 pt-0">
+                            <h6 class="card-title">Bambú Menorca</h6>
+                            <p class="m-0">4/5 (100)</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="carousel-item">
+                      <div class="card text-bg-dark" style="width: 18rem">
+                        <img
+                          class="card-img img-fluid"
+                          src="img/bambu-menorca-fondo.jpg"
+                          alt=""
+                        />
+                        <div class="row card-img-overlay">
+                          <div class="col-4">
+                            <img
+                              class="img-fluid"
+                              src="img/bambu.png"
+                              class="card-img-top"
+                              alt="..."
+                            />
+                          </div>
+                          <div class="text-white col-8 pt-0">
+                            <h6 class="card-title">Bambú Menorca</h6>
+                            <p class="m-0">4/5 (100)</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <button
+                    class="carousel-control-prev"
+                    type="button"
+                    data-bs-target="#carouselExampleControls"
+                    data-bs-slide="prev"
+                  >
+                    <span
+                      class="carousel-control-prev-icon"
+                      aria-hidden="true"
+                    ></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button
+                    class="carousel-control-next"
+                    type="button"
+                    data-bs-target="#carouselExampleControls"
+                    data-bs-slide="next"
+                  >
+                    <span
+                      class="carousel-control-next-icon"
+                      aria-hidden="true"
+                    ></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
                 </div>
               </div>
               <!-- establishments nearby -->
-              <div class="col-9 my-3"></div>
+              <div class="col my-3">
+                <div class="card text-bg-dark mb-3" style="max-width: 540px">
+                  <img src="img/romana-local.png" class="card-img" alt="..." />
+                  <div class="row text-white card-img-overlay g-0">
+                    <div class="col-3">
+                      <img
+                        src="img/roma-logo.png"
+                        class="img-fluid bg-light rounded-start"
+                        alt="..."
+                      />
+                    </div>
+                    <div class="col-8">
+                      <div class="card-body pt-0">
+                        <h5 class="card-title m-0">Pizzeria Roma</h5>
+                        <p class="card-text m-0">3/5 (80)</p>
+                        <p class="card-text m-0">
+                          Carrer de Sant Pere d'Alcàntara, 18
+                        </p>
+                        <p class="card-text m-0">
+                          <small>Spanish - Italian</small>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card text-bg-dark mb-3" style="max-width: 540px">
+                  <img src="img/romana-local.png" class="card-img" alt="..." />
+                  <div class="row text-white card-img-overlay g-0">
+                    <div class="col-3">
+                      <img
+                        src="img/roma-logo.png"
+                        class="img-fluid bg-light rounded-start"
+                        alt="..."
+                      />
+                    </div>
+                    <div class="col-8">
+                      <div class="card-body pt-0">
+                        <h5 class="card-title m-0">Pizzeria Roma</h5>
+                        <p class="card-text m-0">3/5 (80)</p>
+                        <p class="card-text m-0">
+                          Carrer de Sant Pere d'Alcàntara, 18
+                        </p>
+                        <p class="card-text m-0">
+                          <small>Spanish - Italian</small>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </main>
+    <!-- Footer -->
+
+    <!-- Footer -->
+    <footer class="text-center text-lg-start bg-light mt-3 text-muted">
+      <!-- Section: Social media -->
+      <section
+        class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"
+      >
+        <!-- Left -->
+        <div class="me-5 d-none d-lg-block">
+          <span>Get connected with us on social networks:</span>
+        </div>
+        <!-- Left -->
+
+        <!-- Right -->
+        <div>
+          <a href="" class="me-4 text-reset">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="" class="me-4 text-reset">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="" class="me-4 text-reset">
+            <i class="fab fa-google"></i>
+          </a>
+          <a href="" class="me-4 text-reset">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="" class="me-4 text-reset">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="" class="me-4 text-reset">
+            <i class="fab fa-github"></i>
+          </a>
+        </div>
+        <!-- Right -->
+      </section>
+      <!-- Section: Social media -->
+
+      <!-- Section: Links  -->
+      <section class="">
+        <div class="container text-center text-md-start mt-5">
+          <!-- Grid row -->
+          <div class="row mt-3">
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+              <!-- Content -->
+              <h6 class="text-uppercase fw-bold mb-4">
+                <i class="fas fa-gem me-3"></i>Company name
+              </h6>
+              <p>
+                Here you can use rows and columns to organize your footer
+                content. Lorem ipsum dolor sit amet, consectetur adipisicing
+                elit.
+              </p>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+              <!-- Links -->
+              <h6 class="text-uppercase fw-bold mb-4">Products</h6>
+              <p>
+                <a href="#!" class="text-reset">Angular</a>
+              </p>
+              <p>
+                <a href="#!" class="text-reset">React</a>
+              </p>
+              <p>
+                <a href="#!" class="text-reset">Vue</a>
+              </p>
+              <p>
+                <a href="#!" class="text-reset">Laravel</a>
+              </p>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+              <!-- Links -->
+              <h6 class="text-uppercase fw-bold mb-4">Useful links</h6>
+              <p>
+                <a href="#!" class="text-reset">Pricing</a>
+              </p>
+              <p>
+                <a href="#!" class="text-reset">Settings</a>
+              </p>
+              <p>
+                <a href="#!" class="text-reset">Orders</a>
+              </p>
+              <p>
+                <a href="#!" class="text-reset">Help</a>
+              </p>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+              <!-- Links -->
+              <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+              <p><i class="fas fa-home me-3"></i> New York, NY 10012, US</p>
+              <p>
+                <i class="fas fa-envelope me-3"></i>
+                info@example.com
+              </p>
+              <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
+              <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
+            </div>
+            <!-- Grid column -->
+          </div>
+          <!-- Grid row -->
+        </div>
+      </section>
+      <!-- Section: Links  -->
+
+      <!-- Copyright -->
+      <div
+        class="text-center p-4"
+        style="background-color: rgba(0, 0, 0, 0.05)"
+      >
+        © 2021 Copyright:
+        <a class="text-reset fw-bold" href="https://mdbootstrap.com/"
+          >MDBootstrap.com</a
+        >
+      </div>
+      <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
   </body>
