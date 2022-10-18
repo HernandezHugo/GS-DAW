@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen UD02</title>
+</head>
+<body>
+    <script>
+        //Inicializamos la cadena de caracteres con las letras del abecedario
+        let abc = 'abcdefghijklmnopqrstuvwxyz';
+        //print de la posicion de cada letra mas la propia letra
+        // añadimos 1 a i para entender la posicion en la que estamos
+        for (let i = 0; i < abc.length; i++) {
+            document.write(i + 1 + " - " + abc[i] + "<br>");
+        }
+        //print de la posicion de cada letra añadida a la 'a' mas la propia letra
+        //añadimos 27 para continuar con la posicion que teniamos en el bucle de antes
+        //abc[0] elegimos esta posicion para añadir la 'a' al bucle
+        for (let i = 0; i < abc.length; i++) {
+            document.write(i + 27 + " - " + abc[0] + abc[i] + "<br>");
+        }
+
+    </script>
+</body>
+</html>

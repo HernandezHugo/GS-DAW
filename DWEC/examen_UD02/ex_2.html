@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Examen UD02</title>
+  </head>
+  <body>
+    <script>
+      let msg_error = "ERROR, intenta-ho de nou.";
+      let msg_error_nombre = "El falta el nom.";
+      let msg_error_apellido = "El falta el cognom.";
+      let nombre_clave = "Joan";
+      let apellido_clave = "Melsion";
+
+      var name = prompt("nom i cognom del profe de DWEC");
+      // Entramos en el bucle en el caso de que el resultado no sea el esperado
+      while (name != nombre_clave + " " + apellido_clave) {
+        //Comprobamos si existe el nombre o el apellido en el mensaje introducio por pantalla
+        if (name.includes(nombre_clave + " " + apellido_clave)) {
+          break;
+        } 
+        //
+        else if (name.includes(nombre_clave)) {
+          alert(msg_error_apellido);
+        } else if (name.includes(apellido_clave)) {
+          alert(msg_error_nombre);
+        }
+        var name = prompt(msg_error + ", nom i cognom del profe de DWEC");
+      }
+      //Mensaje de bienvenida despues de recibir el resultado esperado
+      alert("Benvingut");
+
+      /* Autor: Hugo Hernandez */
+    </script>
+  </body>
+</html>

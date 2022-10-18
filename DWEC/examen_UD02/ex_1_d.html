@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Examen UD02</title>
+  </head>
+  <body>
+    <!-- integración 1 -->
+    <input
+      type="button"
+      value="intragración 1"
+      onclick="alert('Hola Mundo!')"
+    />
+    <!-- integración 3 -->
+    <input id="btn" type="button" value="integración 2" />
+
+    <script>
+      // Integración 2
+      alert("Hola Mundo!");
+
+      //Integración 3
+      let btn = document.getElementById("btn");
+      btn.addEventListener("click", (e) => {
+        alert("Hola Mundo!");
+      });
+      
+    </script>
+  </body>
+</html>

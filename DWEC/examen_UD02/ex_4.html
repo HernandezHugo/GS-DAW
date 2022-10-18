@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Examen UD02</title>
+  </head>
+  <body>
+    <script>
+      let msg_error_greater = "numero muy grande";
+      let msg_error_minor = "numero muy pequeño";
+      let btn = document.getElementById("btn");
+
+      let dni = prompt("introduce DNI");
+      let valor = Number(dni);
+      let letras = [
+        "T",
+        "R",
+        "W",
+        "A",
+        "G",
+        "M",
+        "Y",
+        "F",
+        "P",
+        "D",
+        "X",
+        "B",
+        "N",
+        "J",
+        "Z",
+        "S",
+        "Q",
+        "V",
+        "H",
+        "L",
+        "C",
+        "K",
+        "E",
+      ];
+      while (valor < 99999999 && valor > 0) {
+        if (valor > 99999999) {
+          alert(msg_error_greater);
+          dni = prompt("introduce DNI");
+          break;
+        }
+        if (valor < 0) {
+          alert(msg_error_minor);
+          dni = prompt("introduce DNI");
+          break;
+        }
+        let pos_letra = valor % 23;
+        let letra = letras[pos_letra];
+
+        document.write("<p>" + dni + letra + "</p>");
+        console.log(dni);
+      }
+    </script>
+  </body>
+</html>
