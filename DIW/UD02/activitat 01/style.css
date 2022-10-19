@@ -5,7 +5,7 @@
 * {
   font-family: myFirstFont;
 }
-h2{
+h2 {
   margin: 20px;
   padding-top: 20px;
 }
@@ -26,14 +26,57 @@ form {
   display: flex;
   flex-direction: column;
 }
+
 .input-text {
   width: 70%;
   margin: 10px auto;
 }
+
 input[type] {
   height: 25px;
   width: 100%;
 }
+
+/* input radio style */
+.d-flex {
+  display: flex;
+}
+
+/* hide radio */
+input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  height: 0;
+  width: 0;
+}
+
+/* img style */
+input[type="radio"] + img {
+  cursor: pointer;
+}
+
+img[src*=icono] {
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0.5;
+  margin: 10px;
+  height: calc(412px * 0.15);
+  width: calc(412px * 0.15);
+}
+
+img[src*=icono]:hover {
+  opacity: 1;
+  height: calc(512px * 0.15);
+  width: calc(512px * 0.15);
+}
+
+/* checked style */
+[type="radio"]:checked + img {
+  outline: 2px solid black;
+  opacity: 1;
+  height: calc(512px * 0.15);
+  width: calc(512px * 0.15);
+}
+
 .btn {
   display: flex;
   margin: 10px auto;
