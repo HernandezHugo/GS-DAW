@@ -1,0 +1,42 @@
+@font-face {
+  font-family: myFirstFont;
+  src: url(jmh_typewriter/JMH\ Typewriter.otf);
+}
+* {
+  font-family: myFirstFont;
+}
+h2{
+  margin: 20px;
+  padding-top: 20px;
+}
+body {
+  height: 100vh;
+  background-image: url(img/fondo-grande.jpg);
+  background-position: center;
+  background-size: cover;
+}
+
+main {
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 60%;
+  margin: 0 auto;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+.input-text {
+  width: 70%;
+  margin: 10px auto;
+}
+input[type] {
+  height: 25px;
+  width: 100%;
+}
+.btn {
+  display: flex;
+  margin: 10px auto;
+  padding: 5px 15px;
+  background-color: white;
+}
