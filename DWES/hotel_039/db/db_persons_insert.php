@@ -5,8 +5,9 @@ include 'connect_db.php';
 
 if (isset($_GET['submit'])) {
     //echo $_GET['ID_persons'];
+    print_r($_GET);
 
-    $dni = mysqli_real_escape_string($conn, $_GET['dni']);
+   /*  $dni = mysqli_real_escape_string($conn, $_GET['dni']);
     $firstname = mysqli_real_escape_string($conn, $_GET['firstname']);
     $surname = mysqli_real_escape_string($conn, $_GET['surname']);
     $email = mysqli_real_escape_string($conn, $_GET['email']);
@@ -15,11 +16,11 @@ if (isset($_GET['submit'])) {
     $position = mysqli_real_escape_string($conn, $_GET['position']);
     if ($position == '0') {
         $position = 'NULL';
-    };
+    }; */
 
     // write query
-    $sql = "INSERT INTO 039_persons (ID_persons, DNI, firstname, surname, email, birthday, phone_number, ID_position)" .
-        "VALUES('DEFAULT','$dni','$firstname','$surname','$email','$birthday','$phone_number', '$position');";
+    //$sql = "INSERT INTO 039_persons (ID_persons, DNI, firstname, surname, email, birthday, phone_number, ID_position)" .
+       // "VALUES('DEFAULT','$dni','$firstname','$surname','$email','$birthday','$phone_number', '$position');";
 
     // make query and result
     $result = mysqli_query($conn, $sql);
@@ -30,5 +31,5 @@ if (isset($_GET['submit'])) {
     // close connection
     mysqli_close($conn);
 
-    //print_r($person);
+    
 };
