@@ -23,11 +23,8 @@ include '../db/db_persons_insert.php';
         <label for="">birthday (yyyy-mm-dd)</label>
         <input type="date" name="birthday">
         <br>
-        <label for="">phone number</label>
+        <label for="">phone number (xxxxxxxxx)</label>
         <input type="number" name="phone_number">
-        <br>
-        <label for="">Posición</label>
-        <input type="number" name="position" min="0" max="10" placeholder="0">
         <br>
         <input type="submit" name="submit" value="submit">
     </form>
