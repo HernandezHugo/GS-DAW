@@ -12,7 +12,6 @@ if (isset($_GET['submit'])) {
     $birthday = mysqli_real_escape_string($conn, $_GET['birthday']);
     $phone_number = mysqli_real_escape_string($conn, $_GET['phone_number']);
 
-
     // write query
     $sql = "INSERT INTO 039_persons (ID_persons, DNI, firstname, surname, email, birthday, phone_number)";
     $sql .= "VALUES('DEFAULT','$dni','$firstname','$surname','$email','$birthday','$phone_number');";
