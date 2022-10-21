@@ -1,19 +1,19 @@
 <?php
 require '../templates/header.php';
-include '../db/db_persons_select.php';
+include '../db/db_clients_select.php';
 
 ?>
 <div class="container bg-light my-5">
 
     <form action="" method="GET">
-        <label for="">ID persons:</label>
-        <input type="number" name="ID_persons">
+        <label for="">ID client:</label>
+        <input type="number" name="ID_client">
         <br>
         <input type="submit" name="submit" value="submit">
     </form>
 
 </div>
-<?php if ($person) : ?>
+<?php if ($client) : ?>
     <div class="container my-5">
         <div class="row bg-light">
             <div class="row">
@@ -33,16 +33,13 @@ include '../db/db_persons_select.php';
                     <p>Email</p>
                 </div>
                 <div class="col">
-                    <p>Cumpleaños</p>
-                </div>
-                <div class="col">
                     <p>Número</p>
                 </div>
             </div>
-            <?php foreach ($person[0] as $person_data) : ?>
+            <?php foreach ($client[0] as $client_data) : ?>
 
                 <div class="col">
-                    <?php echo $person_data; ?>
+                    <?php echo $client_data; ?>
 
                 </div>
             <?php endforeach; ?>

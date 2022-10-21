@@ -1,6 +1,6 @@
 <?php
 require '../templates/header.php';
-include '../db/db_persons_insert.php';
+include '../db/db_clients_insert.php';
 
 
 
@@ -19,9 +19,6 @@ include '../db/db_persons_insert.php';
         <br>
         <label for="">email</label>
         <input type="email" name="email">
-        <br>
-        <label for="">birthday (yyyy-mm-dd)</label>
-        <input type="date" name="birthday">
         <br>
         <label for="">phone number (xxxxxxxxx)</label>
         <input type="number" name="phone_number">
