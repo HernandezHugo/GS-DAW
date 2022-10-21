@@ -25,6 +25,3 @@ if (isset($_GET['submit'])) {
 
     //print_r($client);
 };
-
-
-?>

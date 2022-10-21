@@ -4,12 +4,11 @@ include 'connect_db.php';
 
 
 if (isset($_GET['submit'])) {
-    //echo $_GET['ID_clients'];
 
     $id_client = mysqli_real_escape_string($conn, $_GET['ID_client']);
 
     // write query
-    $sql = "SELECT * FROM 039_clients WHERE ID_client '$id_client'";
+    $sql = "SELECT * FROM 039_clients WHERE ID_client ='$id_client'";
 
     // make query and result
     $result = mysqli_query($conn, $sql);
@@ -23,8 +22,4 @@ if (isset($_GET['submit'])) {
     // close connection
     mysqli_close($conn);
 
-    //print_r($client);
 };
-
-
-?>
