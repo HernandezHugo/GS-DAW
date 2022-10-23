@@ -13,7 +13,7 @@ if (isset($_POST['submit'])) {
     $result = mysqli_query($conn, $sql);
 
     // fetch the resulting rows as an array
-    $client_selected = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    $client_selected = mysqli_fetch_assoc($result);
 
     // free result from memory
     mysqli_free_result($result);

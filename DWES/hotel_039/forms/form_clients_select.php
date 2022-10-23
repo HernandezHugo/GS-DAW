@@ -31,7 +31,7 @@ include './db/db_clients_select.php';
             </thead>
             <tbody>
                 <tr>
-                    <?php foreach ($client_selected[0] as $client_data) : ?>
+                    <?php foreach ($client_selected as $client_data) : ?>
                         <td>
                             <?php echo $client_data; ?>
                         </td>

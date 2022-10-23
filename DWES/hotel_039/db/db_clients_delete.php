@@ -5,6 +5,22 @@ include 'connect_db.php';
 $client_selected = [];
 $id_client = '';
 
+if (isset($_GET['result'])) {
+
+    $id_client = mysqli_real_escape_string($conn, $_GET['result']);
+
+    // write query
+    $sql = "SELECT * FROM 039_clients WHERE ID_client = '$id_client'";
+
+    // make query and result
+    $result = mysqli_query($conn, $sql);
+
+    // fetch the resulting rows as an array
+    $client_selected = mysqli_fetch_assoc($result);
+
+    // free result from memory
+    mysqli_free_result($result);
+};
 
 if (isset($_POST['delete'])) {
 
@@ -21,26 +37,6 @@ if (isset($_POST['delete'])) {
         //error
         echo 'query error: ' . mysqli_error($conn);
     }
-
-    // close connection
-    mysqli_close($conn);
-};
-
-if (isset($_GET['result'])) {
-
-    $id_client = mysqli_real_escape_string($conn, $_GET['result']);
-
-    // write query
-    $sql = "SELECT * FROM 039_clients WHERE ID_client = '$id_client'";
-
-    // make query and result
-    $result = mysqli_query($conn, $sql);
-
-    // fetch the resulting rows as an array
-    $client_selected = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
-    // free result from memory
-    mysqli_free_result($result);
 
     // close connection
     mysqli_close($conn);

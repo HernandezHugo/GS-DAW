@@ -15,12 +15,11 @@ include '../db/db_clients_delete.php';
                     <th scope="col">Surname</th>
                     <th scope="col">Email</th>
                     <th scope="col">Phone number</th>
-                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <?php foreach ($client_selected[0] as $client_data) : ?>
+                    <?php foreach ($client_selected as $client_data) : ?>
                         <td>
                             <?php echo $client_data; ?>
                         </td>
