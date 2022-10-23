@@ -2,24 +2,74 @@
 
 include 'connect_db.php';
 
+$errors = [];
 
-if (isset($_GET['submit'])) {
+//get id from url
+$id = $_GET['result'];
+$id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
 
-    $id_client = mysqli_real_escape_string($conn, $_GET['ID_client']);
+// write query
+$sql = "SELECT * FROM 039_clients WHERE ID_client = '$id'";
 
-    // write query
-    $sql = "SELECT * FROM 039_clients WHERE ID_client ='$id_client'";
+// make query and result
+$result = mysqli_query($conn, $sql);
 
-    // make query and result
-    $result = mysqli_query($conn, $sql);
+// fetch the resulting rows as an array
+$client_selected = mysqli_fetch_assoc($result);
 
-    // fetch the resulting rows as an array
-    $client = mysqli_fetch_all($result, MYSQLI_ASSOC);
+// free result from memory
+mysqli_free_result($result);
 
-    // free result from memory
-    mysqli_free_result($result);
+//get client_data
+$dni = $client_selected['dni'];
+$firstname = $client_selected['firstname'];
+$surname = $client_selected['surname'];
+$email = $client_selected['email'];
+$phone_number = $client_selected['phone_number'];
+
+
+if (isset($_POST['submit'])) {
+
+    $dni = mysqli_real_escape_string($conn, $_POST['dni']);
+    $firstname = mysqli_real_escape_string($conn, $_POST['firstname']);
+    $surname = mysqli_real_escape_string($conn, $_POST['surname']);
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $phone_number = mysqli_real_escape_string($conn, $_POST['phone_number']);
+
+
+    //Validate parameters
+    if (!$dni) {
+        $errors[] = 'DNI section is empty';
+    }
+    if (!$firstname) {
+        $errors[] = 'Firstname section is empty';
+    }
+    if (!$surname) {
+        $errors[] = 'Surname section is empty';
+    }
+    if (!$email) {
+        $errors[] = 'Email section is empty';
+    }
+    if (!$phone_number) {
+        $errors[] = 'Phone number section is empty';
+    }
+
+    //Check array erros is empty
+    if (empty($errors)) {
+        // write query
+        $sql = "UPDATE 039_clients SET dni = '$dni', firstname = '$firstname', surname = '$surname',";
+        $sql .=" email = '$email', phone_number = $phone_number WHERE ID_client = $id;";
+
+        //save to db and check
+        if (mysqli_query($conn, $sql)) {
+            //success
+            header('Location: /DWES/hotel_039/clients.php?msg=3');
+        } else {
+            //error
+            echo 'query error: ' . mysqli_error($conn);
+        }
+    }
 
     // close connection
     mysqli_close($conn);
-
 };

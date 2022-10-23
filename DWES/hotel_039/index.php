@@ -1,12 +1,9 @@
 <?php
 require './templates/header.php';
-echo 'iaeeeeeeeedf';
-
-
-
+echo 'index';
 ?>
 
-</div>
+
 
 <?php
 require './templates/footer.php';

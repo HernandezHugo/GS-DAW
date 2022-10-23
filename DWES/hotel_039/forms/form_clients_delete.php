@@ -3,17 +3,38 @@ require '../templates/header.php';
 include '../db/db_clients_delete.php';
 
 ?>
-<div class="container bg-light my-5">
 
-    <form action="" method="GET">
-        <label for="">ID client:</label>
-        <input type="number" name="ID_client">
-        <br>
-        <input type="submit" name="submit" value="submit">
-    </form>
-
-</div>
-
+<?php if ($client_selected) : ?>
+    <div class="container my-5">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">DNI</th>
+                    <th scope="col">Firstname</th>
+                    <th scope="col">Surname</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone number</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <?php foreach ($client_selected[0] as $client_data) : ?>
+                        <td>
+                            <?php echo $client_data; ?>
+                        </td>
+                    <?php endforeach; ?>
+                </tr>
+            </tbody>
+        </table>
+        <p class="text-center mt-3">Are you sure you want to delete this client?</p>
+        <form class="d-flex justify-content-center" action="" method="POST">
+            <input type="hidden" name="id_to_delete" value="<?php echo $id_client ?>">
+            <input type="submit" name="delete" class="btn btn-danger my-3 mx-auto" value="DELETE">
+        </form>
+    </div>
+<?php endif; ?>
 <?php
 require '../templates/footer.php';
 ?>
