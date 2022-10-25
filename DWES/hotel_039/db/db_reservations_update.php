@@ -9,23 +9,20 @@ $id = $_GET['result'];
 $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
 
 // write query
-$sql = "SELECT * FROM 039_clients WHERE ID_client = '$id'";
-
+$sql = "SELECT * FROM 039_reservations WHERE ID_reservation = '$id'";
 // make query and result
 $result = mysqli_query($conn, $sql);
-
 // fetch the resulting rows as an array
-$client_selected = mysqli_fetch_assoc($result);
-
+$reservation_selected = mysqli_fetch_assoc($result);
 // free result from memory
 mysqli_free_result($result);
 
-//get client_data
-$dni = $client_selected['dni'];
-$firstname = $client_selected['firstname'];
-$surname = $client_selected['surname'];
-$email = $client_selected['email'];
-$phone_number = $client_selected['phone_number'];
+//get reservation_data
+$dni = $reservation_selected['dni'];
+$firstname = $reservation_selected['firstname'];
+$surname = $reservation_selected['surname'];
+$email = $reservation_selected['email'];
+$phone_number = $reservation_selected['phone_number'];
 
 
 if (isset($_POST['submit'])) {
@@ -57,13 +54,13 @@ if (isset($_POST['submit'])) {
     //Check array erros is empty
     if (empty($errors)) {
         // write query
-        $sql = "UPDATE 039_clients SET dni = '$dni', firstname = '$firstname', surname = '$surname',";
-        $sql .=" email = '$email', phone_number = $phone_number WHERE ID_client = $id;";
+        $sql = "UPDATE 039_reservations SET dni = '$dni', firstname = '$firstname', surname = '$surname',";
+        $sql .=" email = '$email', phone_number = $phone_number WHERE ID_reservation = $id;";
 
         //save to db and check
         if (mysqli_query($conn, $sql)) {
             //success
-            header('Location: /DWES/hotel_039/clients.php?msg=3');
+            header('Location: /DWES/hotel_039/reservations.php?msg=3');
         } else {
             //error
             echo 'query error: ' . mysqli_error($conn);

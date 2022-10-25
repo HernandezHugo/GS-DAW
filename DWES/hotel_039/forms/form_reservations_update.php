@@ -4,24 +4,35 @@ include '../db/db_clients_update.php';
 
 ?>
 
-<h1 class="text-center mt-3">Update client</h1>
+<h1 class="text-center mt-3">Update Reservation</h1>
 
 <div class="container bg-light mt-3 w-75">
-    <form class="mt-3 " action="" method="POST">
-        <label class="form-label mt-3" for="">DNI (xxxxxxxxL)</label>
-        <input class="form-control form-control-sm " type="text" name="dni" value="<?php echo $dni; ?>">
+<form class="mt-3 " action="" method="POST">
+        <label class="form-label mt-3" for="">Client</label>
+        <select class="input-group" name="id_client">
+            <option value="" selected></option>
+            <?php foreach ($clients as $client) : ?>
+                <option value="<?php echo $client['ID_client']; ?>"><?php echo $client['firstname']; ?></option>
+            <?php endforeach; ?>
+        </select>
+        <label class="form-label mt-3" for="">room</label>
+        <select class="input-group" name="id_room">
+            <option value="" selected></option>
+            <?php foreach ($rooms as $room) : ?>
+                <option value="<?php echo $room['ID_room']; ?>"><?php echo $room['name_room']; ?></option>
+            <?php endforeach; ?>
+        </select>
 
-        <label class="form-label mt-3" for="">Firstname</label>
-        <input class="form-control form-control-sm " type="text" name="firstname" value="<?php echo $firstname; ?>">
-
-        <label class="form-label mt-3" for="">Surname</label>
-        <input class="form-control form-control-sm " type="text" name="surname" value="<?php echo $surname; ?>">
-
-        <label class="form-label mt-3" for="">Email</label>
-        <input class="form-control form-control-sm " type="email" name="email" value="<?php echo $email; ?>">
-
-        <label class="form-label mt-3" for="">Phone number (xxxxxxxxx)</label>
-        <input class="form-control form-control-sm " type="number" name="phone_number" value="<?php echo $phone_number; ?>">
+        <label class="form-label mt-3" for="">Initial date</label>
+        <input type="date" name="initial_date" value="">
+        <label class="form-label mt-3" for="">Final date</label>
+        <input type="date" name="final_date" value="">
+        <br>
+        <label class="form-label mt-3" for="">Total price</label>
+        <input type="number" name="total_price" value="" class="form-control form-control-sm">
+        <label class="form-label mt-3" for="">Status</label>
+        <input type="text" name="status_room" value="" class="form-control form-control-sm">
+        <br>
 
         <input class="my-3 btn btn-outline-primary btn-sm" type="submit" name="submit" value="Submit">
     </form>
