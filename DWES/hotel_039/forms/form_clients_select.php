@@ -1,7 +1,5 @@
 <?php
 include './db/db_clients_select.php';
-
-
 ?>
 
 <div class="container bg-light my-5">

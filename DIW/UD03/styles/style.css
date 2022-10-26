@@ -1,0 +1,39 @@
+*,
+*::after,
+*::before {
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.text-center {
+  text-align: center;
+}
+.img-sm {
+  height: 3rem;
+}
+.d-block {
+  display: block;
+}
+.d-inline-block {
+  display: inline-block;
+}
+.d-inline {
+    display: inline;
+}
+.center {
+    margin: 0 auto;
+}
+.nav-relative{
+    position: relative;
+}
+.p-absolute {
+  position: absolute;
+}
+.right{
+    right: 0;
+}
+.absolute-center{
+    left: 50%;
+    transform: translateX(-50%);
+}
