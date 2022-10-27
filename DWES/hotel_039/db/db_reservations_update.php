@@ -4,63 +4,64 @@ include 'connect_db.php';
 
 $errors = [];
 
-//get id from url
-$id = $_GET['result'];
-$id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
-
-// write query
-$sql = "SELECT * FROM 039_reservations WHERE ID_reservation = '$id'";
-// make query and result
+$sql = "SELECT * FROM 039_clients";
 $result = mysqli_query($conn, $sql);
-// fetch the resulting rows as an array
-$reservation_selected = mysqli_fetch_assoc($result);
-// free result from memory
+$clients = mysqli_fetch_all($result, MYSQLI_ASSOC);
 mysqli_free_result($result);
 
-//get reservation_data
-$dni = $reservation_selected['dni'];
-$firstname = $reservation_selected['firstname'];
-$surname = $reservation_selected['surname'];
-$email = $reservation_selected['email'];
-$phone_number = $reservation_selected['phone_number'];
+$sql = "SELECT * FROM 039_rooms";
+$result = mysqli_query($conn, $sql);
+$rooms = mysqli_fetch_all($result, MYSQLI_ASSOC);
+mysqli_free_result($result);
+
+$id_client = '';
+$id_room = '';
+$initial_date = '';
+$final_date = '';
+$total_price = '';
+$status_room = '';
 
 
 if (isset($_POST['submit'])) {
 
-    $dni = mysqli_real_escape_string($conn, $_POST['dni']);
-    $firstname = mysqli_real_escape_string($conn, $_POST['firstname']);
-    $surname = mysqli_real_escape_string($conn, $_POST['surname']);
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $phone_number = mysqli_real_escape_string($conn, $_POST['phone_number']);
+    $id_client = mysqli_real_escape_string($conn, $_POST['id_client']);
+    $id_room = mysqli_real_escape_string($conn, $_POST['id_room']);
+    $initial_date = mysqli_real_escape_string($conn, $_POST['initial_date']);
+    $final_date = mysqli_real_escape_string($conn, $_POST['final_date']);
+    $total_price = mysqli_real_escape_string($conn, $_POST['total_price']);
+    $status_room = mysqli_real_escape_string($conn, $_POST['status_room']);
 
 
     //Validate parameters
-    if (!$dni) {
-        $errors[] = 'DNI section is empty';
+    if (!$id_client) {
+        $errors[] = 'Client section is empty';
     }
-    if (!$firstname) {
-        $errors[] = 'Firstname section is empty';
+    if (!$id_room) {
+        $errors[] = 'Room section is empty';
     }
-    if (!$surname) {
-        $errors[] = 'Surname section is empty';
+    if (!$initial_date) {
+        $errors[] = 'Initial date section is empty';
     }
-    if (!$email) {
-        $errors[] = 'Email section is empty';
+    if (!$final_date) {
+        $errors[] = 'Final date section is empty';
     }
-    if (!$phone_number) {
-        $errors[] = 'Phone number section is empty';
+    if (!$total_price) {
+        $errors[] = 'Total price section is empty';
+    }
+    if (!$status_room) {
+        $errors[] = 'Status section is empty';
     }
 
     //Check array erros is empty
     if (empty($errors)) {
         // write query
-        $sql = "UPDATE 039_reservations SET dni = '$dni', firstname = '$firstname', surname = '$surname',";
-        $sql .=" email = '$email', phone_number = $phone_number WHERE ID_reservation = $id;";
+        $sql = "INSERT INTO 039_reservations ( ID_client, ID_room, initial_date, final_date, total_price, status_room)";
+        $sql .= "VALUES('$id_client','$id_room','$initial_date','$final_date','$total_price' ,'$status_room');";
 
         //save to db and check
         if (mysqli_query($conn, $sql)) {
             //success
-            header('Location: /DWES/hotel_039/reservations.php?msg=3');
+            header('Location: /DWES/hotel_039/reservations.php?msg=1');
         } else {
             //error
             echo 'query error: ' . mysqli_error($conn);

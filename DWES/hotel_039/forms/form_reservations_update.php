@@ -1,13 +1,13 @@
 <?php
 require '../templates/header.php';
-include '../db/db_clients_update.php';
+include '../db/db_reservations_insert.php';
 
 ?>
 
-<h1 class="text-center mt-3">Update Reservation</h1>
+<h1 class="text-center mt-3">Insert reservation</h1>
 
 <div class="container bg-light mt-3 w-75">
-<form class="mt-3 " action="" method="POST">
+    <form class="mt-3 " action="" method="POST">
         <label class="form-label mt-3" for="">Client</label>
         <select class="input-group" name="id_client">
             <option value="" selected></option>
@@ -24,14 +24,14 @@ include '../db/db_clients_update.php';
         </select>
 
         <label class="form-label mt-3" for="">Initial date</label>
-        <input type="date" name="initial_date" value="">
+        <input type="date" name="initial_date">
         <label class="form-label mt-3" for="">Final date</label>
-        <input type="date" name="final_date" value="">
+        <input type="date" name="final_date">
         <br>
         <label class="form-label mt-3" for="">Total price</label>
-        <input type="number" name="total_price" value="" class="form-control form-control-sm">
+        <input type="number" name="total_price" class="form-control form-control-sm">
         <label class="form-label mt-3" for="">Status</label>
-        <input type="text" name="status_room" value="" class="form-control form-control-sm">
+        <input type="text" name="status_room" class="form-control form-control-sm">
         <br>
 
         <input class="my-3 btn btn-outline-primary btn-sm" type="submit" name="submit" value="Submit">
@@ -44,6 +44,7 @@ include '../db/db_clients_update.php';
     <?php endforeach; ?>
 
 </div>
+
 <?php
 require '../templates/footer.php';
 ?>
