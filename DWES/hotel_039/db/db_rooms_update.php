@@ -40,7 +40,7 @@ if (isset($_POST['submit'])) {
     //Check array erros is empty
     if (empty($errors)) {
         // write query
-        $sql = "UPDATE 039_rooms SET name = '$name', capacity = '$capacity'";
+        $sql = "UPDATE 039_rooms SET name_room = '$name', capacity = '$capacity'";
         $sql .=" WHERE ID_room = $id;";
 
         //save to db and check
