@@ -1,6 +1,6 @@
 <?php
 
-include 'connect_db.php';
+include ($_SERVER['DOCUMENT_ROOT'].'/DWES/db/connect_db.php');
 
 $room_selected = [];
 $id_room = '';
@@ -32,7 +32,7 @@ if (isset($_POST['delete'])) {
     //delete from db and check
     if (mysqli_query($conn, $sql)) {
         //success
-        header('Location: /DWES/hotel_039/rooms.php?msg=2');
+        header('Location: /DWES/rooms.php?msg=2');
     } else {
         //error
         echo 'query error: ' . mysqli_error($conn);

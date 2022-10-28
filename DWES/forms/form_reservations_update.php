@@ -1,6 +1,6 @@
 <?php
-require '../templates/header.php';
-include '../db/db_reservations_update.php';
+require ($_SERVER['DOCUMENT_ROOT'].'/DWES/templates/header.php');
+include ($_SERVER['DOCUMENT_ROOT'].'/DWES/db/db_reservations_update.php');
 
 ?>
 
@@ -46,5 +46,5 @@ include '../db/db_reservations_update.php';
 </div>
 
 <?php
-require '../templates/footer.php';
+require ($_SERVER['DOCUMENT_ROOT'].'/DWES/templates/footer.php');
 ?>

@@ -1,5 +1,5 @@
 <?php
-include './db/db_reservations_select.php';
+include ($_SERVER['DOCUMENT_ROOT'].'/DWES/db/db_reservations_select.php');
 
 
 ?>

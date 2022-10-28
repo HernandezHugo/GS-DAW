@@ -1,5 +1,5 @@
 <?php
-include './db/db_clients_select.php';
+include ($_SERVER['DOCUMENT_ROOT'].'/DWES/db/db_clients_select.php');
 ?>
 
 <div class="container bg-light my-5">

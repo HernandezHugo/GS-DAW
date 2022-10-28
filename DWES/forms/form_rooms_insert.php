@@ -1,6 +1,6 @@
 <?php
-require '../templates/header.php';
-include '../db/db_rooms_insert.php';
+require ($_SERVER['DOCUMENT_ROOT'].'/DWES/templates/header.php');
+include ($_SERVER['DOCUMENT_ROOT'].'/DWES/db/db_rooms_insert.php');
 
 ?>
 
@@ -20,7 +20,6 @@ include '../db/db_rooms_insert.php';
             <option value="4">4</option>
         </select>
 
-
         <input class="my-3 btn btn-outline-primary btn-sm" type="submit" name="submit" value="Submit">
     </form>
 
@@ -33,5 +32,5 @@ include '../db/db_rooms_insert.php';
 </div>
 
 <?php
-require '../templates/footer.php';
+require ($_SERVER['DOCUMENT_ROOT'].'/DWES/templates/footer.php');
 ?>

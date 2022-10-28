@@ -1,5 +1,5 @@
 <?php
-require './templates/header.php';
+require ($_SERVER['DOCUMENT_ROOT'].'/DWES/templates/header.php');
 include './db/connect_db.php';
 
 //msg success at insert
@@ -20,7 +20,7 @@ mysqli_free_result($result);
 <h1 class="text-center mt-3">Section reservations</h1>
 
 <?php
-include './forms/form_reservations_select.php';
+include ($_SERVER['DOCUMENT_ROOT'].'/DWES/forms/form_reservations_select.php');
 ?>
 
 <div class="container my-5">
@@ -75,5 +75,5 @@ include './forms/form_reservations_select.php';
 </div>
 
 <?php
-require './templates/footer.php';
+require ($_SERVER['DOCUMENT_ROOT'].'/DWES/templates/footer.php');
 ?>
