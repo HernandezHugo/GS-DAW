@@ -1,5 +1,5 @@
 <?php
-require './templates/header.php';
+require ($_SERVER['DOCUMENT_ROOT'].'/DWES/templates/header.php');
 include './db/connect_db.php';
 
 //msg success at insert
@@ -75,5 +75,5 @@ include './forms/form_reservations_select.php';
 </div>
 
 <?php
-require './templates/footer.php';
+require ($_SERVER['DOCUMENT_ROOT'].'/DWES/templates/footer.php');
 ?>

@@ -1,10 +1,10 @@
 <?php
-require './templates/header.php';
+require ($_SERVER['DOCUMENT_ROOT'].'/DWES/templates/header.php');
 echo 'index';
 ?>
 
 
 
 <?php
-require './templates/footer.php';
+require ($_SERVER['DOCUMENT_ROOT'].'/DWES/templates/footer.php');
 ?>
