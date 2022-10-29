@@ -1,3 +1,10 @@
+:root {
+  --grey: #c8c8c8;
+  --orange: #fa880e;
+  --blue: #1774ff;
+  --white: #ffffff;
+}
+
 *,
 *::after,
 *::before {
@@ -5,6 +12,16 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+.bg-grey {
+  background-color: var(--grey);
+}
+.p-1 {
+  padding: 1em;
+}
+.py-2 {
+  padding-top: 2em;
+  padding-bottom: 2em;
 }
 .text-center {
   text-align: center;
@@ -15,25 +32,97 @@
 .d-block {
   display: block;
 }
+.p-fixed {
+  position: fixed;
+}
+.p-sticky {
+  position: sticky;
+  top: 0;
+}
 .d-inline-block {
   display: inline-block;
 }
 .d-inline {
-    display: inline;
+  display: inline;
 }
 .center {
-    margin: 0 auto;
+  margin: 0 auto;
 }
-.nav-relative{
-    position: relative;
+.p-relative {
+  position: relative;
 }
 .p-absolute {
   position: absolute;
 }
-.right{
-    right: 0;
+.absolute-center {
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
-.absolute-center{
-    left: 50%;
-    transform: translateX(-50%);
+.right {
+  right: 5%;
+  transform: translateY(-50%);
+}
+.input-text{
+  padding: 5px;
+}
+.input-text:active{
+  border-color: #1774ff;
+}
+.btn{
+  color: var(--orange);
+  padding: 1em;
+  background-color: var(--white);
+  border: 1px solid var(--orange);
+  border-radius: 5px;
+  cursor: pointer;
+}
+.btn img{
+  height: 25px;
+}
+.btn-sm{
+  padding: 5px;
+}
+.btn-top {
+  border-radius: 50%;
+  right: 5%;
+  bottom: 5%;
+}
+
+.d-inline a {
+  margin: 1em;
+}
+
+a:link {
+  text-decoration: none;
+}
+a:hover {
+  color: var(--orange);
+  text-decoration: underline;
+}
+a:active {
+  color: var(--blue);
+  text-decoration: underline;
+}
+.aside {
+  vertical-align: top;
+  width: 15%;
+}
+
+.menu {
+  margin-left: 2em;
+  margin-bottom: 2em;
+}
+.menu ul {
+  margin-top: 10px;
+}
+.menu li {
+  list-style: none;
+  margin: 5px 10px;
+}
+.main {
+  width: 84%;
+}
+.footer {
+  width: 100%;
+  margin: auto 0 0 0;
 }
