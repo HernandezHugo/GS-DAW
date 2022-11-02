@@ -2,7 +2,6 @@
 require ($_SERVER['DOCUMENT_ROOT'].'/DWES/templates/header.php');
 include ($_SERVER['DOCUMENT_ROOT'].'/DWES/db/connect_db.php');
 
-
 //msg success at insert
 $msg = $_GET['msg'] ?? null;
 
