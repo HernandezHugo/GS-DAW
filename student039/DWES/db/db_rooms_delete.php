@@ -1,22 +1,22 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'].'/dwes/db/connect_db.php');
+include ($_SERVER['DOCUMENT_ROOT'].'/student039/dwes/db/connect_db.php');
 
-$reservation_selected = [];
-$id_reservation = '';
+$room_selected = [];
+$id_room = '';
 
 if (isset($_GET['result'])) {
 
-    $id_reservation = mysqli_real_escape_string($conn, $_GET['result']);
+    $id_room = mysqli_real_escape_string($conn, $_GET['result']);
 
     // write query
-    $sql = "SELECT * FROM 039_reservations WHERE ID_reservation = '$id_reservation'";
+    $sql = "SELECT * FROM 039_rooms WHERE ID_room = '$id_room'";
 
     // make query and result
     $result = mysqli_query($conn, $sql);
 
     // fetch the resulting rows as an array
-    $reservation_selected = mysqli_fetch_assoc($result);
+    $room_selected = mysqli_fetch_assoc($result);
 
     // free result from memory
     mysqli_free_result($result);
@@ -27,12 +27,12 @@ if (isset($_POST['delete'])) {
     $id_to_delete = mysqli_real_escape_string($conn, $_POST['id_to_delete']);
 
     // write query
-    $sql = "DELETE FROM 039_reservations WHERE ID_reservation = '$id_to_delete'";
+    $sql = "DELETE FROM 039_rooms WHERE ID_room = '$id_to_delete'";
 
     //delete from db and check
     if (mysqli_query($conn, $sql)) {
         //success
-        header('Location: /dwes/reservations.php?msg=2');
+        header('Location: /dwes/rooms.php?msg=2');
     } else {
         //error
         echo 'query error: ' . mysqli_error($conn);

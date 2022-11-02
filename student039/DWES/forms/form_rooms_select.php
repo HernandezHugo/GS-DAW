@@ -1,5 +1,5 @@
 <?php
-include ($_SERVER['DOCUMENT_ROOT'].'/dwes/db/db_rooms_select.php');
+include ($_SERVER['DOCUMENT_ROOT'].'/student039/dwes/db/db_rooms_select.php');
 
 
 ?>

@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'].'/dwes/db/connect_db.php');
+include ($_SERVER['DOCUMENT_ROOT'].'/student039/dwes/db/connect_db.php');
 
 $errors = [];
 
