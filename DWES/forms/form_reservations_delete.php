@@ -1,6 +1,6 @@
 <?php
-require ($_SERVER['DOCUMENT_ROOT'].'/DWES/templates/header.php');
-include ($_SERVER['DOCUMENT_ROOT'].'/DWES/db/db_reservations_delete.php');
+require ($_SERVER['DOCUMENT_ROOT'].'/dwes/templates/header.php');
+include ($_SERVER['DOCUMENT_ROOT'].'/dwes/db/db_reservations_delete.php');
 
 ?>
 
@@ -36,5 +36,5 @@ include ($_SERVER['DOCUMENT_ROOT'].'/DWES/db/db_reservations_delete.php');
     </div>
 <?php endif; ?>
 <?php
-require ($_SERVER['DOCUMENT_ROOT'].'/DWES/templates/footer.php');
+require ($_SERVER['DOCUMENT_ROOT'].'/dwes/templates/footer.php');
 ?>

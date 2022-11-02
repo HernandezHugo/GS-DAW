@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'].'/DWES/db/connect_db.php');
+include ($_SERVER['DOCUMENT_ROOT'].'/dwes/db/connect_db.php');
 
 $errors = [];
 
@@ -31,7 +31,7 @@ if (isset($_POST['submit'])) {
         //save to db and check
         if (mysqli_query($conn, $sql)) {
             //success
-            header('Location: /DWES/rooms.php?msg=1');
+            header('Location: /dwes/rooms.php?msg=1');
         } else {
             //error
             echo 'query error: ' . mysqli_error($conn);

@@ -1,6 +1,6 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'].'/DWES/db/connect_db.php');
+include ($_SERVER['DOCUMENT_ROOT'].'/dwes/db/connect_db.php');
 
 $reservation_selected = [];
 $id_reservation = '';
@@ -32,7 +32,7 @@ if (isset($_POST['delete'])) {
     //delete from db and check
     if (mysqli_query($conn, $sql)) {
         //success
-        header('Location: /DWES/reservations.php?msg=2');
+        header('Location: /dwes/reservations.php?msg=2');
     } else {
         //error
         echo 'query error: ' . mysqli_error($conn);
