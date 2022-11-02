@@ -38,7 +38,7 @@ include ($_SERVER['DOCUMENT_ROOT'].'/dwes/forms/form_rooms_select.php');
             <?php echo 'Update succeeded'; ?>
         </p>
     <?php endif; ?>
-    <a class="m-1 btn btn-outline-success btn-sm" href="forms/form_rooms_insert.php">Insert Room</a>
+    <a class="m-1 btn btn-outline-success btn-sm" href="/dwes/forms/form_rooms_insert.php">Insert Room</a>
     <?php if ($rooms) : ?>
         <table class="table table-hover">
             <thead>
@@ -60,8 +60,8 @@ include ($_SERVER['DOCUMENT_ROOT'].'/dwes/forms/form_rooms_select.php');
                             </td>
                         <?php endforeach; ?>
                         <td>
-                            <a class="w-100 m-1 btn btn-outline-warning btn-sm" href="./forms/form_rooms_update.php?result=<?php echo $id ?>">Update</a>
-                            <a class="w-100 m-1 btn btn-outline-danger btn-sm" href="./forms/form_rooms_delete.php?result=<?php echo $id ?>">Delete</a>
+                            <a class="w-100 m-1 btn btn-outline-warning btn-sm" href="/dwes/forms/form_rooms_update.php?result=<?php echo $id ?>">Update</a>
+                            <a class="w-100 m-1 btn btn-outline-danger btn-sm" href="/dwes/forms/form_rooms_delete.php?result=<?php echo $id ?>">Delete</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

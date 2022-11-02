@@ -63,8 +63,8 @@ include ($_SERVER['DOCUMENT_ROOT'].'/dwes/forms/form_clients_select.php');
                             </td>
                         <?php endforeach; ?>
                         <td>
-                            <a class="w-100 m-1 btn btn-outline-warning btn-sm" href="./forms/form_clients_update.php?result=<?php echo $id ?>">Update</a>
-                            <a class="w-100 m-1 btn btn-outline-danger btn-sm" href="./forms/form_clients_delete.php?result=<?php echo $id ?>">Delete</a>
+                            <a class="w-100 m-1 btn btn-outline-warning btn-sm" href="/dwes/forms/form_clients_update.php?result=<?php echo $id ?>">Update</a>
+                            <a class="w-100 m-1 btn btn-outline-danger btn-sm" href="/dwes/forms/form_clients_delete.php?result=<?php echo $id ?>">Delete</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
