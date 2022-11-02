@@ -28,33 +28,33 @@ function getResult() {
   if (myHand == iaHand) return "empatado";
   switch (myHand) {
     case "Piedra":
-      if ((myHand && iaHand == "TIjeras") || (myHand && iaHand == "Lagarto"))
+      if ((myHand && iaHand == "Tijeras") || (myHand && iaHand == "Lagarto"))
         return "ganado";
-      if ((myHand && iaHand == "Papel") || (myHand && iaHand == "Spock"))
+      else
         return "perdido";
       break;
     case "Papel":
       if ((myHand && iaHand == "Piedra") || (myHand && iaHand == "Spock"))
         return "ganado";
-      if ((myHand && iaHand == "Tijeras") || (myHand && iaHand == "Lagarto"))
+      else
         return "perdido";
       break;
     case "Tijeras":
       if ((myHand && iaHand == "Papel") || (myHand && iaHand == "Lagarto"))
         return "ganado";
-      if ((myHand && iaHand == "Piedra") || (myHand && iaHand == "Spock"))
+      else
         return "perdido";
       break;
     case "Lagarto":
       if ((myHand && iaHand == "Papel") || (myHand && iaHand == "Spock"))
         return "ganado";
-      if ((myHand && iaHand == "Tijeras") || (myHand && iaHand == "Piedra"))
+      else
         return "perdido";
       break;
     case "Spock":
       if ((myHand && iaHand == "Papel") || (myHand && iaHand == "Lagarto"))
         return "ganado";
-      if ((myHand && iaHand == "Tijeras") || (myHand && iaHand == "Papel"))
+      else
         return "perdido";
       break;
     default:

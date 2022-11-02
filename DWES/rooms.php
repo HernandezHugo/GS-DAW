@@ -1,6 +1,6 @@
 <?php
 require ($_SERVER['DOCUMENT_ROOT'].'/DWES/templates/header.php');
-include './db/connect_db.php';
+include ($_SERVER['DOCUMENT_ROOT'].'/DWES/db/connect_db.php');
 
 //msg success at insert
 $msg = $_GET['msg'] ?? null;
