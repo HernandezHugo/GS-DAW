@@ -31,7 +31,7 @@ if (isset($_POST['submit'])) {
         //save to db and check
         if (mysqli_query($conn, $sql)) {
             //success
-            header('Location: /dwes/rooms.php?msg=1');
+            header('Location: /student039/dwes/rooms.php?msg=1');
         } else {
             //error
             echo 'query error: ' . mysqli_error($conn);

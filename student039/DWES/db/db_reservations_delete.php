@@ -32,7 +32,7 @@ if (isset($_POST['delete'])) {
     //delete from db and check
     if (mysqli_query($conn, $sql)) {
         //success
-        header('Location: /dwes/reservations.php?msg=2');
+        header('Location: /student039/dwes/reservations.php?msg=2');
     } else {
         //error
         echo 'query error: ' . mysqli_error($conn);
