@@ -98,7 +98,7 @@ img[src*="icono"] {
   background-color: #00000080;
   opacity: 0.5;
   margin: 10px;
-  transition: width 0.5s, height 0.5s, box-shadow 0.5s;
+  transition: width 0.5s, height 0.5s, box-shadow 0.1s;
   transition-timing-function: ease-in-out;
   height: var(--shortside);
   width: var(--shortside);
