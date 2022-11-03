@@ -38,7 +38,7 @@ include ($_SERVER['DOCUMENT_ROOT'].'/student039/dwes/forms/form_reservations_sel
             <?php echo 'Update succeeded'; ?>
         </p>
     <?php endif; ?>
-    <a class="m-1 btn btn-outline-success btn-sm" href="/dwes/forms/form_reservations_insert.php">Insert reservation</a>
+    <a class="m-1 btn btn-outline-success btn-sm" href="/student039/dwes/forms/form_reservations_insert.php">Insert reservation</a>
     <?php if ($reservations) : ?>
         <table class="table table-hover">
             <thead>
@@ -64,8 +64,8 @@ include ($_SERVER['DOCUMENT_ROOT'].'/student039/dwes/forms/form_reservations_sel
                             </td>
                         <?php endforeach; ?>
                         <td>
-                            <a class="w-100 m-1 btn btn-outline-warning btn-sm" href="/dwes/forms/form_reservations_update.php?result=<?php echo $id ?>">Update</a>
-                            <a class="w-100 m-1 btn btn-outline-danger btn-sm" href="/dwes/forms/form_reservations_delete.php?result=<?php echo $id ?>">Delete</a>
+                            <a class="w-100 m-1 btn btn-outline-warning btn-sm" href="/student039/dwes/forms/form_reservations_update.php?result=<?php echo $id ?>">Update</a>
+                            <a class="w-100 m-1 btn btn-outline-danger btn-sm" href="/student039/dwes/forms/form_reservations_delete.php?result=<?php echo $id ?>">Delete</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

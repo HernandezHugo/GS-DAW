@@ -20,16 +20,16 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="/dwes/index.php">Home</a>
+              <a class="nav-link" href="/student039/dwes/index.php">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/dwes/clients.php">Clients</a>
+              <a class="nav-link" href="/student039/dwes/clients.php">Clients</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/dwes/rooms.php">Rooms</a>
+              <a class="nav-link" href="/student039/dwes/rooms.php">Rooms</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/dwes/reservations.php">Reservations</a>
+              <a class="nav-link" href="/student039/dwes/reservations.php">Reservations</a>
             </li>
           </ul>
         </div>

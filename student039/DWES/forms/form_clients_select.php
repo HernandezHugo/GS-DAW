@@ -35,8 +35,8 @@ include ($_SERVER['DOCUMENT_ROOT'].'/student039/dwes/db/db_clients_select.php');
                         </td>
                     <?php endforeach; ?>
                     <td>
-                        <a class="w-100 m-1 btn btn-outline-warning btn-sm" href="./forms/form_clients_update.php?result=<?php echo $_POST['ID_client'] ?>">Update</a>
-                        <a class="w-100 m-1 btn btn-outline-danger btn-sm" href="./forms/form_clients_delete.php?result=<?php echo $_POST['ID_client'] ?>">Delete</a>
+                        <a class="w-100 m-1 btn btn-outline-warning btn-sm" href="/student039/dwes/forms/form_clients_update.php?result=<?php echo $_POST['ID_client'] ?>">Update</a>
+                        <a class="w-100 m-1 btn btn-outline-danger btn-sm" href="/student039/dwes/forms/form_clients_delete.php?result=<?php echo $_POST['ID_client'] ?>">Delete</a>
                     </td>
                 </tr>
             </tbody>
