@@ -1,3 +1,11 @@
+<?php
+
+session_start();
+echo '<pre>';
+var_dump($_SESSION);
+echo '</pre>';
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,15 +30,27 @@
             <li class="nav-item">
               <a class="nav-link" href="/student039/dwes/index.php">Home</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/student039/dwes/clients.php">Clients</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/student039/dwes/rooms.php">Rooms</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/student039/dwes/reservations.php">Reservations</a>
-            </li>
+            <?php if (empty($_SESSION['user'])) : ?>
+              <li class="nav-item">
+                <a class="nav-link" href="/student039/dwes/forms/form_login.php">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/student039/dwes/forms/form_register.php">Register</a>
+              </li>
+            <?php else : ?>
+              <li class="nav-item">
+                <a class="nav-link" href="/student039/dwes/clients.php">Clients</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/student039/dwes/rooms.php">Rooms</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/student039/dwes/reservations.php">Reservations</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/student039/dwes/db/db_logout.php">Log out</a>
+              </li>
+            <?php endif; ?>
           </ul>
         </div>
       </div>
