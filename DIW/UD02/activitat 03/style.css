@@ -15,9 +15,21 @@ h2 {
 }
 body {
   height: 100vh;
-  background-image: url(img/fondo-grande.jpg);
-  background-position: center;
-  background-size: cover;
+  background-color: black;
+  background-image: radial-gradient(
+      white,
+      rgba(255, 255, 255, 0.2) 2px,
+      transparent 40px
+    ),
+    radial-gradient(white, rgba(255, 255, 255, 0.15) 1px, transparent 30px),
+    radial-gradient(white, rgba(255, 255, 255, 0.1) 2px, transparent 40px),
+    radial-gradient(
+      rgba(255, 255, 255, 0.4),
+      rgba(255, 255, 255, 0.1) 2px,
+      transparent 30px
+    );
+  background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
+  background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
 }
 
 main {
@@ -45,26 +57,44 @@ input[type] {
 .input-text {
   position: relative;
 }
-.input-text label[for] {
+.input-text label {
   position: absolute;
-  bottom: 50%;
+  top: 30%;
   left: 2%;
   color: #658ebd;
+  pointer-events: none;
+  text-transform: uppercase;
+  transition: 0.5s;
 }
 
-.input-text:focus label[for]{
+.input-text input:valid ~ label,
+.input-text input:focus ~ label {
+  color: rgb(16, 0, 158);
+  top: -30%;
+  font-size: 0.8em;
+}
+
+.input-text:focus label {
   animation: slideOutUp 1s forwards;
 }
-[type="text"]{
+.input-text input {
+  border: 0;
+  box-shadow: 0 0 4px;
+  padding: 0.8em;
   outline: none;
+  transition: 0.5s;
+}
+.input-text input:focus {
+  border-bottom: 3px solid #5255ff;
+  box-shadow: 0 0 2px;
 }
 
 @keyframes slideOutUp {
-  from{
+  from {
     bottom: 50%;
     left: 2%;
   }
-  to{
+  to {
     bottom: 100%;
     color: #000000;
   }
