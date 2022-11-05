@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Temps de generació: 21-10-2022 a les 17:02:45
--- Versió del servidor: 10.4.18-MariaDB
--- Versió de PHP: 7.4.16
+-- Tiempo de generación: 05-11-2022 a las 18:35:32
+-- Versión del servidor: 10.4.22-MariaDB
+-- Versión de PHP: 8.1.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de dades: `039_hotel`
+-- Base de datos: `039_hotel`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `039_clients`
+-- Estructura de tabla para la tabla `039_clients`
 --
 
 CREATE TABLE `039_clients` (
@@ -37,11 +37,11 @@ CREATE TABLE `039_clients` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Bolcament de dades per a la taula `039_clients`
+-- Volcado de datos para la tabla `039_clients`
 --
 
 INSERT INTO `039_clients` (`ID_client`, `dni`, `firstname`, `surname`, `email`, `phone_number`) VALUES
-(1, '95265142G', 'juan', 'qwer', 'email.1@gmail.com', 653689524),
+(1, '95265142G', 'juanxx', 'qwer', 'email.1@gmail.com', 653689524),
 (2, '22453142K', 'jaime', 'asd', 'email.2@gmail.com', 645812257),
 (3, '18265142W', 'tomas', 'smiz', 'email.3@gmail.com', 957558631),
 (4, '91165142T', 'pol', 'lopez', 'email.4@gmail.com', 654987321),
@@ -60,7 +60,7 @@ INSERT INTO `039_clients` (`ID_client`, `dni`, `firstname`, `surname`, `email`, 
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `039_reservations`
+-- Estructura de tabla para la tabla `039_reservations`
 --
 
 CREATE TABLE `039_reservations` (
@@ -70,15 +70,15 @@ CREATE TABLE `039_reservations` (
   `initial_date` date NOT NULL,
   `final_date` date NOT NULL,
   `total_price` int(11) NOT NULL,
-  `status` varchar(60) NOT NULL
+  `status_room` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Bolcament de dades per a la taula `039_reservations`
+-- Volcado de datos para la tabla `039_reservations`
 --
 
-INSERT INTO `039_reservations` (`ID_reservation`, `ID_client`, `ID_room`, `initial_date`, `final_date`, `total_price`, `status`) VALUES
-(1, 6, 3, '2022-06-17', '2022-06-19', 300, 'check-in/out'),
+INSERT INTO `039_reservations` (`ID_reservation`, `ID_client`, `ID_room`, `initial_date`, `final_date`, `total_price`, `status_room`) VALUES
+(1, 8, 7, '2022-06-17', '2022-06-19', 400, 'check-in'),
 (2, 10, 9, '2022-07-10', '2022-07-17', 2100, 'check-in/out'),
 (3, 13, 10, '2022-06-21', '2022-06-25', 1200, 'check-in/out'),
 (4, 10, 1, '2022-06-21', '2022-06-22', 220, 'check-in/out'),
@@ -89,12 +89,15 @@ INSERT INTO `039_reservations` (`ID_reservation`, `ID_client`, `ID_room`, `initi
 (9, 4, 11, '2022-07-03', '2022-07-06', 900, 'check-in/out'),
 (10, 1, 1, '2022-07-05', '2022-07-10', 1100, 'check-in/out'),
 (11, 1, 15, '2022-06-20', '2022-06-25', 1100, 'check-in/out'),
-(12, 4, 5, '2022-06-20', '2022-06-25', 1100, 'check-in/out');
+(12, 4, 5, '2022-06-20', '2022-06-25', 1100, 'check-in/out'),
+(13, 3, 1, '2022-06-17', '2022-06-19', 300, 'check-in/out'),
+(14, 12, 8, '2022-06-17', '2022-06-19', 3555, 'check-out'),
+(15, 6, 3, '2022-06-17', '2022-06-19', 300, 'check-in');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `039_rooms`
+-- Estructura de tabla para la tabla `039_rooms`
 --
 
 CREATE TABLE `039_rooms` (
@@ -104,7 +107,7 @@ CREATE TABLE `039_rooms` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Bolcament de dades per a la taula `039_rooms`
+-- Volcado de datos para la tabla `039_rooms`
 --
 
 INSERT INTO `039_rooms` (`ID_room`, `name_room`, `capacity`) VALUES
@@ -128,18 +131,38 @@ INSERT INTO `039_rooms` (`ID_room`, `name_room`, `capacity`) VALUES
 (18, 'Cozy', 2),
 (19, 'Cozy', 2);
 
+-- --------------------------------------------------------
+
 --
--- Índexs per a les taules bolcades
+-- Estructura de tabla para la tabla `039_users`
+--
+
+CREATE TABLE `039_users` (
+  `ID_user` int(11) NOT NULL,
+  `email` varchar(60) NOT NULL,
+  `pwd` varchar(60) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `039_users`
+--
+
+INSERT INTO `039_users` (`ID_user`, `email`, `pwd`) VALUES
+(1, 'correo@correo.com', '123'),
+(2, 'dwesteacher@correo.com', 'enrique');
+
+--
+-- Índices para tablas volcadas
 --
 
 --
--- Índexs per a la taula `039_clients`
+-- Indices de la tabla `039_clients`
 --
 ALTER TABLE `039_clients`
   ADD PRIMARY KEY (`ID_client`);
 
 --
--- Índexs per a la taula `039_reservations`
+-- Indices de la tabla `039_reservations`
 --
 ALTER TABLE `039_reservations`
   ADD PRIMARY KEY (`ID_reservation`),
@@ -147,39 +170,52 @@ ALTER TABLE `039_reservations`
   ADD KEY `ID_room` (`ID_room`);
 
 --
--- Índexs per a la taula `039_rooms`
+-- Indices de la tabla `039_rooms`
 --
 ALTER TABLE `039_rooms`
   ADD PRIMARY KEY (`ID_room`);
 
 --
--- AUTO_INCREMENT per les taules bolcades
+-- Indices de la tabla `039_users`
+--
+ALTER TABLE `039_users`
+  ADD PRIMARY KEY (`ID_user`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT per la taula `039_clients`
+-- AUTO_INCREMENT de la tabla `039_clients`
 --
 ALTER TABLE `039_clients`
-  MODIFY `ID_client` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `ID_client` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT per la taula `039_reservations`
+-- AUTO_INCREMENT de la tabla `039_reservations`
 --
 ALTER TABLE `039_reservations`
-  MODIFY `ID_reservation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `ID_reservation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT per la taula `039_rooms`
+-- AUTO_INCREMENT de la tabla `039_rooms`
 --
 ALTER TABLE `039_rooms`
   MODIFY `ID_room` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
--- Restriccions per a les taules bolcades
+-- AUTO_INCREMENT de la tabla `039_users`
+--
+ALTER TABLE `039_users`
+  MODIFY `ID_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Restricciones para tablas volcadas
 --
 
 --
--- Restriccions per a la taula `039_reservations`
+-- Filtros para la tabla `039_reservations`
 --
 ALTER TABLE `039_reservations`
   ADD CONSTRAINT `039_reservations_ibfk_1` FOREIGN KEY (`ID_client`) REFERENCES `039_clients` (`ID_client`) ON UPDATE CASCADE,
