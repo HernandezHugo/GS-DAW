@@ -17,7 +17,7 @@ if (isset($_POST['submit'])) {
     if (!$pwd) {
         $errors[] = 'Password section is empty';
     }
-    
+
     //Check array erros is empty
     if (empty($errors)) {
         // write query
@@ -25,17 +25,17 @@ if (isset($_POST['submit'])) {
         $sql = "SELECT * FROM 039_users WHERE email = '$email' AND pwd = '$pwd';";
 
         $result = mysqli_query($conn, $sql);
-        $_SESSION['user'] = mysqli_fetch_assoc($result);
-        mysqli_free_result($result);
 
-        //save to db and check
-        if (empty($_SESSION['user'])) {
+        //check if user exists
+        if ($result->num_rows) {
+            //success
+            $_SESSION['user'] = mysqli_fetch_assoc($result);
+            header('Location: /student039/dwes/index.php');
+        } else {
             //error
             $errors[] = 'Email or password are wrong';
-        } else {
-            //success
-            header('Location: /student039/dwes/index.php');
         }
+        mysqli_free_result($result);
     }
 
     // close connection
