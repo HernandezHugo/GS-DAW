@@ -7,9 +7,23 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   color: #192666;
 }
+a{
+    color: var(--green);
+}
 .navbar{
     background-color: var(--green);
 }
 .list-group-item.active{
     background-color: var(--green);
+    border-color: var(--green);
 }
+
+.nav-tabs .nav-link{
+    color: var(--green);
+}
+
+.icon{
+    width: 100%;
+    padding: 1em;
+}
+
