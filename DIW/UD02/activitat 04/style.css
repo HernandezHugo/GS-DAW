@@ -1,0 +1,15 @@
+:root{
+    --green: #198754;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #192666;
+}
+.navbar{
+    background-color: var(--green);
+}
+.list-group-item.active{
+    background-color: var(--green);
+}
