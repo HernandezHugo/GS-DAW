@@ -1,3 +1,38 @@
 header {
   text-align: center;
 }
+header h1 {
+  color: green;
+}
+nav {
+  text-align: center;
+}
+nav ul {
+  padding: 0;
+}
+nav ul li {
+  list-style: none;
+  display: inline-block;
+  padding: 0 2em;
+}
+nav ul li a {
+  padding: 0 ;
+}
+main {
+  width: 80%;
+  margin: 3em auto;
+}
+main h2 {
+  color: blue;
+}
+footer {
+  width: 100%;
+  background-color: #cfcfcf;
+}
+footer .copyright p {
+  border-top: 1px solid #696969;
+  color: #555555;
+  padding: 1em;
+  margin: 0 1em;
+  text-align: center;
+}
