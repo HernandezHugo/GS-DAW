@@ -25,6 +25,9 @@ main {
 main h2 {
   color: blue;
 }
+main p {
+  font-size: 18px;
+}
 footer {
   width: 100%;
   background-color: #cfcfcf;
