@@ -25,7 +25,7 @@ DELIMITER $$
 --
 -- Procedimientos
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `addReservations` (IN `var_tier` INT, IN `var_initial_date` DATE, IN `var_number_of_days` INT)  BEGIN
+CREATE PROCEDURE `addReservations` (IN `var_tier` INT, IN `var_initial_date` DATE, IN `var_number_of_days` INT)  BEGIN
 DECLARE var_qty_on_tier, var_qty_of_reservations, var_counter, aux_counter, i, var_ID_persons INT;
 DECLARE var_price DECIMAL(10,2);
 DECLARE var_final_date, aux_initial_day, aux_final_day DATE;
@@ -74,7 +74,7 @@ VALUES(var_ID_persons, var_tier, NULL, var_initial_date, var_final_date, NULL, v
 END IF;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `addReservationsRandom` (IN `var_numberItem` INT)  BEGIN
+CREATE PROCEDURE `addReservationsRandom` (IN `var_numberItem` INT)  BEGIN
 DECLARE i, var_ID_rooms, present, var_total_days, var_capacity, var_ID_tiers INT;
 DECLARE var_price DECIMAL(10,2);
 DECLARE var_date_start, var_initial_date, var_final_date DATE;
@@ -123,7 +123,7 @@ END IF;
 END WHILE;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `addReview` (IN `var_order_number` INT)  BEGIN
+CREATE PROCEDURE `addReview` (IN `var_order_number` INT)  BEGIN
 DECLARE var_comment_text VARCHAR(60);
 DECLARE var_stars, var_ID_persons INT;
 
@@ -146,7 +146,7 @@ LIMIT 1;
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `addToHotelCart` (IN `var_numberItems` INT)  BEGIN
+CREATE PROCEDURE `addToHotelCart` (IN `var_numberItems` INT)  BEGIN
 DECLARE var_ID_rooms, i INT;
 SET i = 0;
 
@@ -169,7 +169,7 @@ SET i = i + 1;
 END WHILE;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `assignRoom` (IN `var_ID_reservations` INT)  BEGIN
+CREATE PROCEDURE `assignRoom` (IN `var_ID_reservations` INT)  BEGIN
 
 DECLARE var_ID_rooms, var_ID_tiers, var_capacity, var_days INT;
 DECLARE var_initial_date, var_final_date DATE;
@@ -195,7 +195,7 @@ WHERE ID_reservations = var_ID_reservations;
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `checkIn` (IN `var_ID_reservation` INT)  BEGIN
+CREATE PROCEDURE `checkIn` (IN `var_ID_reservation` INT)  BEGIN
 
 UPDATE reservations
 SET ID_status = 2
@@ -203,7 +203,7 @@ WHERE ID_reservations = var_ID_reservation AND ID_status = 1;
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `checkOut` (IN `var_ID_rooms` INT)  BEGIN
+CREATE PROCEDURE `checkOut` (IN `var_ID_rooms` INT)  BEGIN
 DECLARE var_last_order, var_qty_services, i INT;
 
 SET var_last_order = 1;
@@ -252,7 +252,7 @@ WHERE ID_rooms = var_ID_rooms;
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `perksRoom` (IN `var_ID_rooms` INT)  BEGIN
+CREATE PROCEDURE `perksRoom` (IN `var_ID_rooms` INT)  BEGIN
 
 SELECT *
 FROM perks
@@ -264,7 +264,7 @@ WHERE ID_perks IN(SELECT ID_perks
                                    
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `roomsAvailability` (IN `var_tier` INT, IN `var_initial_date` DATE, IN `var_final_date` DATE, IN `var_guests` INT)  BEGIN
+CREATE PROCEDURE `roomsAvailability` (IN `var_tier` INT, IN `var_initial_date` DATE, IN `var_final_date` DATE, IN `var_guests` INT)  BEGIN
 
 SELECT *
 FROM rooms
@@ -278,11 +278,11 @@ END$$
 --
 -- Funciones
 --
-CREATE DEFINER=`root`@`localhost` FUNCTION `age` (`birthday` DATE) RETURNS INT(11) RETURN DATEDIFF(CURRENT_DATE, birthday) DIV 365$$
+CREATE FUNCTION `age` (`birthday` DATE) RETURNS INT(11) RETURN DATEDIFF(CURRENT_DATE, birthday) DIV 365$$
 
-CREATE DEFINER=`root`@`localhost` FUNCTION `fullname` (`surname` VARCHAR(60), `firstname` VARCHAR(60)) RETURNS VARCHAR(60) CHARSET utf8mb4 RETURN CONCAT(UPPER(surname), ', ', firstname)$$
+CREATE FUNCTION `fullname` (`surname` VARCHAR(60), `firstname` VARCHAR(60)) RETURNS VARCHAR(60) CHARSET utf8mb4 RETURN CONCAT(UPPER(surname), ', ', firstname)$$
 
-CREATE DEFINER=`root`@`localhost` FUNCTION `room_name` (`var_ID_rooms` INT, `name` VARCHAR(60)) RETURNS VARCHAR(60) CHARSET utf8mb4 RETURN CONCAT(var_ID_rooms, ', ', name)$$
+CREATE FUNCTION `room_name` (`var_ID_rooms` INT, `name` VARCHAR(60)) RETURNS VARCHAR(60) CHARSET utf8mb4 RETURN CONCAT(var_ID_rooms, ', ', name)$$
 
 DELIMITER ;
 
