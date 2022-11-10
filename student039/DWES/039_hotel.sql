@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 10, 2022 at 05:24 PM
+-- Generation Time: Nov 10, 2022 at 09:18 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -141,20 +141,20 @@ INSERT INTO `039_rooms` (`ID_room`, `name_room`, `capacity`) VALUES
 
 CREATE TABLE IF NOT EXISTS `039_users` (
   `ID_user` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(60) NOT NULL,
   `email` varchar(60) NOT NULL,
   `pwd` varchar(60) NOT NULL,
   PRIMARY KEY (`ID_user`),
+  UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `039_users`
 --
 
-INSERT INTO `039_users` (`ID_user`, `email`, `pwd`) VALUES
-(1, 'correo@correo.com', '123456'),
-(2, 'idk.asd@gmail.com', '123'),
-(4, 'asdf@correo.com', '123');
+INSERT INTO `039_users` (`ID_user`, `username`, `email`, `pwd`) VALUES
+(1, 'dwesteacher', 'dwesteacher@correo.com', 'enrique');
 
 --
 -- Constraints for dumped tables

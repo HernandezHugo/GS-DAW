@@ -6,13 +6,16 @@ $errors = [];
 
 if (isset($_POST['submit'])) {
 
+    $username = mysqli_real_escape_string($conn, $_POST['username']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $pwd = mysqli_real_escape_string($conn, $_POST['pwd']);
     $re_pwd = mysqli_real_escape_string($conn, $_POST['re_pwd']);
 
-
     //Validate parameters
 
+    if (!$username) {
+        $errors[] = 'Username section is empty';
+    }
     if (!$email) {
         $errors[] = 'Email section is empty';
     }
@@ -27,14 +30,18 @@ if (isset($_POST['submit'])) {
     if (empty($errors)) {
         // write query
         $sql = "SELECT * FROM 039_users WHERE email = '$email';";
-        $result = mysqli_query($conn, $sql);
+        $result_email = mysqli_query($conn, $sql);
+        $sql = "SELECT * FROM 039_users WHERE email = '$username';";
+        $result_username = mysqli_query($conn, $sql);
         //make sure email is not registered yet
-        if ($result->num_rows) {
+        if ($result_email->num_rows) {
             $errors[] = 'This Email is already registered';
+        } else if ($result_email->num_rows) {
+            $errors[] = 'This Username is already registered';
         } else {
             //write query
-            $sql = "INSERT INTO 039_users (email, pwd)";
-            $sql .= "VALUES ('$email', '$pwd');";
+            $sql = "INSERT INTO 039_users (username, email, pwd)";
+            $sql .= "VALUES ('$username', '$email', '$pwd');";
             //save to db and check
             if (mysqli_query($conn, $sql)) {
                 //success
@@ -45,7 +52,8 @@ if (isset($_POST['submit'])) {
             }
         }
         //free result
-        mysqli_free_result($result);
+        mysqli_free_result($result_email);
+        mysqli_free_result($result_username);
     }
     // close connection
     mysqli_close($conn);
