@@ -1,17 +1,88 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 .btn-accepted {
-  background-color: green;
+  background-color: #008000;
+  color: #ffffff;
 }
 
 .btn-warning {
-  background-color: orange;
+  background-color: #ffa500;
 }
 
 .btn-error {
-  background-color: red;
+  background-color: #ff0000;
 }
 
 .btn-normal {
-  background-color: grey;
+  background-color: #808080;
+  color: #ffffff;
+}
+
+.btn {
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
+  width: 75px;
+  height: 45px;
+  border-radius: 5px;
+  border: 1px solid black;
+  padding: 0.7em;
+  margin: 0.3em;
+}
+
+nav {
+  background-color: rgba(0, 128, 0, 0.5019607843);
+}
+@media (min-width: 576px) {
+  nav {
+    background-color: #00008f;
+    color: #ffffff;
+  }
+}
+@media (min-width: 768px) {
+  nav {
+    background-color: rgba(0, 153, 255, 0.7960784314);
+  }
+}
+nav ul {
+  display: flex;
+  justify-content: space-around;
+  padding: 2em 0;
+  margin-bottom: 2em;
+}
+nav ul li {
+  list-style: none;
+  cursor: pointer;
+}
+nav ul li a:active {
+  color: #800080;
+}
+
+table {
+  margin: 0 auto;
+}
+table thead {
+  background-color: #00008f;
+  color: #ffffff;
+}
+table thead th {
+  padding: 0.5em;
+}
+table tbody tr:nth-of-type(even) {
+  background-color: rgba(0, 153, 255, 0.7960784314);
+}
+table tbody tr:nth-of-type(even) {
+  background-color: rgba(0, 153, 255, 0.7960784314);
+}
+table tbody tr:nth-of-type(even) {
+  background-color: rgba(0, 153, 255, 0.7960784314);
+}
+table tbody td {
+  padding: 0.5em;
 }
 
 /*# sourceMappingURL=app.css.map */

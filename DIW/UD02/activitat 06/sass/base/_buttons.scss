@@ -5,6 +5,7 @@ $normal: normal;
 
 .btn-#{$accepted} {
   background-color: $green;
+  color: $white;
 }
 .btn-#{$warning} {
   background-color: $orange;
@@ -14,4 +15,16 @@ $normal: normal;
 }
 .btn-#{$normal} {
   background-color: $grey;
+  color: $white;
+}
+.btn{
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
+  width: 75px;
+  height: 45px;
+  border-radius: 5px;
+  border: 1px solid black;
+  padding: 0.7em;
+  margin: 0.3em;
 }
