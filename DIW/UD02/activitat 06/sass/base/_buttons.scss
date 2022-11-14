@@ -1,0 +1,17 @@
+$accepted: accepted;
+$warning: warning;
+$error: error;
+$normal: normal;
+
+.btn-#{$accepted} {
+  background-color: $green;
+}
+.btn-#{$warning} {
+  background-color: $orange;
+}
+.btn-#{$error} {
+  background-color: $red;
+}
+.btn-#{$normal} {
+  background-color: $grey;
+}
