@@ -20,6 +20,18 @@ nav {
             color: $purple;
         }
       }
+      &.active{
+        @include mobile {
+          background-color: $blue-light;
+          color: $black;
+        }
+        @include tablet {
+          background-color: $blue-dark;
+          color: $black;
+        }
+        background-color: $green-dark;
+        color: $white;
+      }
     }
   }
 }
