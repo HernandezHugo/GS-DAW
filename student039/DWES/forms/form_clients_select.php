@@ -1,5 +1,5 @@
 <?php
-include ($_SERVER['DOCUMENT_ROOT'].'/student039/dwes/db/db_clients_select.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/db_clients_select.php');
 ?>
 
 <div class="container bg-light my-5">
@@ -24,6 +24,7 @@ include ($_SERVER['DOCUMENT_ROOT'].'/student039/dwes/db/db_clients_select.php');
                     <th scope="col">Surname</th>
                     <th scope="col">Email</th>
                     <th scope="col">Phone number</th>
+                    <th scope="col">Birthday</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>

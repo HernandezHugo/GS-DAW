@@ -29,8 +29,9 @@ $id_client = $reservation_selected['ID_client'];
 $id_room = $reservation_selected['ID_room'];
 $initial_date = $reservation_selected['initial_date'];
 $final_date = $reservation_selected['final_date'];
+$number_guests = $reservation_selected['number_guests'];
 $total_price = $reservation_selected['total_price'];
-$status_room = $reservation_selected['status_room'];
+$id_status = $reservation_selected['ID_status'];
 
 //get name from clients to dropdown value selected
 $sql = "SELECT firstname FROM 039_clients WHERE ID_client = '$id_client'";
@@ -51,8 +52,9 @@ if (isset($_POST['submit'])) {
     $id_room = mysqli_real_escape_string($conn, $_POST['id_room']);
     $initial_date = mysqli_real_escape_string($conn, $_POST['initial_date']);
     $final_date = mysqli_real_escape_string($conn, $_POST['final_date']);
+    $number_guests = mysqli_real_escape_string($conn, $_POST['number_guests']);
     $total_price = mysqli_real_escape_string($conn, $_POST['total_price']);
-    $status_room = mysqli_real_escape_string($conn, $_POST['status_room']);
+    $id_status = mysqli_real_escape_string($conn, $_POST['ID_status']);
 
     //Validate parameters
     if (!$id_client) {
@@ -67,10 +69,13 @@ if (isset($_POST['submit'])) {
     if (!$final_date) {
         $errors[] = 'Final date section is empty';
     }
+    if (!$number_guests) {
+        $errors[] = 'Guests section is empty';
+    }
     if (!$total_price) {
         $errors[] = 'Total price section is empty';
     }
-    if (!$status_room) {
+    if (!$id_status) {
         $errors[] = 'Status section is empty';
     }
 
@@ -78,7 +83,7 @@ if (isset($_POST['submit'])) {
     if (empty($errors)) {
         // write query
         $sql = "UPDATE 039_reservations SET ID_client = '$id_client', ID_room = '$id_room' , initial_date = '$initial_date',";
-        $sql .= " final_date = '$final_date', total_price = '$total_price', status_room = '$status_room' WHERE ID_reservation = '$id';";
+        $sql .= " final_date = '$final_date', number_guests = $number_guests, total_price = '$total_price', ID_status = '$id_status' WHERE ID_reservation = '$id';";
 
         //save to db and check
         if (mysqli_query($conn, $sql)) {

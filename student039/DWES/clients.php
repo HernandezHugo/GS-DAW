@@ -1,6 +1,6 @@
 <?php
-require ($_SERVER['DOCUMENT_ROOT'].'/student039/dwes/templates/header.php');
-include ($_SERVER['DOCUMENT_ROOT'].'/student039/dwes/db/connect_db.php');
+require($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/templates/header.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/connect_db.php');
 
 //msg success at insert
 $msg = $_GET['msg'] ?? null;
@@ -20,7 +20,7 @@ mysqli_free_result($result);
 <h1 class="text-center mt-3">Section Clients</h1>
 
 <?php
-include ($_SERVER['DOCUMENT_ROOT'].'/student039/dwes/forms/form_clients_select.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/forms/form_clients_select.php');
 ?>
 
 <div class="container my-5">
@@ -49,6 +49,7 @@ include ($_SERVER['DOCUMENT_ROOT'].'/student039/dwes/forms/form_clients_select.p
                     <th scope="col">Surname</th>
                     <th scope="col">Email</th>
                     <th scope="col">Phone number</th>
+                    <th scope="col">Birthday</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
@@ -74,5 +75,5 @@ include ($_SERVER['DOCUMENT_ROOT'].'/student039/dwes/forms/form_clients_select.p
 </div>
 
 <?php
-require ($_SERVER['DOCUMENT_ROOT'].'/student039/dwes/templates/footer.php');
+require($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/templates/footer.php');
 ?>

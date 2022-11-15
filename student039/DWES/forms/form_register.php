@@ -1,21 +1,21 @@
 <?php
-require ($_SERVER['DOCUMENT_ROOT'].'/student039/dwes/templates/header.php');
-include ($_SERVER['DOCUMENT_ROOT'].'/student039/dwes/db/db_register.php');
+require($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/templates/header.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/db_register.php');
 ?>
 
 <div class="container bg-light mt-3 w-75">
     <form class="mt-3 " action="" method="POST">
-        
-        <label class="form-label mt-3" for="">Username</label>
+
+        <label class="form-label mt-3">Username</label>
         <input class="form-control form-control-sm " type="name" name="username">
 
-        <label class="form-label mt-3" for="">Email</label>
+        <label class="form-label mt-3">Email</label>
         <input class="form-control form-control-sm " type="email" name="email">
 
-        <label class="form-label mt-3" for="">Password</label>
+        <label class="form-label mt-3">Password</label>
         <input class="form-control form-control-sm " type="password" name="pwd">
 
-        <label class="form-label mt-3" for="">Re-password</label>
+        <label class="form-label mt-3">Re-password</label>
         <input class="form-control form-control-sm " type="password" name="re_pwd">
 
         <input class="my-3 btn btn-outline-primary btn-sm" type="submit" name="submit" value="Submit">
@@ -30,5 +30,5 @@ include ($_SERVER['DOCUMENT_ROOT'].'/student039/dwes/db/db_register.php');
 </div>
 
 <?php
-require ($_SERVER['DOCUMENT_ROOT'].'/student039/dwes/templates/footer.php');
+require($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/templates/footer.php');
 ?>

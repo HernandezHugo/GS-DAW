@@ -26,6 +26,7 @@ $firstname = $client_selected['firstname'];
 $surname = $client_selected['surname'];
 $email = $client_selected['email'];
 $phone_number = $client_selected['phone_number'];
+$birthday = $client_selected['birthday'];
 
 
 if (isset($_POST['submit'])) {
@@ -35,6 +36,7 @@ if (isset($_POST['submit'])) {
     $surname = mysqli_real_escape_string($conn, $_POST['surname']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $phone_number = mysqli_real_escape_string($conn, $_POST['phone_number']);
+    $birthday = mysqli_real_escape_string($conn, $_POST['birthday']);
 
 
     //Validate parameters
@@ -53,12 +55,15 @@ if (isset($_POST['submit'])) {
     if (!$phone_number) {
         $errors[] = 'Phone number section is empty';
     }
+    if (!$birthday) {
+        $errors[] = 'Birthday section is empty';
+    }
 
     //Check array erros is empty
     if (empty($errors)) {
         // write query
         $sql = "UPDATE 039_clients SET dni = '$dni', firstname = '$firstname', surname = '$surname',";
-        $sql .=" email = '$email', phone_number = $phone_number WHERE ID_client = $id;";
+        $sql .=" email = '$email', phone_number = $phone_number, birthday = '$birthday' WHERE ID_client = $id;";
 
         //save to db and check
         if (mysqli_query($conn, $sql)) {

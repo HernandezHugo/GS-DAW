@@ -1,6 +1,6 @@
 <?php
-require ($_SERVER['DOCUMENT_ROOT'].'/student039/dwes/templates/header.php');
-include ($_SERVER['DOCUMENT_ROOT'].'/student039/dwes/db/db_clients_delete.php');
+require($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/templates/header.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/db_clients_delete.php');
 
 ?>
 
@@ -15,6 +15,7 @@ include ($_SERVER['DOCUMENT_ROOT'].'/student039/dwes/db/db_clients_delete.php');
                     <th scope="col">Surname</th>
                     <th scope="col">Email</th>
                     <th scope="col">Phone number</th>
+                    <th scope="col">Birthday</th>
                 </tr>
             </thead>
             <tbody>
@@ -35,5 +36,5 @@ include ($_SERVER['DOCUMENT_ROOT'].'/student039/dwes/db/db_clients_delete.php');
     </div>
 <?php endif; ?>
 <?php
-require ($_SERVER['DOCUMENT_ROOT'].'/student039/dwes/templates/footer.php');
+require($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/templates/footer.php');
 ?>

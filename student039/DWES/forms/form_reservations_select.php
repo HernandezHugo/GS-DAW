@@ -1,5 +1,5 @@
 <?php
-include ($_SERVER['DOCUMENT_ROOT'].'/student039/dwes/db/db_reservations_select.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/db_reservations_select.php');
 
 
 ?>
@@ -25,6 +25,7 @@ include ($_SERVER['DOCUMENT_ROOT'].'/student039/dwes/db/db_reservations_select.p
                     <th scope="col"># Room</th>
                     <th scope="col">Initial date</th>
                     <th scope="col">Final date</th>
+                    <th scope="col">Guests</th>
                     <th scope="col">Total price</th>
                     <th scope="col">Status</th>
                     <th scope="col">Actions</th>
