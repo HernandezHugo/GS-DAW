@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2022 at 08:17 PM
+-- Generation Time: Nov 17, 2022 at 09:17 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -33,6 +33,11 @@ CREATE TABLE IF NOT EXISTS `039_amenities` (
   PRIMARY KEY (`ID_amenity`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
 
+--
+-- Truncate table before insert `039_amenities`
+--
+
+TRUNCATE TABLE `039_amenities`;
 --
 -- Dumping data for table `039_amenities`
 --
@@ -66,6 +71,11 @@ CREATE TABLE IF NOT EXISTS `039_categories` (
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
 
 --
+-- Truncate table before insert `039_categories`
+--
+
+TRUNCATE TABLE `039_categories`;
+--
 -- Dumping data for table `039_categories`
 --
 
@@ -97,6 +107,11 @@ CREATE TABLE IF NOT EXISTS `039_clients` (
   PRIMARY KEY (`ID_client`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
 
+--
+-- Truncate table before insert `039_clients`
+--
+
+TRUNCATE TABLE `039_clients`;
 --
 -- Dumping data for table `039_clients`
 --
@@ -140,6 +155,11 @@ CREATE TABLE IF NOT EXISTS `039_reservations` (
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
 
 --
+-- Truncate table before insert `039_reservations`
+--
+
+TRUNCATE TABLE `039_reservations`;
+--
 -- Dumping data for table `039_reservations`
 --
 
@@ -165,35 +185,58 @@ INSERT INTO `039_reservations` (`ID_reservation`, `ID_client`, `ID_room`, `initi
 
 CREATE TABLE IF NOT EXISTS `039_rooms` (
   `ID_room` int(11) NOT NULL AUTO_INCREMENT,
-  `name_room` varchar(60) NOT NULL,
+  `ID_category` int(11) NOT NULL,
   `capacity` int(11) NOT NULL,
-  PRIMARY KEY (`ID_room`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4;
+  PRIMARY KEY (`ID_room`),
+  KEY `ID_category` (`ID_category`)
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4;
 
+--
+-- Truncate table before insert `039_rooms`
+--
+
+TRUNCATE TABLE `039_rooms`;
 --
 -- Dumping data for table `039_rooms`
 --
 
-INSERT INTO `039_rooms` (`ID_room`, `name_room`, `capacity`) VALUES
-(1, 'Fabulous', 2),
-(2, 'Fabulous Sky', 2),
-(3, 'Cozy', 2),
-(4, 'Cozy', 2),
-(5, 'Wonderful Sky', 4),
-(6, 'Wonderful Sky', 4),
-(7, 'Wonderful', 2),
-(8, 'Wonderful', 2),
-(9, 'Wonderful', 2),
-(10, 'Wonderful', 2),
-(11, 'Wonderful Sky', 4),
-(12, 'Fabulous Sky', 2),
-(13, 'Fabulous', 2),
-(14, 'Fabulous', 2),
-(15, 'Fabulous Sky', 2),
-(16, 'Cozy', 2),
-(17, 'Cozy', 2),
-(18, 'Cozy', 2),
-(19, 'Cozy', 2);
+INSERT INTO `039_rooms` (`ID_room`, `ID_category`, `capacity`) VALUES
+(1, 8, 4),
+(2, 8, 4),
+(3, 8, 4),
+(4, 7, 2),
+(5, 7, 2),
+(6, 7, 2),
+(7, 7, 2),
+(8, 7, 2),
+(9, 7, 2),
+(10, 6, 2),
+(11, 6, 2),
+(12, 4, 4),
+(13, 4, 4),
+(14, 4, 4),
+(15, 5, 5),
+(16, 5, 5),
+(17, 5, 5),
+(18, 3, 5),
+(19, 3, 5),
+(20, 1, 3),
+(21, 1, 3),
+(22, 1, 3),
+(23, 1, 3),
+(24, 1, 3),
+(25, 2, 3),
+(26, 2, 3),
+(27, 2, 3),
+(28, 2, 3),
+(29, 2, 3),
+(30, 2, 3),
+(31, 9, 3),
+(32, 9, 3),
+(33, 9, 3),
+(34, 9, 3),
+(35, 9, 3),
+(36, 9, 3);
 
 -- --------------------------------------------------------
 
@@ -207,6 +250,11 @@ CREATE TABLE IF NOT EXISTS `039_status` (
   PRIMARY KEY (`ID_status`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
+--
+-- Truncate table before insert `039_status`
+--
+
+TRUNCATE TABLE `039_status`;
 --
 -- Dumping data for table `039_status`
 --
@@ -233,6 +281,11 @@ CREATE TABLE IF NOT EXISTS `039_users` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 --
+-- Truncate table before insert `039_users`
+--
+
+TRUNCATE TABLE `039_users`;
+--
 -- Dumping data for table `039_users`
 --
 
@@ -251,6 +304,12 @@ ALTER TABLE `039_reservations`
   ADD CONSTRAINT `039_reservations_ibfk_1` FOREIGN KEY (`ID_client`) REFERENCES `039_clients` (`ID_client`),
   ADD CONSTRAINT `039_reservations_ibfk_2` FOREIGN KEY (`ID_room`) REFERENCES `039_rooms` (`ID_room`),
   ADD CONSTRAINT `039_reservations_ibfk_3` FOREIGN KEY (`ID_status`) REFERENCES `039_status` (`ID_status`);
+
+--
+-- Constraints for table `039_rooms`
+--
+ALTER TABLE `039_rooms`
+  ADD CONSTRAINT `039_rooms_ibfk_1` FOREIGN KEY (`ID_category`) REFERENCES `039_categories` (`ID_category`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
