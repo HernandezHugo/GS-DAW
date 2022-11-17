@@ -1,0 +1,9 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    width: 100%;
+}
+canvas{
+    border: 7px dashed #00b7ff;
+}
