@@ -1,10 +1,14 @@
 <?php
 
 session_start();
-$_SESSION['type'] = 'guest';
-
-/* var_dump($_SESSION);
-exit; */
+$type_default = 'guest';
+$type_admin = 'admin';
+$type_client = 'client';
+if (empty($_SESSION['type'])) {
+  $_SESSION['type'] = $type_default;
+}
+var_dump($_SESSION);
+//exit;
 
 ?>
 <!DOCTYPE html>
@@ -30,13 +34,13 @@ exit; */
 
         <?php
         switch ($_SESSION['type']) {
-          case 'guest':
+          case $type_default:
             include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/templates/nav_guest.php');
             break;
-          case 'hugo':
-            include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/templates/nav_user.php');
+          case $type_client:
+            include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/templates/nav_client.php');
             break;
-          case 'dwesteacher':
+          case $type_admin:
             include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/templates/nav_admin.php');
             break;
         }

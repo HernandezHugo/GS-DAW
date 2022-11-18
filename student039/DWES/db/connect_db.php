@@ -8,4 +8,5 @@ $conn = mysqli_connect('localhost','root','','039_hotel');
 if(!$conn){
     echo 'Connection error: ' . mysqli_connect_error();
 };
+
 ?>
