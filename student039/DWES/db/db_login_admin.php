@@ -28,8 +28,9 @@ if (isset($_POST['submit'])) {
         //check if user exists
         if ($result->num_rows) {
             //success
+            $user = mysqli_fetch_assoc($result);
             $_SESSION['type'] = $type_admin;
-            $_SESSION['user'] = mysqli_fetch_assoc($result);
+            $_SESSION['user'] = $user['username'];
             header('Location: /student039/dwes/index.php');
         } else {
             //error

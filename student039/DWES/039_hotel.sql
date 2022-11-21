@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 17, 2022 at 09:17 PM
+-- Generation Time: Nov 21, 2022 at 07:32 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -103,7 +103,8 @@ CREATE TABLE IF NOT EXISTS `039_clients` (
   `surname` varchar(60) NOT NULL,
   `email` varchar(60) NOT NULL,
   `phone_number` int(11) NOT NULL,
-  `birthday` date DEFAULT NULL,
+  `birthday` date NOT NULL,
+  `pwd` varchar(60) NOT NULL,
   PRIMARY KEY (`ID_client`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
 
@@ -116,22 +117,22 @@ TRUNCATE TABLE `039_clients`;
 -- Dumping data for table `039_clients`
 --
 
-INSERT INTO `039_clients` (`ID_client`, `dni`, `firstname`, `surname`, `email`, `phone_number`, `birthday`) VALUES
-(1, '95265142G', 'juan', 'qwer', 'email.1@gmail.com', 653689524, '1990-08-08'),
-(2, '22453142K', 'jaime', 'asd', 'email.2@gmail.com', 645812257, '1980-08-08'),
-(3, '18265142W', 'tomas', 'smiz', 'email.3@gmail.com', 957558631, '1999-08-08'),
-(4, '91165142T', 'pol', 'lopez', 'email.4@gmail.com', 654987321, '1985-08-08'),
-(5, '95265872H', 'paul', 'lopes', 'email.5@gmail.com', 369852147, '1996-08-08'),
-(6, '97832337P', 'Hiroko', 'Boyd', 'in@google.edu', 320585866, '1975-08-08'),
-(7, '06893777O', 'Ethan', 'Wade', 'non.feugiat.nec@outlook.com', 216373121, '1986-08-08'),
-(8, '979359103', 'Alma', 'Dodson', 'ac.mattis@yahoo.org', 236724556, '1988-08-08'),
-(9, '07671327J', 'Hamilton', 'Riddle', 'pellentesque.ultricies@protonmail.com', 256971068, '1984-08-08'),
-(10, '47715381M', 'Wylie', 'Hess', 'nulla.eget@icloud.couk', 713312882, '1995-08-08'),
-(11, '81512703N', 'Ashely', 'Mclean', 'morbi.sit.amet@aol.couk', 426088885, '1995-08-08'),
-(12, '61315716M', 'Myra', 'Carr', 'vitae.nibh@outlook.couk', 427187745, '1998-08-08'),
-(13, '53117614H', 'Anjolie', 'Cash', 'cras.interdum.nunc@yahoo.org', 865222605, '1997-08-08'),
-(14, '33447936Q', 'Jana', 'Hicks', 'in.cursus@protonmail.net', 475351125, '1991-08-08'),
-(15, '77526272F', 'Herrod', 'Prince', 'molestie.sodales@outlook.org', 686155111, '1992-08-08');
+INSERT INTO `039_clients` (`ID_client`, `dni`, `firstname`, `surname`, `email`, `phone_number`, `birthday`, `pwd`) VALUES
+(1, '95265142G', 'juan', 'qwer', 'email.1@gmail.com', 653689524, '1990-08-08', '123'),
+(2, '22453142K', 'jaime', 'asd', 'email.2@gmail.com', 645812257, '1980-08-08', '123'),
+(3, '18265142W', 'tomas', 'smiz', 'email.3@gmail.com', 957558631, '1999-08-08', '123'),
+(4, '91165142T', 'pol', 'lopez', 'email.4@gmail.com', 654987321, '1985-08-08', '123'),
+(5, '95265872H', 'paul', 'lopes', 'email.5@gmail.com', 369852147, '1996-08-08', '123'),
+(6, '97832337P', 'Hiroko', 'Boyd', 'in@google.edu', 320585866, '1975-08-08', '123'),
+(7, '06893777O', 'Ethan', 'Wade', 'non.feugiat.nec@outlook.com', 216373121, '1986-08-08', '123'),
+(8, '979359103', 'Alma', 'Dodson', 'ac.mattis@yahoo.org', 236724556, '1988-08-08', '123'),
+(9, '07671327J', 'Hamilton', 'Riddle', 'pellentesque.ultricies@protonmail.com', 256971068, '1984-08-08', '123'),
+(10, '47715381M', 'Wylie', 'Hess', 'nulla.eget@icloud.couk', 713312882, '1995-08-08', '123'),
+(11, '81512703N', 'Ashely', 'Mclean', 'morbi.sit.amet@aol.couk', 426088885, '1995-08-08', '123'),
+(12, '61315716M', 'Myra', 'Carr', 'vitae.nibh@outlook.couk', 427187745, '1998-08-08', '123'),
+(13, '53117614H', 'Anjolie', 'Cash', 'cras.interdum.nunc@yahoo.org', 865222605, '1997-08-08', '123'),
+(14, '33447936Q', 'Jana', 'Hicks', 'in.cursus@protonmail.net', 475351125, '1991-08-08', '123'),
+(15, '77526272F', 'Herrod', 'Prince', 'molestie.sodales@outlook.org', 686155111, '1992-08-08', '123');
 
 -- --------------------------------------------------------
 

@@ -32,31 +32,26 @@ function getResult() {
         return "ganado";
       else
         return "perdido";
-      break;
     case "Papel":
       if ((myHand && iaHand == "Piedra") || (myHand && iaHand == "Spock"))
         return "ganado";
       else
         return "perdido";
-      break;
     case "Tijeras":
       if ((myHand && iaHand == "Papel") || (myHand && iaHand == "Lagarto"))
         return "ganado";
       else
         return "perdido";
-      break;
     case "Lagarto":
       if ((myHand && iaHand == "Papel") || (myHand && iaHand == "Spock"))
         return "ganado";
       else
         return "perdido";
-      break;
     case "Spock":
       if ((myHand && iaHand == "Papel") || (myHand && iaHand == "Lagarto"))
         return "ganado";
       else
         return "perdido";
-      break;
     default:
       break;
   }

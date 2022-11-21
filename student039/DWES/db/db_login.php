@@ -21,26 +21,20 @@ if (isset($_POST['submit'])) {
     //Check array erros is empty
     if (empty($errors)) {
         // write query
-        // use regex to 
-        $sql = "SELECT * FROM 039_users WHERE email = '$login_name' AND pwd = '$pwd';";
-        $result_email = mysqli_query($conn, $sql);
-        $sql = "SELECT * FROM 039_users WHERE username = '$login_name' AND pwd = '$pwd';";
-        $result_username = mysqli_query($conn, $sql);
+        $sql = "SELECT * FROM 039_clients WHERE email = '$login_name' AND pwd = '$pwd';";
+        $result = mysqli_query($conn, $sql);
 
         //check if user exists
-        if ($result_username->num_rows) {
-            //success
-            $_SESSION['user'] = mysqli_fetch_assoc($result_username);
-            header('Location: /student039/dwes/index.php');
-        } else if ($result_email->num_rows) {
-            $_SESSION['user'] = mysqli_fetch_assoc($result_email);
+         if ($result->num_rows) {
+            $user = mysqli_fetch_assoc($result);
+            $_SESSION['type'] = $type_client;
+            $_SESSION['user'] = $user['email'];
             header('Location: /student039/dwes/index.php');
         } else {
             //error
             $errors[] = 'Email or password are wrong';
         }
-        mysqli_free_result($result_email);
-        mysqli_free_result($result_username);
+        mysqli_free_result($result);
     }
 
     // close connection
