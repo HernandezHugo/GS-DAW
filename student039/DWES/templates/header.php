@@ -1,16 +1,17 @@
 <?php
 
 session_start();
+
 $type_default = 'guest';
 $type_admin = 'admin';
 $type_client = 'client';
+
 if (empty($_SESSION['type'])) {
   $_SESSION['type'] = $type_default;
 }
-var_dump($_SESSION);
-//exit;
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 

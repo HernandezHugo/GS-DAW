@@ -1,6 +1,7 @@
 <?php
-require ($_SERVER['DOCUMENT_ROOT'].'/student039/dwes/templates/header.php');
-include ($_SERVER['DOCUMENT_ROOT'].'/student039/dwes/db/connect_db.php');
+require($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/templates/header.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/connect_db.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/verify_admin.php');
 
 //msg success at insert
 $msg = $_GET['msg'] ?? null;
@@ -20,7 +21,7 @@ mysqli_free_result($result);
 <h1 class="text-center mt-3">Section Rooms</h1>
 
 <?php
-include ($_SERVER['DOCUMENT_ROOT'].'/student039/dwes/forms/form_rooms_select.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/forms/form_rooms_select.php');
 ?>
 
 <div class="container my-5">
@@ -71,5 +72,5 @@ include ($_SERVER['DOCUMENT_ROOT'].'/student039/dwes/forms/form_rooms_select.php
 </div>
 
 <?php
-require ($_SERVER['DOCUMENT_ROOT'].'/student039/dwes/templates/footer.php');
+require($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/templates/footer.php');
 ?>
