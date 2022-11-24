@@ -60,6 +60,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/forms/form_clients_select.
                         <?php
                         $id = $client['ID_client'];
                         foreach ($client as $client_data) : ?>
+                            <?php if (array_search($client_data, $client) == 'pwd') continue; ?>
                             <td>
                                 <?php echo $client_data; ?>
                             </td>

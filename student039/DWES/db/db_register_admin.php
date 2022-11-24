@@ -29,16 +29,19 @@ if (isset($_POST['submit'])) {
     //Check array erros is empty
     if (empty($errors)) {
         // write query
-        $sql = "SELECT * FROM 039_clients WHERE email = '$email';";
+        $sql = "SELECT * FROM 039_users WHERE email = '$email';";
         $result_email = mysqli_query($conn, $sql);
-        
+        $sql = "SELECT * FROM 039_users WHERE email = '$username';";
+        $result_username = mysqli_query($conn, $sql);
         //make sure email is not registered yet
         if ($result_email->num_rows) {
             $errors[] = 'This Email is already registered';
+        } else if ($result_email->num_rows) {
+            $errors[] = 'This Username is already registered';
         } else {
             //write query
-            $sql = "INSERT INTO 039_clients (dni, firstname, surname, email, phone_number, birthday, pwd)";
-            $sql .= "VALUES ('$dni', '$firstname', '$surname', '$email', '$email', '$phone_number','$birthday', '$pwd');";
+            $sql = "INSERT INTO 039_users (username, email, pwd)";
+            $sql .= "VALUES ('$username', '$email', '$pwd');";
             //save to db and check
             if (mysqli_query($conn, $sql)) {
                 //success
