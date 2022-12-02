@@ -35,9 +35,9 @@ body {
   display: flex;
 }
 
-main {
+section {
   background-color: var(--bg-grey);
-  width: 60%;
+  width: 33%;
   height: 60%;
   margin: 0 auto;
 }
