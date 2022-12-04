@@ -100,13 +100,12 @@ if (indexedDB) {
         
         //READ USERIMAGE
         const userImg = document.createElement("img");
-        const blob = new Blob([cursor.value.img], { type: "image/*" });
-        userImg.src = URL.createObjectURL(blob);
-        userImg.height = 50;
-        userImg.onload = () => {
-          URL.revokeObjectURL(userImg.src);
+        const reader = new FileReader();
+        reader.readAsDataURL(cursor.value.img)
+        reader.onload = () => {
+          userImg.src = reader.result;
+          userImg.height = 50;
         };
-        userImg.textContent = cursor.value.img;
         fragment.appendChild(userImg);
         
         //ADD UPDATE BUTTON
@@ -138,8 +137,9 @@ if (indexedDB) {
       name: e.target.name.value,
       email: e.target.email.value,
       password: md5(e.target.password.value), // HASH md5
-      img: e.target.fileImg.files[0],
+      img: new Blob([e.target.fileImg.files[0]], {type: 'image/png'}),
     };
+
     if (e.target.button.dataset.action == "add") {
       addData(data);
     } else if (e.target.button.dataset.action == "update") {
@@ -164,15 +164,14 @@ if (indexedDB) {
       } else {
         imgExpositor.innerHTML = "";
 
-        const blob = new Blob([e.target.files[0]], { type: "image/*" });
         const img = document.createElement("img");
-        
-        img.src = URL.createObjectURL(blob);
-        img.height = 50;
-        img.onload = () => {
-          URL.revokeObjectURL(img.src);
-        };
-
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.readAsDataURL(file)
+        reader.onload = () => {
+          img.src = reader.result;
+          img.height = 50;
+        }
         imgExpositor.appendChild(img);
       }
     },
