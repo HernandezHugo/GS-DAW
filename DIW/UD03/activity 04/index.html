@@ -14,46 +14,31 @@
         <h2>Formulario</h2>
         <form id="form" class="d-flex flex-column">
           <div class="input-container input-text">
-            <input name="name" type="text"  />
+            <input name="name" type="text" />
             <label>Name</label>
           </div>
           <div class="input-container input-text">
-            <input name="email" type="email"  />
+            <input name="email" type="email" />
             <label>Email</label>
           </div>
           <div class="input-container input-text">
-            <input name="password" type="password"  />
+            <input name="password" type="password" />
             <label>Password</label>
           </div>
-          
-          <div class="input-container h-100">
-            <label>Choose image</label>
-            <div class="d-flex justify-content-sb">
-              <label>
-                <input type="radio" name="option" />
-                <img src="img/icono1.png" />
-              </label>
-              <label>
-                <input type="radio" name="option" />
-                <img src="img/icono2.png" />
-              </label>
-              <label>
-                <input type="radio" name="option" />
-                <img src="img/icono3.png" />
-              </label>
-            </div>
+          <div class="input-container">
+            <input id="fileElem" type="file" name="fileImg" accept="image/*" />
           </div>
-          <input class="btn" name="button" type="submit" data-action="add" value="Añadir">
+          <div id="imgExpositor" class="centered">
+
+          </div>
+          <input class="btn" name="button" type="submit" data-action="add" value="Añadir"/>
         </form>
       </section>
       <section>
         <h2>Usuarios</h2>
-        <div id="lista">
-
-        </div>
+        <div id="lista"></div>
       </section>
     </main>
-    <script src="prueba.js"></script>
-    <!-- <script src="app.js"></script> -->
+    <script src="app.js"></script>
   </body>
 </html>
