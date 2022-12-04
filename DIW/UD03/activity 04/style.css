@@ -1,8 +1,8 @@
 :root {
-  --shortside: calc(412px * 0.15);
-  --bigside: calc(512px * 0.15);
+  --shortsize: calc(412px * 0.15);
+  --bigsize: calc(512px * 0.15);
   --blue: #5255ff;
-  --bg-grey: #ffffff80;
+  --bg-grey: #ffffff9d;
   --bg-btn: #ffffff;
   --bg-btn-active: #dfdfdf;
 }
@@ -31,21 +31,28 @@ body {
   background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
   background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
 }
-.d-flex{
+.d-flex {
   display: flex;
 }
-
-section {
-  background-color: var(--bg-grey);
-  width: 33%;
-  height: 60%;
+.flex-column {
+  flex-direction: column;
+}
+.centered {
   margin: 0 auto;
 }
-
-
-form {
-  display: flex;
-  flex-direction: column;
+h2 {
+  text-align: center;
+}
+main{
+  display: grid;
+  grid-template-columns:  33% 63%;
+  gap: 3%;
+  justify-items: center;
+  align-items: center;
+}
+section {
+  background-color: var(--bg-grey);
+  width: 100%;
 }
 
 .input-container {
@@ -54,7 +61,7 @@ form {
   height: 3em;
 }
 
-input[type] {
+input {
   height: 25px;
   width: 100%;
 }
@@ -105,9 +112,7 @@ input[type] {
 }
 
 /* input radio style */
-.d-flex {
-  display: flex;
-}
+
 .justify-content-sb {
   justify-content: space-between;
 }
@@ -134,14 +139,14 @@ img[src*="icono"] {
   margin: 10px;
   transition: width 0.5s, height 0.5s, box-shadow 0.1s;
   transition-timing-function: ease-in-out;
-  height: var(--shortside);
-  width: var(--shortside);
+  height: var(--shortsize);
+  width: var(--shortsize);
 }
 
 img[src*="icono"]:hover {
   opacity: 1;
-  height: var(--bigside);
-  width: var(--bigside);
+  height: var(--bigsize);
+  width: var(--bigsize);
 }
 
 /* checked style */
@@ -149,8 +154,8 @@ img[src*="icono"]:hover {
   outline: 2px solid black;
   box-shadow: 3px 3px 6px black;
   opacity: 1;
-  height: var(--bigside);
-  width: var(--bigside);
+  height: var(--bigsize);
+  width: var(--bigsize);
 }
 
 .btn {
@@ -158,8 +163,9 @@ img[src*="icono"]:hover {
   display: flex;
   color: var(--blue);
   background-color: var(--bg-btn);
+  width: 100px;
   margin: 10px auto;
-  padding: 1em 2em;
+  justify-content: center;
   border: 1px solid var(--blue);
   border-radius: 10px;
   transition: box-shadow 0.3s, padding 0.3s;
@@ -168,7 +174,6 @@ img[src*="icono"]:hover {
 
 .btn:hover {
   box-shadow: 0 0 7px #000000;
-  padding: 1.1em 2.1em;
 }
 
 .btn:active {
@@ -177,11 +182,18 @@ img[src*="icono"]:hover {
 
 @keyframes click_btn {
   from {
-    padding: 1.1em 2.1em;
   }
   to {
     box-shadow: 0 0 0;
     background-color: var(--bg-btn-active);
-    padding: 1em 2em;
   }
+}
+
+#lista {
+  background-color: white;
+  margin: 1em;
+  display: grid;
+  grid-template-columns:  repeat(4, 1fr);
+  justify-items: center;
+  align-items: center;
 }

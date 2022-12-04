@@ -5,32 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <title>activitat 03</title>
+    <script src="http://www.myersdaily.org/joseph/javascript/md5.js"></script>
+    <title>activitat 04</title>
   </head>
   <body>
-    <main class="">
-      <section>
-
-      </section>
+    <main>
       <section>
         <h2>Formulario</h2>
-        <form action="">
+        <form id="form" class="d-flex flex-column">
           <div class="input-container input-text">
-            <input type="text" required />
+            <input name="name" type="text"  />
             <label>Name</label>
           </div>
           <div class="input-container input-text">
-            <input type="email" required />
+            <input name="email" type="email"  />
             <label>Email</label>
           </div>
           <div class="input-container input-text">
-            <input type="password" required />
+            <input name="password" type="password"  />
             <label>Password</label>
           </div>
-          <div class="input-container input-text">
-            <input type="password" required />
-            <label>Repeat password</label>
-          </div>
+          
           <div class="input-container h-100">
             <label>Choose image</label>
             <div class="d-flex justify-content-sb">
@@ -48,13 +43,17 @@
               </label>
             </div>
           </div>
-          <button class="btn">Accept</button>
+          <input class="btn" name="button" type="submit" data-action="add" value="Añadir">
         </form>
       </section>
       <section>
+        <h2>Usuarios</h2>
+        <div id="lista">
 
+        </div>
       </section>
     </main>
-    <script src="app.js"></script>
+    <script src="prueba.js"></script>
+    <!-- <script src="app.js"></script> -->
   </body>
 </html>
