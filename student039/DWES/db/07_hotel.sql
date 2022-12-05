@@ -26,7 +26,7 @@ DELIMITER $$
 -- Procedimientos
 --
 CREATE PROCEDURE `addReservations` (IN `var_tier` INT, IN `var_initial_date` DATE, IN `var_number_of_days` INT)  BEGIN
-DECLARE var_qty_on_tier, var_qty_of_reservations, var_counter, aux_counter, i, var_ID_persons INT;
+DECLARE var_qty_on_tier, var_counter, aux_counter, i, var_ID_persons INT;
 DECLARE var_price DECIMAL(10,2);
 DECLARE var_final_date, aux_initial_day, aux_final_day DATE;
 

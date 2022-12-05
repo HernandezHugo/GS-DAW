@@ -20,7 +20,13 @@ SET time_zone = "+00:00";
 --
 -- Database: `039_hotel`
 --
-
+DROP TABLE IF EXISTS `039_reservations`;
+DROP TABLE IF EXISTS `039_rooms`;
+DROP TABLE IF EXISTS `039_categories`;
+DROP TABLE IF EXISTS `039_clients`;
+DROP TABLE IF EXISTS `039_status`;
+DROP TABLE IF EXISTS `039_users`;
+DROP TABLE IF EXISTS `039_amenities`;
 -- --------------------------------------------------------
 
 --

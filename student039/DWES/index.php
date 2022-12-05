@@ -6,8 +6,8 @@ require ($_SERVER['DOCUMENT_ROOT'].'/student039/dwes/templates/header.php');
 //actions: show rooms by date
 
 ?>
-<main>
-    
+<main class="container">
+    <section></section>
 </main>
 
 

@@ -3,7 +3,7 @@
         <li class="nav-item">
             <a class="nav-link" href="/student039/dwes/index.php">Home</a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link" href="/student039/dwes/#">About us</a>
         </li>
         <li class="nav-item">
@@ -11,7 +11,7 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/student039/dwes/#">Contact</a>
-        </li>
+        </li> -->
         <li class="nav-item">
             <a class="nav-link" href="/student039/dwes/forms/form_login.php">Login</a>
         </li>
