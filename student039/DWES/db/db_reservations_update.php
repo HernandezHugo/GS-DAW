@@ -19,6 +19,12 @@ $clients = mysqli_fetch_all($result, MYSQLI_ASSOC);
 mysqli_free_result($result);
 
 //get rooms to dropdown
+$sql = "SELECT * FROM 039_categories";
+$result = mysqli_query($conn, $sql);
+$categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
+mysqli_free_result($result);
+
+//get categories to dropdown
 $sql = "SELECT * FROM 039_rooms";
 $result = mysqli_query($conn, $sql);
 $rooms = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -27,6 +33,7 @@ mysqli_free_result($result);
 //get every data from ID_reservation and put it as default
 $id_client = $reservation_selected['ID_client'];
 $id_room = $reservation_selected['ID_room'];
+$id_category = $reservation_selected['ID_category'];
 $initial_date = $reservation_selected['initial_date'];
 $final_date = $reservation_selected['final_date'];
 $number_guests = $reservation_selected['number_guests'];
@@ -45,11 +52,18 @@ $result = mysqli_query($conn, $sql);
 $room_selected = mysqli_fetch_assoc($result);
 mysqli_free_result($result);
 
+//get name from rooms to dropdown value selected
+$sql = "SELECT category_name FROM 039_categorys WHERE ID_category = '$id_category'";
+$result = mysqli_query($conn, $sql);
+$category_selected = mysqli_fetch_assoc($result);
+mysqli_free_result($result);
+
 
 if (isset($_POST['submit'])) {
 
     $id_client = mysqli_real_escape_string($conn, $_POST['id_client']);
     $id_room = mysqli_real_escape_string($conn, $_POST['id_room']);
+    $id_category = mysqli_real_escape_string($conn, $_POST['id_category']);
     $initial_date = mysqli_real_escape_string($conn, $_POST['initial_date']);
     $final_date = mysqli_real_escape_string($conn, $_POST['final_date']);
     $number_guests = mysqli_real_escape_string($conn, $_POST['number_guests']);
@@ -62,6 +76,9 @@ if (isset($_POST['submit'])) {
     }
     if (!$id_room) {
         $errors[] = 'Room section is empty';
+    }
+    if (!$id_category) {
+        $errors[] = 'Category section is empty';
     }
     if (!$initial_date) {
         $errors[] = 'Initial date section is empty';
@@ -82,7 +99,7 @@ if (isset($_POST['submit'])) {
     //Check array erros is empty
     if (empty($errors)) {
         // write query
-        $sql = "UPDATE 039_reservations SET ID_client = '$id_client', ID_room = '$id_room' , initial_date = '$initial_date',";
+        $sql = "UPDATE 039_reservations SET ID_client = '$id_client', ID_room = '$id_room' , ID_category = '$id_category' , initial_date = '$initial_date',";
         $sql .= " final_date = '$final_date', number_guests = $number_guests, total_price = '$total_price', ID_status = '$id_status' WHERE ID_reservation = '$id';";
 
         //save to db and check

@@ -22,6 +22,13 @@ include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/db_reservations_update.
                 <option value="<?php echo $room['ID_room']; ?>"><?php echo $room['name_room']; ?></option>
             <?php endforeach; ?>
         </select>
+        <label class="form-label mt-3">category</label>
+        <select class="input-group" name="id_category">
+            <option value="<?php echo $id_category; ?>" selected><?php echo $category_selected['category_name']; ?></option>
+            <?php foreach ($categories as $category) : ?>
+                <option value="<?php echo $category['ID_category']; ?>"><?php echo $category['category_name']; ?></option>
+            <?php endforeach; ?>
+        </select>
 
         <label class="form-label mt-3">Initial date</label>
         <input type="date" name="initial_date" value="<?php echo $initial_date; ?>">

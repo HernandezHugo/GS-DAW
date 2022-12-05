@@ -3,6 +3,9 @@
         <li class="nav-item">
             <a class="nav-link" href="/student039/dwes/index.php">Home</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/student039/dwes/booking.php">Booking</a>
+        </li>
         <!-- <li class="nav-item">
             <a class="nav-link" href="/student039/dwes/#">About us</a>
         </li>

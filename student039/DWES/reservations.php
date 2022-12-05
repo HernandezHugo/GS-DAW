@@ -47,6 +47,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/forms/form_reservations_se
                     <th scope="col">#</th>
                     <th scope="col"># Client</th>
                     <th scope="col"># Room</th>
+                    <th scope="col"># Category</th>
                     <th scope="col">Initial date</th>
                     <th scope="col">Final date</th>
                     <th scope="col">Guests</th>
