@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-12-2022 a las 15:00:04
--- Versión del servidor: 10.4.22-MariaDB
--- Versión de PHP: 8.1.1
+-- Tiempo de generación: 05-12-2022 a las 20:16:20
+-- Versión del servidor: 10.4.25-MariaDB
+-- Versión de PHP: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,15 +34,11 @@ DELIMITER $$
 --
 -- Procedimientos
 --
-CREATE PROCEDURE `availableCategoriesByDate` (IN `var_initial_date` DATE, IN `var_final_date` DATE)  BEGIN
-DECLARE var_qty_on_category, var_qty_categories, var_counter, aux_counter, i, j, var_number_of_days INT;
-DECLARE var_price DECIMAL(10,2);
+CREATE PROCEDURE `availableCategoriesByDate` (IN `var_initial_date` DATE, IN `var_final_date` DATE)   BEGIN
+DECLARE var_qty_on_category, var_capacity, var_qty_categories, var_counter, aux_counter, i, j, var_number_of_days INT;
 DECLARE aux_initial_day, aux_final_day DATE;
 
 SET var_number_of_days = DATEDIFF(var_final_date, var_initial_date);
-SET aux_initial_day = var_initial_date;
-SET var_price = 0.0;
-SET i = 1;
 SET j = 1;
 SET var_qty_on_category = 0;
 
@@ -54,6 +50,8 @@ FROM 039_categories;
 
 WHILE j <= var_qty_categories DO
     
+	SET aux_initial_day = var_initial_date;
+	SET i = 1;
     SET var_counter = 0;
 
     /*qty of rooms by category*/
@@ -83,14 +81,16 @@ WHILE j <= var_qty_categories DO
     END WHILE;
 
     IF (var_qty_on_category > var_counter)  THEN
-        SELECT category_price INTO var_price
-        FROM 039_categories
+    
+        SELECT capacity INTO var_capacity
+        FROM 039_rooms
         WHERE ID_category = j;
 
-        SET var_price = var_price * var_number_of_days;
-
-        INSERT INTO 039_categories_to_show(ID_category, price)
-        VALUES(j, var_price);
+        INSERT INTO 039_categories_to_show(ID_category, category_name, category_description, capacity, price)
+        SELECT ID_category, category_name, category_description, var_capacity, (category_price * var_number_of_days) AS price
+        FROM 039_categories
+        WHERE ID_category = j;
+        
     END IF;
 
     SET j = j + 1;
@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `039_amenities` (
   `ID_amenity` int(11) NOT NULL AUTO_INCREMENT,
   `amenity_name` varchar(60) NOT NULL,
   PRIMARY KEY (`ID_amenity`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Truncar tablas antes de insertar `039_amenities`
@@ -149,7 +149,7 @@ CREATE TABLE IF NOT EXISTS `039_categories` (
   `category_description` text NOT NULL,
   `category_price` decimal(10,2) NOT NULL,
   PRIMARY KEY (`ID_category`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Truncar tablas antes de insertar `039_categories`
@@ -179,6 +179,9 @@ INSERT INTO `039_categories` (`ID_category`, `category_name`, `category_descript
 
 CREATE TABLE IF NOT EXISTS `039_categories_to_show` (
   `ID_category` int(11) NOT NULL,
+  `category_name` varchar(60) NOT NULL,
+  `category_description` varchar(60) NOT NULL,
+  `capacity` int(11) NOT NULL,
   `price` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -191,15 +194,13 @@ TRUNCATE TABLE `039_categories_to_show`;
 -- Volcado de datos para la tabla `039_categories_to_show`
 --
 
-INSERT INTO `039_categories_to_show` (`ID_category`, `price`) VALUES
-(2, '720.00'),
-(3, '1680.00'),
-(4, '1500.00'),
-(5, '1590.00'),
-(6, '1260.00'),
-(7, '1125.00'),
-(8, '1050.00'),
-(9, '780.00');
+INSERT INTO `039_categories_to_show` (`ID_category`, `category_name`, `category_description`, `capacity`, `price`) VALUES
+(4, 'Bungalow', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nec', 4, '7500.00'),
+(5, 'Villa', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nec', 4, '7950.00'),
+(6, 'Suite Presidencial', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nec', 2, '6300.00'),
+(7, 'Suite Colonial', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nec', 2, '5625.00'),
+(8, 'Junior Suite Colonial', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nec', 3, '5250.00'),
+(9, 'Habitacion Colonial', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nec', 2, '3900.00');
 
 -- --------------------------------------------------------
 
@@ -217,7 +218,7 @@ CREATE TABLE IF NOT EXISTS `039_clients` (
   `birthday` date NOT NULL,
   `pwd` varchar(60) NOT NULL,
   PRIMARY KEY (`ID_client`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Truncar tablas antes de insertar `039_clients`
@@ -266,7 +267,7 @@ CREATE TABLE IF NOT EXISTS `039_reservations` (
   KEY `ID_room` (`ID_room`),
   KEY `ID_status` (`ID_status`),
   KEY `ID_category` (`ID_category`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Truncar tablas antes de insertar `039_reservations`
@@ -279,7 +280,8 @@ TRUNCATE TABLE `039_reservations`;
 
 INSERT INTO `039_reservations` (`ID_reservation`, `ID_client`, `ID_room`, `ID_category`, `initial_date`, `final_date`, `number_guests`, `total_price`, `ID_status`) VALUES
 (1, 1, 1, 1, '2022-06-17', '2022-06-19', 2, 300, 1),
-(14, 1, 2, 2, '2022-06-17', '2022-06-19', 2, 300, 1);
+(14, 1, 2, 2, '2022-06-18', '2022-06-19', 2, 300, 1),
+(15, 1, 3, 3, '2022-06-21', '2022-06-24', 2, 300, 1);
 
 -- --------------------------------------------------------
 
@@ -293,7 +295,7 @@ CREATE TABLE IF NOT EXISTS `039_rooms` (
   `capacity` int(11) NOT NULL,
   PRIMARY KEY (`ID_room`),
   KEY `ID_category` (`ID_category`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Truncar tablas antes de insertar `039_rooms`
@@ -305,15 +307,15 @@ TRUNCATE TABLE `039_rooms`;
 --
 
 INSERT INTO `039_rooms` (`ID_room`, `ID_category`, `capacity`) VALUES
-(1, 1, 4),
-(2, 2, 4),
-(3, 3, 4),
+(1, 1, 2),
+(2, 2, 2),
+(3, 3, 6),
 (4, 4, 4),
 (5, 5, 4),
-(6, 6, 4),
-(7, 7, 4),
-(8, 8, 4),
-(9, 9, 4);
+(6, 6, 2),
+(7, 7, 2),
+(8, 8, 3),
+(9, 9, 2);
 
 -- --------------------------------------------------------
 
@@ -325,7 +327,7 @@ CREATE TABLE IF NOT EXISTS `039_status` (
   `ID_status` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(10) NOT NULL,
   PRIMARY KEY (`ID_status`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Truncar tablas antes de insertar `039_status`
@@ -355,7 +357,7 @@ CREATE TABLE IF NOT EXISTS `039_users` (
   PRIMARY KEY (`ID_user`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Truncar tablas antes de insertar `039_users`

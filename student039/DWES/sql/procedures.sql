@@ -1,5 +1,5 @@
 BEGIN
-DECLARE var_qty_on_category, var_qty_categories, var_counter, aux_counter, i, j, var_number_of_days INT;
+DECLARE var_qty_on_category, var_capacity, var_qty_categories, var_counter, aux_counter, i, j, var_number_of_days INT;
 DECLARE aux_initial_day, aux_final_day DATE;
 
 SET var_number_of_days = DATEDIFF(var_final_date, var_initial_date);
@@ -46,8 +46,12 @@ WHILE j <= var_qty_categories DO
 
     IF (var_qty_on_category > var_counter)  THEN        
 
-        INSERT INTO 039_categories_to_show(ID_category, category_name, category_description, price)
-        SELECT ID_category, category_name, category_description, (category_price * var_number_of_days) AS price
+        SELECT capacity INTO var_capacity
+        FROM 039_rooms
+        WHERE ID_category = j;
+
+        INSERT INTO 039_categories_to_show(ID_category, category_name, category_description, capacity, price)
+        SELECT ID_category, category_name, category_description, var_capacity, (category_price * var_number_of_days) AS price
         FROM 039_categories
         WHERE ID_category = j;
 

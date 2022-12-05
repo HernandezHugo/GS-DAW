@@ -3,17 +3,34 @@ require($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/templates/header.php');
 include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/connect_db.php');
 require($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/db_booking_select.php');
 
+if(isset($_POST['book'])){
+
+
+
+    if($_SESSION['type']=='client'){
+        
+        echo $_POST['book_id_category'];
+        echo '<br>';
+        echo $_POST['book_initial_date'];
+        echo '<br>';
+
+        //$_SESSION['booking_info'] = mysqli_real_escape_string($conn, $_POST['book_id_category']);
+    }
+
+    var_dump($_SESSION);
+}
+
 ?>
 <main class="container">
     <div class="row">
         <div class="col">
-            <form class="text-center bg-light my-5 px-2" action="" method="POST">
+            <form action="booking.php" class="text-center bg-light my-5 px-2"method="POST">
                 <div class="mb-3">
                     <label class="p-2 m-2" class="form-label mt-3">Initial date</label>
-                    <input class="p-2 m-2" type="date" name="initial_date">
+                    <input class="p-2 m-2" type="date" name="initial_date" value="<?php echo $initial_date;?>">
                     <label class="p-2 m-2" class="form-label mt-3">Final date</label>
-                    <input class="p-2 m-2" type="date" name="final_date">
-                    <input class="p-2 m-2 btn btn-outline-primary btn-sm" type="submit" name="submit" value="Submit">
+                    <input class="p-2 m-2" type="date" name="final_date" value="<?php echo $final_date;?>">
+                    <input class="p-2 m-2 btn btn-outline-primary" type="submit" name="submit" value="Submit">
                 </div>
             </form>
         </div>
@@ -30,7 +47,12 @@ require($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/db_booking_select.php')
                             <h5 class="card-title"><?php echo $category['category_name']; ?></h5>
                             <p class="card-text"><?php echo $category['category_description']; ?>...</p>
                             <p class="card-text"><?php echo $category['price']; ?> €</p>
-                            <a class="btn btn-outline-success" href="#">Book</a>
+                            <form action="booking.php" method="post">
+                                <input type="hidden" name="book_id_category" value="<?php echo $category['ID_category'];?>">
+                                <input type="hidden" name="book_initial_date" value="<?php echo $initial_date;?>">
+                                <input type="hidden" name="book_final_date" value="<?php echo $final_date;?>">
+                                <input type="submit" name="book" class="btn btn-outline-success" value="Book">
+                            </form>
                         </div>
                     </div>
                 </div>
