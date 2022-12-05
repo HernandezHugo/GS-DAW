@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 24, 2022 at 09:17 PM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 8.1.10
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 05-12-2022 a las 15:00:04
+-- Versión del servidor: 10.4.22-MariaDB
+-- Versión de PHP: 8.1.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,34 +18,108 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `039_hotel`
+-- Base de datos: `039_hotel`
 --
+
 DROP TABLE IF EXISTS `039_reservations`;
 DROP TABLE IF EXISTS `039_rooms`;
 DROP TABLE IF EXISTS `039_categories`;
+DROP TABLE IF EXISTS `039_categories_to_show`;
 DROP TABLE IF EXISTS `039_clients`;
 DROP TABLE IF EXISTS `039_status`;
 DROP TABLE IF EXISTS `039_users`;
 DROP TABLE IF EXISTS `039_amenities`;
+
+DELIMITER $$
+--
+-- Procedimientos
+--
+CREATE PROCEDURE `availableCategoriesByDate` (IN `var_initial_date` DATE, IN `var_final_date` DATE)  BEGIN
+DECLARE var_qty_on_category, var_qty_categories, var_counter, aux_counter, i, j, var_number_of_days INT;
+DECLARE var_price DECIMAL(10,2);
+DECLARE aux_initial_day, aux_final_day DATE;
+
+SET var_number_of_days = DATEDIFF(var_final_date, var_initial_date);
+SET aux_initial_day = var_initial_date;
+SET var_price = 0.0;
+SET i = 1;
+SET j = 1;
+SET var_qty_on_category = 0;
+
+TRUNCATE TABLE 039_categories_to_show;
+
+/*qty categories*/
+SELECT COUNT(*) INTO var_qty_categories
+FROM 039_categories;
+
+WHILE j <= var_qty_categories DO
+    
+    SET var_counter = 0;
+
+    /*qty of rooms by category*/
+    SELECT COUNT(*) INTO var_qty_on_category
+    FROM 039_rooms
+    WHERE ID_category = j;
+
+    WHILE i <= var_number_of_days DO
+		
+        SET aux_counter = 0;
+        SET aux_final_day = ADDDATE(aux_initial_day, 1);
+
+        /*find qty of reservations each day*/
+        SELECT COUNT(*) INTO aux_counter
+        FROM 039_reservations
+        WHERE ID_category = j AND (initial_date < aux_final_day AND  final_date > aux_initial_day);
+
+        SET aux_initial_day = ADDDATE(aux_initial_day, 1);
+
+        /*store the max qty of reservations*/
+        IF var_counter < aux_counter THEN
+            SET var_counter = aux_counter;
+        END IF;
+
+        SET i = i + 1;
+
+    END WHILE;
+
+    IF (var_qty_on_category > var_counter)  THEN
+        SELECT category_price INTO var_price
+        FROM 039_categories
+        WHERE ID_category = j;
+
+        SET var_price = var_price * var_number_of_days;
+
+        INSERT INTO 039_categories_to_show(ID_category, price)
+        VALUES(j, var_price);
+    END IF;
+
+    SET j = j + 1;
+
+END WHILE;
+
+END$$
+
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `039_amenities`
+-- Estructura de tabla para la tabla `039_amenities`
 --
 
 CREATE TABLE IF NOT EXISTS `039_amenities` (
   `ID_amenity` int(11) NOT NULL AUTO_INCREMENT,
   `amenity_name` varchar(60) NOT NULL,
   PRIMARY KEY (`ID_amenity`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 --
--- Truncate table before insert `039_amenities`
+-- Truncar tablas antes de insertar `039_amenities`
 --
 
 TRUNCATE TABLE `039_amenities`;
 --
--- Dumping data for table `039_amenities`
+-- Volcado de datos para la tabla `039_amenities`
 --
 
 INSERT INTO `039_amenities` (`ID_amenity`, `amenity_name`) VALUES
@@ -66,40 +140,71 @@ INSERT INTO `039_amenities` (`ID_amenity`, `amenity_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `039_categories`
+-- Estructura de tabla para la tabla `039_categories`
 --
 
 CREATE TABLE IF NOT EXISTS `039_categories` (
   `ID_category` int(11) NOT NULL AUTO_INCREMENT,
   `category_name` varchar(60) NOT NULL,
-  `category_price` int(11) NOT NULL,
+  `category_description` text NOT NULL,
+  `category_price` decimal(10,2) NOT NULL,
   PRIMARY KEY (`ID_category`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 --
--- Truncate table before insert `039_categories`
+-- Truncar tablas antes de insertar `039_categories`
 --
 
 TRUNCATE TABLE `039_categories`;
 --
--- Dumping data for table `039_categories`
+-- Volcado de datos para la tabla `039_categories`
 --
 
-INSERT INTO `039_categories` (`ID_category`, `category_name`, `category_price`) VALUES
-(1, 'Habitacion Deluxe', 230),
-(2, 'Serenity Suite', 240),
-(3, 'Suite Familiar del Lago', 560),
-(4, 'Bungalow', 500),
-(5, 'Villa', 530),
-(6, 'Suite Presidencial', 420),
-(7, 'Suite Colonial', 375),
-(8, 'Junior Suite Colonial', 350),
-(9, 'Habitacion Colonial', 260);
+INSERT INTO `039_categories` (`ID_category`, `category_name`, `category_description`, `category_price`) VALUES
+(1, 'Habitacion Deluxe', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus ea incidunt quasi sint! Nobis fugiat, reprehenderit vitae ducimus nesciunt, est officia voluptas quisquam, nihil illum ipsum molestias quaerat pariatur accusamus.\r\nSit tempore animi a praesentium quidem dolorum aut earum possimus pariatur quae asperiores autem velit alias veniam consectetur deleniti incidunt, fuga laudantium sunt error eaque rem? Velit omnis odio molestias!\r\nSapiente, corrupti? Numquam consequatur nobis repellat at porro ipsum eius ex ipsam ipsa quo, voluptatum doloribus dignissimos recusandae quas, cumque facere, commodi officia distinctio accusantium? Corporis excepturi incidunt odio porro!', '230.00'),
+(2, 'Serenity Suite', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus ea incidunt quasi sint! Nobis fugiat, reprehenderit vitae ducimus nesciunt, est officia voluptas quisquam, nihil illum ipsum molestias quaerat pariatur accusamus.\r\nSit tempore animi a praesentium quidem dolorum aut earum possimus pariatur quae asperiores autem velit alias veniam consectetur deleniti incidunt, fuga laudantium sunt error eaque rem? Velit omnis odio molestias!\r\nSapiente, corrupti? Numquam consequatur nobis repellat at porro ipsum eius ex ipsam ipsa quo, voluptatum doloribus dignissimos recusandae quas, cumque facere, commodi officia distinctio accusantium? Corporis excepturi incidunt odio porro!', '240.00'),
+(3, 'Suite Familiar del Lago', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus ea incidunt quasi sint! Nobis fugiat, reprehenderit vitae ducimus nesciunt, est officia voluptas quisquam, nihil illum ipsum molestias quaerat pariatur accusamus.\r\nSit tempore animi a praesentium quidem dolorum aut earum possimus pariatur quae asperiores autem velit alias veniam consectetur deleniti incidunt, fuga laudantium sunt error eaque rem? Velit omnis odio molestias!\r\nSapiente, corrupti? Numquam consequatur nobis repellat at porro ipsum eius ex ipsam ipsa quo, voluptatum doloribus dignissimos recusandae quas, cumque facere, commodi officia distinctio accusantium? Corporis excepturi incidunt odio porro!', '560.00'),
+(4, 'Bungalow', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus ea incidunt quasi sint! Nobis fugiat, reprehenderit vitae ducimus nesciunt, est officia voluptas quisquam, nihil illum ipsum molestias quaerat pariatur accusamus.\r\nSit tempore animi a praesentium quidem dolorum aut earum possimus pariatur quae asperiores autem velit alias veniam consectetur deleniti incidunt, fuga laudantium sunt error eaque rem? Velit omnis odio molestias!\r\nSapiente, corrupti? Numquam consequatur nobis repellat at porro ipsum eius ex ipsam ipsa quo, voluptatum doloribus dignissimos recusandae quas, cumque facere, commodi officia distinctio accusantium? Corporis excepturi incidunt odio porro!', '500.00'),
+(5, 'Villa', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus ea incidunt quasi sint! Nobis fugiat, reprehenderit vitae ducimus nesciunt, est officia voluptas quisquam, nihil illum ipsum molestias quaerat pariatur accusamus.\r\nSit tempore animi a praesentium quidem dolorum aut earum possimus pariatur quae asperiores autem velit alias veniam consectetur deleniti incidunt, fuga laudantium sunt error eaque rem? Velit omnis odio molestias!\r\nSapiente, corrupti? Numquam consequatur nobis repellat at porro ipsum eius ex ipsam ipsa quo, voluptatum doloribus dignissimos recusandae quas, cumque facere, commodi officia distinctio accusantium? Corporis excepturi incidunt odio porro!', '530.00'),
+(6, 'Suite Presidencial', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus ea incidunt quasi sint! Nobis fugiat, reprehenderit vitae ducimus nesciunt, est officia voluptas quisquam, nihil illum ipsum molestias quaerat pariatur accusamus.\r\nSit tempore animi a praesentium quidem dolorum aut earum possimus pariatur quae asperiores autem velit alias veniam consectetur deleniti incidunt, fuga laudantium sunt error eaque rem? Velit omnis odio molestias!\r\nSapiente, corrupti? Numquam consequatur nobis repellat at porro ipsum eius ex ipsam ipsa quo, voluptatum doloribus dignissimos recusandae quas, cumque facere, commodi officia distinctio accusantium? Corporis excepturi incidunt odio porro!', '420.00'),
+(7, 'Suite Colonial', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus ea incidunt quasi sint! Nobis fugiat, reprehenderit vitae ducimus nesciunt, est officia voluptas quisquam, nihil illum ipsum molestias quaerat pariatur accusamus.\r\nSit tempore animi a praesentium quidem dolorum aut earum possimus pariatur quae asperiores autem velit alias veniam consectetur deleniti incidunt, fuga laudantium sunt error eaque rem? Velit omnis odio molestias!\r\nSapiente, corrupti? Numquam consequatur nobis repellat at porro ipsum eius ex ipsam ipsa quo, voluptatum doloribus dignissimos recusandae quas, cumque facere, commodi officia distinctio accusantium? Corporis excepturi incidunt odio porro!', '375.00'),
+(8, 'Junior Suite Colonial', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus ea incidunt quasi sint! Nobis fugiat, reprehenderit vitae ducimus nesciunt, est officia voluptas quisquam, nihil illum ipsum molestias quaerat pariatur accusamus.\r\nSit tempore animi a praesentium quidem dolorum aut earum possimus pariatur quae asperiores autem velit alias veniam consectetur deleniti incidunt, fuga laudantium sunt error eaque rem? Velit omnis odio molestias!\r\nSapiente, corrupti? Numquam consequatur nobis repellat at porro ipsum eius ex ipsam ipsa quo, voluptatum doloribus dignissimos recusandae quas, cumque facere, commodi officia distinctio accusantium? Corporis excepturi incidunt odio porro!', '350.00'),
+(9, 'Habitacion Colonial', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus ea incidunt quasi sint! Nobis fugiat, reprehenderit vitae ducimus nesciunt, est officia voluptas quisquam, nihil illum ipsum molestias quaerat pariatur accusamus.\r\nSit tempore animi a praesentium quidem dolorum aut earum possimus pariatur quae asperiores autem velit alias veniam consectetur deleniti incidunt, fuga laudantium sunt error eaque rem? Velit omnis odio molestias!\r\nSapiente, corrupti? Numquam consequatur nobis repellat at porro ipsum eius ex ipsam ipsa quo, voluptatum doloribus dignissimos recusandae quas, cumque facere, commodi officia distinctio accusantium? Corporis excepturi incidunt odio porro!', '260.00');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `039_clients`
+-- Estructura de tabla para la tabla `039_categories_to_show`
+--
+
+CREATE TABLE IF NOT EXISTS `039_categories_to_show` (
+  `ID_category` int(11) NOT NULL,
+  `price` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Truncar tablas antes de insertar `039_categories_to_show`
+--
+
+TRUNCATE TABLE `039_categories_to_show`;
+--
+-- Volcado de datos para la tabla `039_categories_to_show`
+--
+
+INSERT INTO `039_categories_to_show` (`ID_category`, `price`) VALUES
+(2, '720.00'),
+(3, '1680.00'),
+(4, '1500.00'),
+(5, '1590.00'),
+(6, '1260.00'),
+(7, '1125.00'),
+(8, '1050.00'),
+(9, '780.00');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `039_clients`
 --
 
 CREATE TABLE IF NOT EXISTS `039_clients` (
@@ -112,15 +217,15 @@ CREATE TABLE IF NOT EXISTS `039_clients` (
   `birthday` date NOT NULL,
   `pwd` varchar(60) NOT NULL,
   PRIMARY KEY (`ID_client`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 --
--- Truncate table before insert `039_clients`
+-- Truncar tablas antes de insertar `039_clients`
 --
 
 TRUNCATE TABLE `039_clients`;
 --
--- Dumping data for table `039_clients`
+-- Volcado de datos para la tabla `039_clients`
 --
 
 INSERT INTO `039_clients` (`ID_client`, `dni`, `firstname`, `surname`, `email`, `phone_number`, `birthday`, `pwd`) VALUES
@@ -143,13 +248,14 @@ INSERT INTO `039_clients` (`ID_client`, `dni`, `firstname`, `surname`, `email`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `039_reservations`
+-- Estructura de tabla para la tabla `039_reservations`
 --
 
 CREATE TABLE IF NOT EXISTS `039_reservations` (
   `ID_reservation` int(11) NOT NULL AUTO_INCREMENT,
   `ID_client` int(11) NOT NULL,
   `ID_room` int(11) NOT NULL,
+  `ID_category` int(11) NOT NULL,
   `initial_date` date NOT NULL,
   `final_date` date NOT NULL,
   `number_guests` int(11) NOT NULL,
@@ -158,36 +264,27 @@ CREATE TABLE IF NOT EXISTS `039_reservations` (
   PRIMARY KEY (`ID_reservation`),
   KEY `ID_client` (`ID_client`),
   KEY `ID_room` (`ID_room`),
-  KEY `ID_status` (`ID_status`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
+  KEY `ID_status` (`ID_status`),
+  KEY `ID_category` (`ID_category`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 --
--- Truncate table before insert `039_reservations`
+-- Truncar tablas antes de insertar `039_reservations`
 --
 
 TRUNCATE TABLE `039_reservations`;
 --
--- Dumping data for table `039_reservations`
+-- Volcado de datos para la tabla `039_reservations`
 --
 
-INSERT INTO `039_reservations` (`ID_reservation`, `ID_client`, `ID_room`, `initial_date`, `final_date`, `number_guests`, `total_price`, `ID_status`) VALUES
-(1, 6, 3, '2022-06-17', '2022-06-19', 2, 300, 1),
-(2, 10, 9, '2022-07-10', '2022-07-17', 2, 2100, 2),
-(3, 13, 10, '2022-06-21', '2022-06-25', 2, 1200, 1),
-(4, 10, 1, '2022-06-21', '2022-06-22', 2, 220, 2),
-(5, 1, 10, '2022-06-30', '2022-07-08', 2, 2400, 2),
-(6, 12, 2, '2022-06-28', '2022-06-29', 2, 220, 2),
-(7, 10, 9, '2022-06-29', '2022-07-08', 2, 2700, 2),
-(8, 12, 14, '2022-06-18', '2022-06-19', 2, 220, 2),
-(9, 4, 11, '2022-07-03', '2022-07-06', 2, 900, 2),
-(10, 1, 1, '2022-07-05', '2022-07-10', 2, 1100, 2),
-(11, 1, 15, '2022-06-20', '2022-06-25', 2, 1100, 2),
-(12, 4, 5, '2022-06-20', '2022-06-25', 2, 1100, 2);
+INSERT INTO `039_reservations` (`ID_reservation`, `ID_client`, `ID_room`, `ID_category`, `initial_date`, `final_date`, `number_guests`, `total_price`, `ID_status`) VALUES
+(1, 1, 1, 1, '2022-06-17', '2022-06-19', 2, 300, 1),
+(14, 1, 2, 2, '2022-06-17', '2022-06-19', 2, 300, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `039_rooms`
+-- Estructura de tabla para la tabla `039_rooms`
 --
 
 CREATE TABLE IF NOT EXISTS `039_rooms` (
@@ -196,74 +293,47 @@ CREATE TABLE IF NOT EXISTS `039_rooms` (
   `capacity` int(11) NOT NULL,
   PRIMARY KEY (`ID_room`),
   KEY `ID_category` (`ID_category`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 --
--- Truncate table before insert `039_rooms`
+-- Truncar tablas antes de insertar `039_rooms`
 --
 
 TRUNCATE TABLE `039_rooms`;
 --
--- Dumping data for table `039_rooms`
+-- Volcado de datos para la tabla `039_rooms`
 --
 
 INSERT INTO `039_rooms` (`ID_room`, `ID_category`, `capacity`) VALUES
-(1, 8, 4),
-(2, 8, 4),
-(3, 8, 4),
-(4, 7, 2),
-(5, 7, 2),
-(6, 7, 2),
-(7, 7, 2),
-(8, 7, 2),
-(9, 7, 2),
-(10, 6, 2),
-(11, 6, 2),
-(12, 4, 4),
-(13, 4, 4),
-(14, 4, 4),
-(15, 5, 5),
-(16, 5, 5),
-(17, 5, 5),
-(18, 3, 5),
-(19, 3, 5),
-(20, 1, 3),
-(21, 1, 3),
-(22, 1, 3),
-(23, 1, 3),
-(24, 1, 3),
-(25, 2, 3),
-(26, 2, 3),
-(27, 2, 3),
-(28, 2, 3),
-(29, 2, 3),
-(30, 2, 3),
-(31, 9, 3),
-(32, 9, 3),
-(33, 9, 3),
-(34, 9, 3),
-(35, 9, 3),
-(36, 9, 3);
+(1, 1, 4),
+(2, 2, 4),
+(3, 3, 4),
+(4, 4, 4),
+(5, 5, 4),
+(6, 6, 4),
+(7, 7, 4),
+(8, 8, 4),
+(9, 9, 4);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `039_status`
+-- Estructura de tabla para la tabla `039_status`
 --
 
 CREATE TABLE IF NOT EXISTS `039_status` (
   `ID_status` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(10) NOT NULL,
   PRIMARY KEY (`ID_status`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 --
--- Truncate table before insert `039_status`
+-- Truncar tablas antes de insertar `039_status`
 --
 
 TRUNCATE TABLE `039_status`;
 --
--- Dumping data for table `039_status`
+-- Volcado de datos para la tabla `039_status`
 --
 
 INSERT INTO `039_status` (`ID_status`, `name`) VALUES
@@ -274,7 +344,7 @@ INSERT INTO `039_status` (`ID_status`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `039_users`
+-- Estructura de tabla para la tabla `039_users`
 --
 
 CREATE TABLE IF NOT EXISTS `039_users` (
@@ -285,15 +355,15 @@ CREATE TABLE IF NOT EXISTS `039_users` (
   PRIMARY KEY (`ID_user`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 --
--- Truncate table before insert `039_users`
+-- Truncar tablas antes de insertar `039_users`
 --
 
 TRUNCATE TABLE `039_users`;
 --
--- Dumping data for table `039_users`
+-- Volcado de datos para la tabla `039_users`
 --
 
 INSERT INTO `039_users` (`ID_user`, `username`, `email`, `pwd`) VALUES
@@ -301,19 +371,20 @@ INSERT INTO `039_users` (`ID_user`, `username`, `email`, `pwd`) VALUES
 (2, 'hugo', 'correo@correo.com', '123');
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `039_reservations`
+-- Filtros para la tabla `039_reservations`
 --
 ALTER TABLE `039_reservations`
   ADD CONSTRAINT `039_reservations_ibfk_1` FOREIGN KEY (`ID_client`) REFERENCES `039_clients` (`ID_client`),
   ADD CONSTRAINT `039_reservations_ibfk_2` FOREIGN KEY (`ID_room`) REFERENCES `039_rooms` (`ID_room`),
-  ADD CONSTRAINT `039_reservations_ibfk_3` FOREIGN KEY (`ID_status`) REFERENCES `039_status` (`ID_status`);
+  ADD CONSTRAINT `039_reservations_ibfk_3` FOREIGN KEY (`ID_status`) REFERENCES `039_status` (`ID_status`),
+  ADD CONSTRAINT `039_reservations_ibfk_4` FOREIGN KEY (`ID_category`) REFERENCES `039_categories` (`ID_category`);
 
 --
--- Constraints for table `039_rooms`
+-- Filtros para la tabla `039_rooms`
 --
 ALTER TABLE `039_rooms`
   ADD CONSTRAINT `039_rooms_ibfk_1` FOREIGN KEY (`ID_category`) REFERENCES `039_categories` (`ID_category`);
