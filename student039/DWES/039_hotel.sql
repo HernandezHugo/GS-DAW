@@ -29,12 +29,13 @@ DROP TABLE IF EXISTS `039_clients`;
 DROP TABLE IF EXISTS `039_status`;
 DROP TABLE IF EXISTS `039_users`;
 DROP TABLE IF EXISTS `039_amenities`;
+DROP PROCEDURE IF EXISTS `039_availableCategoriesByDate`;
 
 DELIMITER $$
 --
 -- Procedimientos
 --
-CREATE PROCEDURE `availableCategoriesByDate` (IN `var_initial_date` DATE, IN `var_final_date` DATE)   BEGIN
+CREATE PROCEDURE `039_availableCategoriesByDate` (IN `var_initial_date` DATE, IN `var_final_date` DATE)   BEGIN
 DECLARE var_qty_on_category, var_capacity, var_qty_categories, var_counter, aux_counter, i, j, var_number_of_days INT;
 DECLARE aux_initial_day, aux_final_day DATE;
 

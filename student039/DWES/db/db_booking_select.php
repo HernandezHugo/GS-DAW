@@ -15,7 +15,7 @@ if (isset($_POST['submit'])) {
     $initial_date = mysqli_real_escape_string($conn, $_POST['initial_date']);
     $final_date = mysqli_real_escape_string($conn, $_POST['final_date']);
 
-    $sql = "CALL availableCategoriesByDate('$initial_date', '$final_date')";
+    $sql = "CALL 039_availableCategoriesByDate('$initial_date', '$final_date')";
 
     $result = mysqli_query($conn, $sql);
 

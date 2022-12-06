@@ -36,7 +36,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/db_reservations_insert.
         <input type="date" name="final_date">
         <br>
         <label class="form-label">Guests:</label>
-        <input class="form-control form-control-sm" value="<?php echo $number_guests; ?>" type="number" name="number_guests">
+        <input class="form-control form-control-sm" value="<?php echo $number_guests; ?>" type="number" name="number_guests" min="1" max="5" placeholder="1">
         <label class="form-label mt-3">Total price</label>
         <input type="number" name="total_price" value="<?php echo $total_price; ?>" class="form-control form-control-sm">
         <label class="form-label mt-3">Status</label>

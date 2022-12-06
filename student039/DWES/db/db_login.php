@@ -26,9 +26,10 @@ if (isset($_POST['submit'])) {
 
         //check if user exists
          if ($result->num_rows) {
-            $user = mysqli_fetch_assoc($result);
+            $client= mysqli_fetch_assoc($result);
             $_SESSION['type'] = $type_client;
-            $_SESSION['user'] = $user['email'];
+            $_SESSION['user_id'] = $client['ID_client'];
+            $_SESSION['user_email'] = $client['email'];
             header('Location: /student039/dwes/index.php');
         } else {
             //error

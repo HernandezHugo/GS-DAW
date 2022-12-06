@@ -25,7 +25,7 @@ $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
 mysqli_free_result($result);
 
 //get categories to dropdown
-$sql = "SELECT * FROM 039_rooms";
+$sql = "SELECT ID_room, CONCAT(ID_category , '', ID_room) AS name_room FROM 039_rooms";
 $result = mysqli_query($conn, $sql);
 $rooms = mysqli_fetch_all($result, MYSQLI_ASSOC);
 mysqli_free_result($result);
@@ -47,13 +47,13 @@ $client_selected = mysqli_fetch_assoc($result);
 mysqli_free_result($result);
 
 //get name from rooms to dropdown value selected
-$sql = "SELECT name_room FROM 039_rooms WHERE ID_room = '$id_room'";
+$sql = "SELECT CONCAT(ID_category , '', ID_room) AS name_room FROM 039_rooms WHERE ID_room = '$id_room'";
 $result = mysqli_query($conn, $sql);
 $room_selected = mysqli_fetch_assoc($result);
 mysqli_free_result($result);
 
 //get name from rooms to dropdown value selected
-$sql = "SELECT category_name FROM 039_categorys WHERE ID_category = '$id_category'";
+$sql = "SELECT category_name FROM 039_categories WHERE ID_category = '$id_category'";
 $result = mysqli_query($conn, $sql);
 $category_selected = mysqli_fetch_assoc($result);
 mysqli_free_result($result);

@@ -63,7 +63,8 @@ include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/forms/form_reservations_se
                         $id = $reservation['ID_reservation'];
                         foreach ($reservation as $reservation_data) : ?>
                             <td>
-                                <?php echo $reservation_data; ?>
+                                <?php 
+                                echo $reservation_data ?? 'No client assigned'; ?>
                             </td>
                         <?php endforeach; ?>
                         <td>

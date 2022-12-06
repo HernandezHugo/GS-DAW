@@ -17,7 +17,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/db_reservations_update.
         </select>
         <label class="form-label mt-3">room</label>
         <select class="input-group" name="id_room">
-            <option value="<?php echo $id_room; ?>" selected><?php echo $room_selected['name_room']; ?></option>
+            <option value="<?php echo $id_room ?? ''; ?>" selected><?php echo $room_selected['name_room'] ?? ''; ?></option>
             <?php foreach ($rooms as $room) : ?>
                 <option value="<?php echo $room['ID_room']; ?>"><?php echo $room['name_room']; ?></option>
             <?php endforeach; ?>
@@ -36,7 +36,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/db_reservations_update.
         <input type="date" name="final_date" value="<?php echo $final_date; ?>">
         <br>
         <label class="form-label">Guests:</label>
-        <input class="form-control form-control-sm" value="<?php echo $number_guests; ?>" type="number" name="number_guests">
+        <input class="form-control form-control-sm" value="<?php echo $number_guests; ?>" type="number" name="number_guests" min="1" max="5">
         <label class="form-label mt-3">Total price</label>
         <input type="number" name="total_price" value="<?php echo $total_price; ?>" class="form-control form-control-sm">
         <label class="form-label mt-3">Status</label>

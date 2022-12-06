@@ -9,7 +9,7 @@ $result = mysqli_query($conn, $sql);
 $clients = mysqli_fetch_all($result, MYSQLI_ASSOC);
 mysqli_free_result($result);
 
-$sql = "SELECT * FROM 039_rooms";
+$sql = "SELECT ID_room, CONCAT(ID_category , '', ID_room) AS name_room FROM 039_rooms";
 $result = mysqli_query($conn, $sql);
 $rooms = mysqli_fetch_all($result, MYSQLI_ASSOC);
 mysqli_free_result($result);
