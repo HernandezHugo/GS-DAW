@@ -8,10 +8,7 @@
         </li>
         <!-- <li class="nav-item">
             <a class="nav-link" href="/student039/dwes/#">About us</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/student039/dwes/#">Awards</a>
-        </li>
+        </li
         <li class="nav-item">
             <a class="nav-link" href="/student039/dwes/#">Contact</a>
         </li> -->

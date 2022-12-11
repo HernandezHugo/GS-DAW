@@ -1,9 +1,9 @@
 <?php
 require ($_SERVER['DOCUMENT_ROOT'].'/student039/dwes/templates/header.php');
 
-//category: descrip, link to its own page, cards,
-//pages: descrip, categories, profile, about us, contact, awards, payment, 'tus reservas', 'reservar'
-//actions: show rooms by date
+//category:link to its own page
+//pages: descrip, categories, profile, about us, contact, payment, 'tus reservas', 'reservar'
+
 ?>
 <main class="container">
     <section></section>

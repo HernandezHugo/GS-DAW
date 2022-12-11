@@ -26,6 +26,13 @@ include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/db_clients_update.php')
         <label class="form-label mt-3">Birthday</label>
         <input type="date" name="birthday" value="<?php echo $birthday; ?>">
         <br>
+
+        <label class="form-label mt-3">Password *</label>
+        <input class="form-control form-control-sm " type="password" name="pwd">
+
+        <label class="form-label mt-3">Re-password *</label>
+        <input class="form-control form-control-sm " type="password" name="re_pwd">
+        
         <input class="my-3 btn btn-outline-primary btn-sm" type="submit" name="submit" value="Submit">
     </form>
 

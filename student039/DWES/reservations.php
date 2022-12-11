@@ -64,7 +64,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/forms/form_reservations_se
                         foreach ($reservation as $reservation_data) : ?>
                             <td>
                                 <?php 
-                                echo $reservation_data ?? 'No client assigned'; ?>
+                                echo $reservation_data ?? 'No room assigned'; ?>
                             </td>
                         <?php endforeach; ?>
                         <td>
