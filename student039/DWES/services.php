@@ -48,7 +48,7 @@ mysqli_free_result($result);
         <?php foreach ($services as $service) : ?>
             <div class="col d-flex justify-content-center">
                 <div class="card" style="width: 18rem;">
-                    <img src="./img/<?php echo $service['service_name']; ?>.jpg" class="card-img-top" alt="<?php echo $service['service_name']; ?> image">
+                    <img src="<?echo './img/' . $service['service_name'] . '.jpg'; ?>" class="card-img-top" alt="<?php echo $service['service_name']; ?> image">
                     <div class="card-body">
                         <h5 class="card-title"><?php echo $service['service_name']; ?></h5>
                         <p class="card-text"><?php echo $service['service_price']; ?> €</p>
