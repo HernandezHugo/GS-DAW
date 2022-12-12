@@ -62,3 +62,22 @@ WHILE j <= var_qty_categories DO
 END WHILE;
 
 END
+
+
+
+BEGIN
+DECLARE var_id_service INT;
+DECLARE var_total DECIMAL(10,2);
+
+SELECT ID_service INTO var_id_service 
+FROM 039_services
+WHERE service_name = var_service_name;
+
+SELECT (service_price * var_qty) INTO var_total
+FROM 039_services
+WHERE service_name = var_service_name;
+
+INSERT INTO 039_cart (ID_reservation, ID_service, qty, total)
+VALUES (var_id_reservation, var_id_service, var_qty, var_total);
+
+END

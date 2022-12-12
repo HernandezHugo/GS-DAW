@@ -1,6 +1,6 @@
 <?php
 require($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/templates/header.php');
-include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/db_register.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/db_register_admin.php');
 ?>
 
 <div class="container bg-light mt-3 w-75">

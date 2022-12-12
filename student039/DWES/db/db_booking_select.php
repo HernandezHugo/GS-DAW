@@ -7,11 +7,6 @@ $final_date = '';
 
 if (isset($_POST['submit'])) {
 
-    if($_SESSION['type']=='client'){
-
-        //$_SESSION['booking_info'] = mysqli_real_escape_string($conn, $_POST['id_category']);
-    }
-
     $initial_date = mysqli_real_escape_string($conn, $_POST['initial_date']);
     $final_date = mysqli_real_escape_string($conn, $_POST['final_date']);
 

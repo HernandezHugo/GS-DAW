@@ -13,6 +13,9 @@
             <a class="nav-link" href="/student039/dwes/booking.php">Booking</a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="/student039/dwes/services.php">Services</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="/student039/dwes/clients.php">Clients</a>
         </li>
         <li class="nav-item">

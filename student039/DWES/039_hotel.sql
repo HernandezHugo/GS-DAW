@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-12-2022 a las 20:16:20
--- Versión del servidor: 10.4.25-MariaDB
--- Versión de PHP: 8.1.10
+-- Tiempo de generación: 12-12-2022 a las 01:58:35
+-- Versión del servidor: 10.4.22-MariaDB
+-- Versión de PHP: 8.1.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -23,19 +23,39 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `039_reservations`;
 DROP TABLE IF EXISTS `039_rooms`;
-DROP TABLE IF EXISTS `039_categories`;
 DROP TABLE IF EXISTS `039_categories_to_show`;
+DROP TABLE IF EXISTS `039_categories`;
 DROP TABLE IF EXISTS `039_clients`;
+DROP TABLE IF EXISTS `039_cart`;
+DROP TABLE IF EXISTS `039_services`;
 DROP TABLE IF EXISTS `039_status`;
 DROP TABLE IF EXISTS `039_users`;
 DROP TABLE IF EXISTS `039_amenities`;
 DROP PROCEDURE IF EXISTS `039_availableCategoriesByDate`;
+DROP PROCEDURE IF EXISTS `039_addToCart`;
 
 DELIMITER $$
 --
 -- Procedimientos
 --
-CREATE PROCEDURE `039_availableCategoriesByDate` (IN `var_initial_date` DATE, IN `var_final_date` DATE)   BEGIN
+CREATE PROCEDURE `039_addToCart` (IN `var_id_reservation` INT, IN `var_service_name` VARCHAR(60), IN `var_qty` INT)  BEGIN
+DECLARE var_id_service INT;
+DECLARE var_total DECIMAL(10,2);
+
+SELECT ID_service INTO var_id_service 
+FROM 039_services
+WHERE service_name = var_service_name;
+
+SELECT (service_price * var_qty) INTO var_total
+FROM 039_services
+WHERE service_name = var_service_name;
+
+INSERT INTO 039_cart (ID_reservation, ID_service, qty, total)
+VALUES (var_id_reservation, var_id_service, var_qty, var_total);
+
+END$$
+
+CREATE PROCEDURE `039_availableCategoriesByDate` (IN `var_initial_date` DATE, IN `var_final_date` DATE)  BEGIN
 DECLARE var_qty_on_category, var_capacity, var_qty_categories, var_counter, aux_counter, i, j, var_number_of_days INT;
 DECLARE aux_initial_day, aux_final_day DATE;
 
@@ -141,6 +161,24 @@ INSERT INTO `039_amenities` (`ID_amenity`, `amenity_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `039_cart`
+--
+
+CREATE TABLE IF NOT EXISTS `039_cart` (
+  `ID_reservation` int(11) NOT NULL,
+  `ID_service` int(11) NOT NULL,
+  `qty` int(11) NOT NULL,
+  `total` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Truncar tablas antes de insertar `039_cart`
+--
+
+TRUNCATE TABLE `039_cart`;
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `039_categories`
 --
 
@@ -196,12 +234,13 @@ TRUNCATE TABLE `039_categories_to_show`;
 --
 
 INSERT INTO `039_categories_to_show` (`ID_category`, `category_name`, `category_description`, `capacity`, `price`) VALUES
-(4, 'Bungalow', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nec', 4, '7500.00'),
-(5, 'Villa', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nec', 4, '7950.00'),
-(6, 'Suite Presidencial', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nec', 2, '6300.00'),
-(7, 'Suite Colonial', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nec', 2, '5625.00'),
-(8, 'Junior Suite Colonial', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nec', 3, '5250.00'),
-(9, 'Habitacion Colonial', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nec', 2, '3900.00');
+(3, 'Suite Familiar del Lago', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nec', 6, '1120.00'),
+(4, 'Bungalow', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nec', 4, '1000.00'),
+(5, 'Villa', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nec', 4, '1060.00'),
+(6, 'Suite Presidencial', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nec', 2, '840.00'),
+(7, 'Suite Colonial', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nec', 2, '750.00'),
+(8, 'Junior Suite Colonial', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nec', 3, '700.00'),
+(9, 'Habitacion Colonial', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nec', 2, '520.00');
 
 -- --------------------------------------------------------
 
@@ -219,7 +258,7 @@ CREATE TABLE IF NOT EXISTS `039_clients` (
   `birthday` date NOT NULL,
   `pwd` varchar(60) NOT NULL,
   PRIMARY KEY (`ID_client`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Truncar tablas antes de insertar `039_clients`
@@ -231,7 +270,7 @@ TRUNCATE TABLE `039_clients`;
 --
 
 INSERT INTO `039_clients` (`ID_client`, `dni`, `firstname`, `surname`, `email`, `phone_number`, `birthday`, `pwd`) VALUES
-(1, '95265142G', 'juan', 'qwer', 'email.1@gmail.com', 653689524, '1990-08-08', '123'),
+(1, '95265142G', 'juan', 'qwer', 'ema33@gmail.com', 653689524, '1990-08-08', '123'),
 (2, '22453142K', 'jaime', 'asd', 'email.2@gmail.com', 645812257, '1980-08-08', '123'),
 (3, '18265142W', 'tomas', 'smiz', 'email.3@gmail.com', 957558631, '1999-08-08', '123'),
 (4, '91165142T', 'pol', 'lopez', 'email.4@gmail.com', 654987321, '1985-08-08', '123'),
@@ -245,7 +284,8 @@ INSERT INTO `039_clients` (`ID_client`, `dni`, `firstname`, `surname`, `email`, 
 (12, '61315716M', 'Myra', 'Carr', 'vitae.nibh@outlook.couk', 427187745, '1998-08-08', '123'),
 (13, '53117614H', 'Anjolie', 'Cash', 'cras.interdum.nunc@yahoo.org', 865222605, '1997-08-08', '123'),
 (14, '33447936Q', 'Jana', 'Hicks', 'in.cursus@protonmail.net', 475351125, '1991-08-08', '123'),
-(15, '77526272F', 'Herrod', 'Prince', 'molestie.sodales@outlook.org', 686155111, '1992-08-08', '123');
+(15, '77526272F', 'Herrod', 'Prince', 'molestie.sodales@outlook.org', 686155111, '1992-08-08', '123'),
+(16, '12411125F', 'juandd', 'poom', 'asdf@correo.com', 123321123, '1986-11-13', '123');
 
 -- --------------------------------------------------------
 
@@ -256,19 +296,19 @@ INSERT INTO `039_clients` (`ID_client`, `dni`, `firstname`, `surname`, `email`, 
 CREATE TABLE IF NOT EXISTS `039_reservations` (
   `ID_reservation` int(11) NOT NULL AUTO_INCREMENT,
   `ID_client` int(11) NOT NULL,
-  `ID_room` int(11) NOT NULL,
+  `ID_room` int(11) DEFAULT NULL,
   `ID_category` int(11) NOT NULL,
   `initial_date` date NOT NULL,
   `final_date` date NOT NULL,
   `number_guests` int(11) NOT NULL,
   `total_price` int(11) NOT NULL,
-  `ID_status` int(11) NOT NULL,
+  `ID_status` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`ID_reservation`),
   KEY `ID_client` (`ID_client`),
   KEY `ID_room` (`ID_room`),
   KEY `ID_status` (`ID_status`),
   KEY `ID_category` (`ID_category`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Truncar tablas antes de insertar `039_reservations`
@@ -280,9 +320,11 @@ TRUNCATE TABLE `039_reservations`;
 --
 
 INSERT INTO `039_reservations` (`ID_reservation`, `ID_client`, `ID_room`, `ID_category`, `initial_date`, `final_date`, `number_guests`, `total_price`, `ID_status`) VALUES
-(1, 1, 1, 1, '2022-06-17', '2022-06-19', 2, 300, 1),
-(14, 1, 2, 2, '2022-06-18', '2022-06-19', 2, 300, 1),
-(15, 1, 3, 3, '2022-06-21', '2022-06-24', 2, 300, 1);
+(1, 1, 1, 1, '2022-06-17', '2022-06-19', 2, 300, 2),
+(14, 1, 2, 2, '2022-06-18', '2022-06-19', 2, 300, 2),
+(15, 1, 3, 3, '2022-06-21', '2022-06-24', 2, 300, 2),
+(16, 1, 1, 1, '2022-12-07', '2022-12-08', 2, 230, 2),
+(24, 3, NULL, 2, '2022-12-07', '2022-12-09', 2, 480, 1);
 
 -- --------------------------------------------------------
 
@@ -321,6 +363,33 @@ INSERT INTO `039_rooms` (`ID_room`, `ID_category`, `capacity`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `039_services`
+--
+
+CREATE TABLE IF NOT EXISTS `039_services` (
+  `ID_service` int(11) NOT NULL AUTO_INCREMENT,
+  `service_name` varchar(60) NOT NULL,
+  `service_price` decimal(10,2) NOT NULL,
+  PRIMARY KEY (`ID_service`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Truncar tablas antes de insertar `039_services`
+--
+
+TRUNCATE TABLE `039_services`;
+--
+-- Volcado de datos para la tabla `039_services`
+--
+
+INSERT INTO `039_services` (`ID_service`, `service_name`, `service_price`) VALUES
+(1, 'Spa', '20.00'),
+(2, 'Bar', '15.00'),
+(3, 'Restaurant', '25.00');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `039_status`
 --
 
@@ -328,7 +397,7 @@ CREATE TABLE IF NOT EXISTS `039_status` (
   `ID_status` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(10) NOT NULL,
   PRIMARY KEY (`ID_status`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Truncar tablas antes de insertar `039_status`
@@ -342,7 +411,8 @@ TRUNCATE TABLE `039_status`;
 INSERT INTO `039_status` (`ID_status`, `name`) VALUES
 (1, 'booked'),
 (2, 'checkin'),
-(3, 'checkout');
+(3, 'checkout'),
+(4, 'canceled');
 
 -- --------------------------------------------------------
 
