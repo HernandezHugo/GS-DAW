@@ -21,7 +21,7 @@ if (indexedDB) {
     console.log("CREATED", db);
 
     const objectStore = db.createObjectStore("users", {
-      keypath: "id_user",
+      keyPath: "id_user",
       autoIncrement: true,
     });
     objectStore.createIndex("users_name", ["name"], { unique: false });

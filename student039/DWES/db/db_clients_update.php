@@ -37,8 +37,6 @@ if (isset($_POST['submit'])) {
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $phone_number = mysqli_real_escape_string($conn, $_POST['phone_number']);
     $birthday = mysqli_real_escape_string($conn, $_POST['birthday']);
-    $pwd = mysqli_real_escape_string($conn, $_POST['pwd']);
-    $re_pwd = mysqli_real_escape_string($conn, $_POST['re_pwd']);
 
 
     //Validate parameters
@@ -71,8 +69,8 @@ if (isset($_POST['submit'])) {
     if (empty($errors)) {
         // write query
         $sql = "UPDATE 039_clients SET dni = '$dni', firstname = '$firstname', surname = '$surname',";
-        $sql .= " email = '$email', phone_number = $phone_number, birthday = '$birthday', ";
-        $sql .= "pwd = $pwd WHERE ID_client = $id;";
+        $sql .= " email = '$email', phone_number = $phone_number, birthday = '$birthday' ";
+        $sql .= "WHERE ID_client = $id;";
 
         //save to db and check
         if (mysqli_query($conn, $sql)) {

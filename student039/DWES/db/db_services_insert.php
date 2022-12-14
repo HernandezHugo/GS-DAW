@@ -20,6 +20,8 @@ if (isset($_POST['submit'])) {
             $quantity = mysqli_real_escape_string($conn, $_POST['qty_list'][$name_service]);
             
             if(!$quantity) continue;
+            //if(id_reservation on DB) updateCart 
+            //else
             $sql = "CALL 039_addToCart($id_reservation, '$name_service', $quantity)";
             
             $result = mysqli_query($conn, $sql);

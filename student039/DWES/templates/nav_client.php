@@ -8,10 +8,10 @@
         </li>
         <!-- <li class="nav-item">
             <a class="nav-link" href="/student039/dwes/#">About us</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/student039/dwes/#">Contact</a>
         </li> -->
+        <li class="nav-item">
+            <a class="nav-link" href="/student039/dwes/client_reservations.php">My reservations</a>
+        </li>
         <li class="nav-item">
             <a class="nav-link" href="/student039/dwes/db/db_logout.php">Log out</a>
         </li>
