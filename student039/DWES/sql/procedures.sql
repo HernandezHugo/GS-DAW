@@ -81,3 +81,32 @@ INSERT INTO 039_cart (ID_reservation, ID_service, qty, total)
 VALUES (var_id_reservation, var_id_service, var_qty, var_total);
 
 END
+
+
+BEGIN 
+DECLARE present INT;
+
+SET present = 0;
+
+SELECT COUNT(*) INTO present
+FROM 039_cart
+WHERE ID_reservation = var_id_reservation AND ID_service = 0;
+
+SELECT * 
+FROM 039_cart
+WHERE ID_reservation = var_id_reservation;
+
+IF present = 0 THEN
+
+	INSERT INTO 039_cart(ID_reservation, ID_service, qty, total)
+	SELECT ID_reservation, 0, DATEDIFF(`final_date`,`initial_date`), total_price  
+	FROM 039_reservations
+	WHERE ID_reservation = var_id_reservation;
+
+END IF;
+
+SELECT * 
+FROM 039_cart
+WHERE ID_reservation = var_id_reservation;
+
+END

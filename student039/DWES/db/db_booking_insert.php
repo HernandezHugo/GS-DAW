@@ -3,9 +3,10 @@ if (isset($_POST['book'])) {
 
     $id_client = '';
 
-    if ($_SESSION['type'] == 'guest') {
+    if ($_SESSION['type'] == $type_default) {
 
         header('Location: /student039/dwes/forms/form_login.php');
+
     } else if ($_SESSION['type'] == 'admin') {
 
         //Get a random client ID

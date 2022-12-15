@@ -3,8 +3,17 @@ require($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/templates/header.php');
 include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/connect_db.php');
 include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/db_services_insert.php');
 
-// write query
-$sql = "SELECT * FROM 039_reservations WHERE ID_status = 2";
+if ($_SESSION['type'] == $type_client) {
+
+    $id_client = $_SESSION['user_id'];
+    // write query
+    $sql = "SELECT * FROM 039_reservations WHERE ID_client = $id_client AND ID_status = 2;"; //checked in
+} else  {
+
+    // write query
+    $sql = "SELECT * FROM 039_reservations WHERE ID_status = 2"; //checked in
+}
+
 // make query and result
 $result = mysqli_query($conn, $sql);
 // fetch the resulting rows as an array
@@ -48,13 +57,13 @@ mysqli_free_result($result);
         <?php foreach ($services as $service) : ?>
             <div class="col d-flex justify-content-center">
                 <div class="card" style="width: 18rem;">
-                    <img src="<?echo './img/' . $service['service_name'] . '.jpg'; ?>" class="card-img-top" alt="<?php echo $service['service_name']; ?> image">
+                    <img src="<?php echo './img/' . $service['service_name'] . '.jpg'; ?>" class="card-img-top" alt="<?php echo $service['service_name']; ?> image">
                     <div class="card-body">
                         <h5 class="card-title"><?php echo $service['service_name']; ?></h5>
                         <p class="card-text"><?php echo $service['service_price']; ?> €</p>
                         <div class="d-flex justify-content-between">
                             <input class="form-check-input" type="checkbox" name="check_list[<?php echo $service['ID_service']; ?>]" value="<?php echo $service['service_name']; ?>">
-                            <input type="number" name="qty_list[<?php echo $service['service_name']; ?>]" min="0" max="5" placeholder="0">
+                            <input type="number" name="qty_list[<?php echo $service['service_name']; ?>]" min="0" max="10" placeholder="0">
                         </div>
                     </div>
                 </div>

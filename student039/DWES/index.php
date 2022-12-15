@@ -2,7 +2,7 @@
 require ($_SERVER['DOCUMENT_ROOT'].'/student039/dwes/templates/header.php');
 
 //category:link to its own page
-//pages: descrip, categories, profile, about us, contact, payment, 'tus reservas', 'reservar'
+//pages: descrip, categories, profile, about us, contact, payment.
 
 ?>
 <main class="container">

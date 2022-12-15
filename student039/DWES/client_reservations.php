@@ -1,12 +1,13 @@
 <?php
 require($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/templates/header.php');
 include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/connect_db.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/verify_guest.php');
 include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/db_checkin.php');
 include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/db_checkout.php');
-include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/db_cancel.php');
+//include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/db_cancel.php');
 
 
-//msg success at insert
+//success msgs 
 $msg = $_GET['msg'] ?? null;
 
 $id_client = $_SESSION['user_id'];
@@ -23,18 +24,20 @@ mysqli_free_result($result);
 ?>
 
 <h1 class="text-center mt-3">My reservations</h1>
-
 <div class="container my-5">
+
+    <?php foreach ($errors as $error) : ?>
+        <p class="text-center text-white fw-bold mb-3  bg-danger">
+            <?php echo $error; ?>
+        </p>
+    <?php endforeach; ?>
 
     <?php if ($msg == 1) : ?>
         <p class="text-center text-white fw-bold mt-1  bg-success">
             <?php echo 'Check-in succeeded'; ?>
         </p>
+    
     <?php elseif ($msg == 2) : ?>
-        <p class="text-center text-white fw-bold mt-1  bg-success">
-            <?php echo 'Check-out succeeded'; ?>
-        </p>
-    <?php elseif ($msg == 3) : ?>
         <p class="text-center text-white fw-bold mt-1  bg-success">
             <?php echo 'Cancellation succeeded'; ?>
         </p>
@@ -71,9 +74,9 @@ mysqli_free_result($result);
                             <form method="POST">
                                 <input type="hidden" name="id_reservation" value="<?php echo $id ?>">
                                 <input type="hidden" name="id_category" value="<?php echo $category ?>">
-                                <button type="submit" name="checkin" class="w-100 m-1 btn btn-outline-warning btn-sm">Check-in</button>
-                                <button type="submit" name="checkout" class="w-100 m-1 btn btn-outline-warning btn-sm">Check-out</button>
-                                <button type="submit" name="cancel" class="w-100 m-1 btn btn-outline-danger btn-sm">Cancel</button>
+                                <button type="submit" name="checkin" class="w-100 m-1 btn btn-warning btn-sm">Check-in</button>
+                                <button type="submit" name="checkout" class="w-100 m-1 btn btn-warning btn-sm">Check-out</button>
+                                <button type="submit" disabled name="cancel" class="w-100 m-1 btn btn-outline-danger btn-sm">Cancel</button>
                             </form>
                         </td>
                     </tr>

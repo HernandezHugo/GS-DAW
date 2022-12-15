@@ -1,9 +1,9 @@
 <?php
 
-include ($_SERVER['DOCUMENT_ROOT'].'/student039/dwes/db/connect_db.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/connect_db.php');
 
 if (isset($_POST['checkout'])) {
-    
+
     $id_reservation = mysqli_real_escape_string($conn, $_POST['id_reservation']);
 
     $sql = "SELECT ID_status FROM 039_status WHERE status_name = 'checkout';";
@@ -15,11 +15,12 @@ if (isset($_POST['checkout'])) {
     if ($id_status) {
         // write query
         $sql = "UPDATE 039_reservations SET  ID_status = '$id_status' WHERE ID_reservation = '$id_reservation';";
-
+        
         //save to db and check
         if (mysqli_query($conn, $sql)) {
             //success
-            header('Location: /student039/dwes/reservations.php?msg=2');
+            $_SESSION['id_reserv_to_ticket'] = $id_reservation;
+            header('Location: /student039/dwes/ticket.php?msg=1');
         } else {
             //error
             echo 'query error: ' . mysqli_error($conn);
