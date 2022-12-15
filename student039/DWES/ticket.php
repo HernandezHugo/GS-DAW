@@ -15,9 +15,13 @@ $my_reservation = $_SESSION['id_reserv_to_ticket'];
 unset($_SESSION['id_reserv_to_ticket']);
 
 $sql = "CALL 039_ticket($my_reservation)";
-$result = mysqli_query($conn, $sql);
-$ticket = mysqli_fetch_all($result, MYSQLI_ASSOC);
-mysqli_free_result($result);
+if (mysqli_query($conn, $sql)) {
+    
+    $sql = "SELECT * FROM 039_cart WHERE ID_reservation = $my_reservation";
+    $result = mysqli_query($conn, $sql);
+    $ticket = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    mysqli_free_result($result);
+}
 
 $total_price = 0;
 
@@ -59,7 +63,7 @@ $total_price = 0;
                     <td></td>
                     <td></td>
                     <td>TOTAL PRICE:</td>
-                    <td><?php echo $total_price;?> €</td>
+                    <td><?php echo $total_price; ?> €</td>
                 </tr>
             </tbody>
         </table>

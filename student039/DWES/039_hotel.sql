@@ -130,10 +130,6 @@ SELECT COUNT(*) INTO present
 FROM 039_cart
 WHERE ID_reservation = var_id_reservation AND ID_service = 0;
 
-SELECT * 
-FROM 039_cart
-WHERE ID_reservation = var_id_reservation;
-
 IF present = 0 THEN
 
 	INSERT INTO 039_cart(ID_reservation, ID_service, qty, total)
@@ -142,10 +138,6 @@ IF present = 0 THEN
 	WHERE ID_reservation = var_id_reservation;
 
 END IF;
-
-SELECT * 
-FROM 039_cart
-WHERE ID_reservation = var_id_reservation;
 
 END$$
 
