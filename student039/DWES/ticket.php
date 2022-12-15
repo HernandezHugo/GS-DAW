@@ -10,11 +10,11 @@ if (!$_SESSION['id_reserv_to_ticket']) {
 //success msgs 
 $msg = $_GET['msg'] ?? null;
 
-$id_reservation = $_SESSION['id_reserv_to_ticket'];
+$my_reservation = $_SESSION['id_reserv_to_ticket'];
 
 unset($_SESSION['id_reserv_to_ticket']);
 
-$sql = "CALL 039_ticket($id_reservation)";
+$sql = "CALL 039_ticket($my_reservation)";
 $result = mysqli_query($conn, $sql);
 $ticket = mysqli_fetch_all($result, MYSQLI_ASSOC);
 mysqli_free_result($result);
