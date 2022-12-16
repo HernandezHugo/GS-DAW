@@ -112,11 +112,11 @@ const createLocalStorage = () => {
 
   //if localStorage is not empty we get history
   if (localStorage.length != 0)
-    history = JSON.parse(localStorage.getItem("game"));
+    history = JSON.parse(localStorage.getItem("history"));
 
   //push data into history and store it on localStorage
   history.push(data);
-  localStorage.setItem("game", JSON.stringify(history));
+  localStorage.setItem("history", JSON.stringify(history));
 };
 
 //stop timers and see the final result of the game
