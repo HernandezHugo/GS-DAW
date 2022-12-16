@@ -1,7 +1,7 @@
-const miLocalStorage = document.querySelector("#miLocalStorage");
-const btn_crear = document.querySelector(".btn-crear");
-const btn_mostrar = document.querySelector(".btn-mostrar");
-const btn_eliminar = document.querySelector(".btn-eliminar");
+const MILOCALSTORAGE = document.querySelector("#miLocalStorage");
+const BTN_CREAR = document.querySelector(".btn-crear");
+const BTN_MOSTRAR = document.querySelector(".btn-mostrar");
+const BTN_ELIMINAR = document.querySelector(".btn-eliminar");
 
 function creaLocalStorage() {
   localStorage.setItem("usuario", "IDK");
@@ -9,10 +9,10 @@ function creaLocalStorage() {
 }
 
 function mostrarLocalStorage() {
-  //miLocalStorage.innerHTML = localStorage.getItem("usuario");
+  //MILOCALSTORAGE.innerHTML = localStorage.getItem("usuario");
   for (let i = 0; i < localStorage.length; i++) {
     const element = localStorage.getItem(localStorage.key(i));
-    miLocalStorage.innerHTML += element;
+    MILOCALSTORAGE.innerHTML += element;
   }
 }
 
@@ -20,12 +20,12 @@ function eliminaLocalStorage() {
   localStorage.removeItem("usuario");
 }
 
-btn_crear.addEventListener("click", (e) => {
+BTN_CREAR.addEventListener("click", (e) => {
   creaLocalStorage();
 });
-btn_mostrar.addEventListener("click", (e) => {
+BTN_MOSTRAR.addEventListener("click", (e) => {
   mostrarLocalStorage();
 });
-btn_eliminar.addEventListener("click", (e) => {
+BTN_ELIMINAR.addEventListener("click", (e) => {
   eliminaLocalStorage();
 });
