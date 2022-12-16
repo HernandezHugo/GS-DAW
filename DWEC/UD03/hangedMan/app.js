@@ -66,7 +66,12 @@ const displayWordHidden = (word) => {
 
 //get char from input
 const getChar = () => {
-  return document.querySelector("input").value;
+  return document.querySelector("input").value.trim().charAt(0);
+};
+
+//empty input
+const resetInput = () => {
+  document.querySelector("input").value = "";
 };
 
 //check if the word guessed is correct
@@ -90,6 +95,7 @@ const replaceDisplay = (char, indexes) => {
     SCORE.innerHTML = +SCORE.innerHTML + 20;
     chars[indexes[i]] = char;
   }
+  resetInput();
   DISPLAY.innerText = chars.join("");
 };
 
