@@ -111,7 +111,7 @@ const createLocalStorage = () => {
   };
 
   //if localStorage is not empty we get history
-  if (localStorage.length !== 0)
+  if (localStorage.length != 0)
     history = JSON.parse(localStorage.getItem("game"));
 
   //push data into history and store it on localStorage
@@ -143,7 +143,7 @@ btnSend.addEventListener("click", (e) => {
   let indexes = getIndexes(MYWORD, getChar());
 
   //if bad guessing/no indexes, hangedman is printing
-  //otherwise, chars are replace 
+  //otherwise, chars are replace
   indexes.length !== 0 ? replaceDisplay(getChar(), indexes) : printHangedMan();
   //reset countdown when we guess
   initialize_counter();
