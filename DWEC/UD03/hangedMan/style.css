@@ -14,15 +14,19 @@ h1 {
   text-align: center;
 }
 
+p{
+  font-size: 20px;
+}
+
 input[type="text"] {
   line-height: 25px;
-  font-size: 14px;
+  font-size: 20px;
   width: 5em;
   text-align: center;
 }
 
 .btn {
-  font-size: 13px;
+  font-size: 14px;
   cursor: pointer;
   background-color: var(--bg-light);
   color: var(--btn);
@@ -49,5 +53,5 @@ section {
   margin: 2em 0;
 }
 #hangedman {
-  height: 140px;
+  height: 170px;
 }
