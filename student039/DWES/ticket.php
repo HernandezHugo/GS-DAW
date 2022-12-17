@@ -9,6 +9,7 @@ if (!$_SESSION['id_reserv_to_ticket']) {
 
 //success msgs 
 $msg = $_GET['msg'] ?? null;
+$ticket = [];
 
 $my_reservation = $_SESSION['id_reserv_to_ticket'];
 
