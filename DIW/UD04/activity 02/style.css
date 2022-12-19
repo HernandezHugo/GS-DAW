@@ -1,0 +1,51 @@
+:root{
+    --btn: #0000be;
+    --bg-light: #ffffff;
+}
+*, *::after, *::before{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+h1{
+    text-align: center;
+}
+
+input[type="number"]{
+    line-height: 25px;
+    font-size: 13px;
+    width: 5em;
+    text-align: center;
+    margin: 1em;
+}
+
+.btn{
+    font-size: 13px;
+    cursor: pointer;
+    background-color: var(--bg-light);
+    color: var(--btn);
+    border: 1px solid var(--btn);
+    border-radius: 5px;
+    padding: 0.5em 0.75em;
+    text-transform: uppercase;
+}
+
+.msgs{
+    height: 100px;
+}
+
+form{
+    margin: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+p{
+    text-align: center;
+    margin: 1em;
+    font-weight: 700;
+    font-size: large;
+}
