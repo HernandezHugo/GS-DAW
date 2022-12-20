@@ -1,56 +1,83 @@
 let result;
 let msg;
-function useRegex(input) {
-  let regex = /[0-9]+/i;
-  return regex.test(input);
-}
+let errors = [];
 
 function checkInput_1() {
-  return useRegex($("#num_1").val());
+  return !isNaN($("#num_1").val()) && $("#num_1").val().length > 0
+    ? true
+    : false;
 }
 
 function checkInput_2() {
-  return useRegex($("#num_2").val());
+  return !isNaN($("#num_2").val()) && $("#num_2").val().length > 0
+    ? true
+    : false;
 }
 
-function chooseMsg(checkInput_1, checkInput_2) {
-  if (checkInput_1 && checkInput_2) {
-    msg = "Result: ";
-    return true;
-  } else if (checkInput_1) {
-    msg = "Input 2 must be a number";
-  } else if (checkInput_2) {
-    msg = "Input 1 must be a number";
-  } else {
-    msg = "Both inputs have to be a number";
-  }
-  return false;
+function checkErrors(checkInput_1, checkInput_2) {
+  errors = [];
+  msg = "";
+  if (checkInput_1 && checkInput_2) msg = "Result: ";
+  else errors.push("Both inputs must contain a number");
+
+  if (checkInput_1 == false) errors.push("Input 1 is empty");
+  if (checkInput_2 == false) errors.push("Input 2 is empty");
 }
 
 function sumInputs() {
   result = +$("#num_1").val() + +$("#num_2").val();
 }
-function printMessage(type) {
-  let p;
-  if ($("#msgs").children().length == 0) p = $("p");
-  else p = $("#msgs").children([0]);
 
-  if (!type) p.addClass("errormsg");
-  else p.addClass("infomsg");
+function bindingElements(element) {
+  element.on({
+    mouseover: (e) => {
+      $(element).css({ fontSize: "1.25em",margin: "0.7em 2em", padding: "0.5em", boxShadow: "1px 2px 4px black" });
+    },
+    mouseout: (e) => {
+      $(element).css({ fontSize: "1.2em",margin: "1em 2em", padding: "0.3em", boxShadow: "0px 0px 0px" });
+    },
+  });
+}
 
-  p.text(result);
-  $("#msgs").append(p);
+function printErrors(fragment) {
+  for (let i = 0; i < errors.length; i++) {
+    let p = $(document.createElement("p"));
+    p.addClass("errormsg");
+    p.text(errors[i]);
+    fragment.append(p);
+    bindingElements(p);
+  }
+}
+
+function printInfo(fragment) {
+  let p = $(document.createElement("p"));
+  p.addClass("infomsg");
+  p.text(msg + result);
+  bindingElements(p);
+  fragment.append(p);
+}
+
+function printMessage() {
+  $("#msgs").html("");
+  let fragment = $(document.createDocumentFragment());
+
+  if (errors.length != 0) printErrors(fragment);
+  else printInfo(fragment);
+
+  $("#msgs").append(fragment);
 }
 
 function emptyInputs() {
-  $("#num_1").val("");
-  $("#num_2").val("");
+  if (errors.length == 0) {
+    $("#num_1").val("");
+    $("#num_2").val("");
+  }
 }
 
 $("button").click((e) => {
   e.preventDefault();
-  type = chooseMsg(checkInput_1(), checkInput_2());
-  printMessage(type);
-  emptyInputs();
+  checkErrors(checkInput_1(), checkInput_2());
   sumInputs();
+  printMessage();
+  emptyInputs();
 });
