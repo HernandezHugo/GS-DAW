@@ -220,8 +220,5 @@ function counter() {
     lives -= 1;
   }
 }
-COUNTDOWN.addEventListener("change", (e) => {
-  if (COUNTDOWN.innerText === "08.000") {
-  }
-});
+
 console.log(MYWORD);

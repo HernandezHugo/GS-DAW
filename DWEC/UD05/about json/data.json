@@ -1,0 +1,22 @@
+{
+  "persona": [
+    {
+      "nom": "pepe",
+      "ciutat": "mao"
+    },
+    {
+      "nom": "pere",
+      "ciutat": "alaior"
+    }
+  ],
+  "cotxe": [
+    {
+      "model": "qwe",
+      "marca": "2TX"
+    },
+    {
+      "model": "ty",
+      "marca": "JEX"
+    }
+  ]
+}
