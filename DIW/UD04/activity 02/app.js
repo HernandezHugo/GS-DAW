@@ -20,8 +20,8 @@ function checkErrors(checkInput_1, checkInput_2) {
   if (checkInput_1 && checkInput_2) msg = "Result: ";
   else errors.push("Both inputs must contain a number");
 
-  if (checkInput_1 == false) errors.push("Input 1 is empty");
-  if (checkInput_2 == false) errors.push("Input 2 is empty");
+  if (checkInput_1 == false) errors.push("Input 1 has to contain a number");
+  if (checkInput_2 == false) errors.push("Input 2 has to contain a number");
 }
 
 function sumInputs() {
