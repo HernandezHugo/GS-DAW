@@ -1,12 +1,9 @@
-$.fn.countChars = function () {
-  $(this).each((index) => {
-    console.log(index + " " + $(this).val());
-    console.log($(this).val());
-
+$.fn.countChars = function (i) {
+  $(this).keyup(() => {
+    $("span").eq(i).text($(this).val().length)
   });
 };
 
-$(".area").keyup(()=>{
-    countChars();
+$("textarea").each((index, element) => {
+  $(element).countChars(index);
 });
-console.log($(".area")[0]);
