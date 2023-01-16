@@ -1,4 +1,3 @@
-import "./App.css";
 import NavBar from "./NavBar";
 import Home from "./Home";
 
@@ -19,7 +18,7 @@ function App() {
   return (
     <div className="App">
         <NavBar></NavBar>
-      <div className="contenido">
+      <div className="content">
         {/* <h1>{ titulo }</h1>
         <p>{ "asd" }</p>
         <p>{ "asd" + contador }</p>
