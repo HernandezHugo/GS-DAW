@@ -1,40 +1,34 @@
+import { useState } from "react";
+
 const Home = () => {
-  const chars = ["A", "B"];
-  let count = [];
-
-  const handleClick = (x) => {
-    let random = Math.random() * 5;
-    console.log(random + " asdfasdf: " + x);
-  };
-  const idkClick = () => {
-    console.log("idk");
-  };
-
-  const getRandomChar = () => {
-    let j = 0;
-    for (let i = 0; i < chars.length; j++) {
-      let pos = Math.floor(Math.random() * chars.length);
-      console.log(chars[pos]);
-      console.log(pos + ": " + count[j] + " - " + j);
-      
-      count.push(chars[pos]);
-      
-    }
-  };
-
+  const [blogs, setBlogs] = useState([
+    {
+      title: "Mi nueva web hellokittyOnline",
+      body: "lorem ipsum",
+      author: "Pepe",
+      id: 1,
+    },
+    {
+      title: "HellokittyOnline 2",
+      body: "lorem ipsum 7",
+      author: "EUPepe",
+      id: 2,
+    },
+    {
+      title: "El refgreso de Hellokitty",
+      body: "lorem 77",
+      author: "Asder",
+      id: 3,
+    },
+  ]);
   return (
     <div className="Home">
-      <h1>App Component: Home</h1>
-      <button
-        onClick={() => {
-          let x = prompt("111");
-          handleClick(x);
-        }}
-      >
-        Go!
-      </button>
-      <button onClick={idkClick}>IDK!</button>
-      <button onClick={getRandomChar}>RandomChar</button>
+      {blogs.map((blog) => (
+        <div className="blog-preview" key={blog.id}>
+          <h2>{blog.title}</h2>
+          <p>Escrito por {blog.author}</p>
+        </div>
+      ))}
     </div>
   );
 };

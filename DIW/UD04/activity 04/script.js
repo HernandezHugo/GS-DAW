@@ -1,4 +1,5 @@
-$(".post").data("dropped", false)
+$(".post")
+  .data("dropped", false)
   .draggable({})
   .on({
     mouseenter: function () {
@@ -19,13 +20,21 @@ $(".drop").droppable({
     $(this)
       .find("span")
       .text(+count + 1);
-      $(ui.draggable).data("dropped", true)
-    },
-    out: function (event, ui) {
-        let count = $(this).find("span").text();
-        $(this)
-        .find("span")
-        .text(+count - 1);
-        $(ui.draggable).data("dropped", false)
+    $(ui.draggable).data("dropped", true);
+  },
+  out: function (event, ui) {
+    let count = $(this).find("span").text();
+    $(this)
+      .find("span")
+      .text(+count - 1);
+    $(ui.draggable).data("dropped", false);
   },
 });
+
+$.fn.createPostIt = function () {
+  $("<div><div/>", {
+    class: "post",
+  }).appendTo("posts");
+};
+
+$("add-green").on("click", createPostIt());
