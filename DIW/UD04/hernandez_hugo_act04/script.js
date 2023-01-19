@@ -76,15 +76,6 @@ function createPostIt(color, num) {
                       {
                         text: "Delete",
                         click: function (e) {
-                          let count = $(".d-" + color)
-                            .find("span")
-                            .text();
-                          if ($("#" + num).data("dropped") !== false)
-                            count = +count - 1;
-
-                          $(".d-" + color)
-                            .find("span")
-                            .text(count);
                           $("#" + num).remove();
                           $(this).dialog("close");
                         },
