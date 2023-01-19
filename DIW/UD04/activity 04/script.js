@@ -1,3 +1,5 @@
+let count = 0;
+
 $(".drop").droppable({
   drop: function (event, ui) {
     let count = $(this).find("span").text();
@@ -24,7 +26,7 @@ function createPostIt(color, num) {
   $(document.createElement("div"))
     .attr({
       class: "post " + color,
-      id: color + num,
+      id: num,
     })
     .append(
       $(document.createElement("div"))
@@ -44,16 +46,16 @@ function createPostIt(color, num) {
             .on({
               click: function (e) {
                 let text =
-                  $("#" + color + num)
+                  $("#" + num)
                     .find(".minimize")
                     .text() == "_"
                     ? "❏"
                     : "_";
-                $("#" + color + num).toggleClass("minimizing");
-                $("#" + color + num)
+                $("#" + num).toggleClass("minimizing");
+                $("#" + num)
                   .find("textarea")
                   .toggle("fold", 500);
-                $("#" + color + num)
+                $("#" + num)
                   .find(".minimize")
                   .text(text);
               },
@@ -74,7 +76,7 @@ function createPostIt(color, num) {
                       {
                         text: "Delete",
                         click: function (e) {
-                          $("#" + color + num).remove();
+                          $("#" + num).remove();
                           $(this).dialog("close");
                         },
                       },
@@ -113,17 +115,15 @@ function createPostIt(color, num) {
     .appendTo("#" + color);
 }
 
-function countPosts(color) {
-  return $("." + color).length;
-}
-
 $(".add-green").on({
   click: function () {
-    createPostIt("green", countPosts("green"));
+    count += 1;
+    createPostIt("green", count);
   },
 });
 $(".add-red").on({
   click: function () {
-    createPostIt("red", countPosts("red"));
+    count += 1;
+    createPostIt("red", count);
   },
 });
