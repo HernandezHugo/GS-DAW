@@ -24,6 +24,7 @@ function createPostIt(color, num) {
   $(document.createElement("div"))
     .attr({
       class: "post " + color,
+      id: color + num,
     })
     .append(
       $(document.createElement("div"))
@@ -33,26 +34,70 @@ function createPostIt(color, num) {
         .append(
           $(document.createElement("input")).attr({
             type: "text",
+            maxlength: 10,
           }),
           $(document.createElement("button"))
             .attr({
               class: "minimize",
             })
-            .text("_"),
+            .text("_")
+            .on({
+              click: function (e) {
+                let text =
+                  $("#" + color + num)
+                    .find(".minimize")
+                    .text() == "_"
+                    ? "❏"
+                    : "_";
+                $("#" + color + num).toggleClass("minimizing");
+                $("#" + color + num)
+                  .find("textarea")
+                  .toggle("fold", 500);
+                $("#" + color + num)
+                  .find(".minimize")
+                  .text(text);
+              },
+            }),
           $(document.createElement("button"))
             .attr({
               class: "close",
             })
             .text("X")
+            .on({
+              click: function (e) {
+                $(this)
+                  .clone()
+                  .text("Close post it")
+                  .dialog({
+                    modal: true,
+                    buttons: [
+                      {
+                        text: "Delete",
+                        click: function (e) {
+                          $("#" + color + num).remove();
+                          $(this).dialog("close");
+                        },
+                      },
+                      {
+                        text: "Close",
+                        click: function (e) {
+                          $(this).dialog("close");
+                        },
+                      },
+                    ],
+                  });
+              },
+            })
         )
     )
     .append(
       $(document.createElement("textarea")).attr({
         cols: 15,
         rows: 6,
+        maxlength: 100,
       })
     )
-    .data("prop", { dropped: false, id: num + 1 })
+    .data("dropped", false)
     .draggable()
     .on({
       mouseenter: function () {
@@ -80,17 +125,5 @@ $(".add-green").on({
 $(".add-red").on({
   click: function () {
     createPostIt("red", countPosts("red"));
-  },
-});
-
-/*to continue*/ 
-$(".minimize").on({
-  click: function () {
-    createPostIt("red");
-  },
-});
-$(".close").on({
-  click: function () {
-    createPostIt("red");
   },
 });

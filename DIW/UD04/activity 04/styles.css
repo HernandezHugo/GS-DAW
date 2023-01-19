@@ -103,6 +103,10 @@ input:focus {
   border: none;
 }
 
+.minimizing{
+  height: 70px;
+}
+
 .close {
   background-color: #ff4444;
   border: 1px solid #837868;
