@@ -1,8 +1,13 @@
 :root {
   --green: #00db75;
-  --green-light: #cdfce6;
+  --green-dark: #93e7bf;
+  --green-light: #99fdcf;
+  --btn-green: #cdfce6;
   --red: #ff8272;
-  --red-light: #fdd0cb;
+  --red-light: #faa197;
+  --red-dark: #ca8179;
+  --btn-red: #ffc8c2;
+  --btn-close: #ff4444;
 }
 * {
   padding: 0;
@@ -23,6 +28,7 @@ p {
 button {
   cursor: pointer;
 }
+
 .add-green,
 .add-red {
   height: 1.5em;
@@ -34,13 +40,14 @@ button {
   border: 1px solid var(--green);
   color: var(--green);
   font-size: larger;
-  background-color: var(--green-light);
+  background-color: var(--btn-green);
 }
+
 .add-red {
   border: 1px solid var(--red);
   color: var(--red);
   font-size: larger;
-  background-color: var(--red-light);
+  background-color: var(--btn-red);
 }
 
 .posts {
@@ -55,10 +62,20 @@ button {
   border-radius: 0px 0px 5px 5px;
   padding: 0.3em;
   margin-top: 0.3em;
-  background-color: blanchedalmond;
 }
 
-.principal {
+.green {
+  background-color: var(--green-light);
+  border-top: solid 10px var(--green-dark);
+}
+
+.red {
+  background-color: var(--red-light);
+  border-top: solid 10px var(--red-dark);
+}
+
+
+.menu {
   display: flex;
   justify-content: space-between;
   margin-bottom: 0.3em;
@@ -87,7 +104,7 @@ input:focus {
 }
 
 .close {
-  background-color: rgb(252, 153, 153);
+  background-color: #ff4444;
   border: 1px solid #837868;
 }
 
@@ -101,16 +118,17 @@ textarea {
   width: 49%;
   border: solid 1px black;
 }
-.drop {
+.d-green,
+.d-red {
   height: 100%;
   width: 50%;
   text-align: center;
 }
 
-.drop:nth-of-type(1) {
+.d-green {
   background-color: var(--green);
 }
 
-.drop:nth-of-type(2) {
+.d-red {
   background-color: var(--red);
 }
