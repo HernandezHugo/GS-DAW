@@ -7,8 +7,53 @@ function Spotify() {
   this.apiUrl = "https://api.spotify.com/";
 }
 
+function getGenres(genres) {
+  if (genres.length == 0) return "";
+  //use array
+  let arrayGenres = [];
+
+  $(genres).each(function (i, e) {
+    arrayGenres.push($(document.createElement("span").text(e)));
+  });
+  console.log(arrayGenres);
+}
+
 //display artists
 function createArtistCard(artist) {
+  $(document.createElement("div"))
+    .attr({
+      class: "container",
+    })
+    .append(
+      $(document.createElement("h3"))
+        .attr({
+          class: "title",
+        })
+        .text(artist.name)
+    )
+    .append(
+      $(document.createElement("img")).attr({
+        class: "front_img",
+        src:
+          artist.images.length != 0 ? artist.images[1].url : "./img/pngegg.png",
+      })
+    )
+    .append(
+      $(document.createElement("p"))
+        .attr({
+          class: "followers",
+        })
+        .text("Followers: " + artist.followers.total)
+    )
+    .append(
+      $(document.createElement("p")).attr({
+        class: "genres",
+      })
+      /*         .append(getGenres(artist.genres))
+       */
+    )
+    .appendTo($("#results"));
+  console.log(getGenres(artist.genres));
   console.log(artist);
 }
 
@@ -21,7 +66,7 @@ Spotify.prototype.getArtist = function (artist) {
       Authorization: "Bearer " + access_token,
     },
   }).done(function (response) {
-    $("#qty_results").find("span").text(response.artists.total);
+    $("#num_results_artists").find("span").text(response.artists.total);
     $(response.artists.items).each(function (i, artist) {
       createArtistCard(artist);
     });
@@ -61,6 +106,7 @@ $(function () {
   var spotify = new Spotify();
 
   $("#bgetArtist").on("click", function () {
+    $(".container").remove();
     spotify.getArtist($("#artistName").val());
   });
 
