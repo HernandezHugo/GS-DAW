@@ -7,56 +7,6 @@ function Spotify() {
   this.apiUrl = "https://api.spotify.com/";
 }
 
-function getGenres(genres) {
-  if (genres.length == 0) return "";
-  //use array
-  let arrayGenres = [];
-
-  $(genres).each(function (i, e) {
-    arrayGenres.push($(document.createElement("span").text(e)));
-  });
-  console.log(arrayGenres);
-}
-
-//display artists
-function createArtistCard(artist) {
-  $(document.createElement("div"))
-    .attr({
-      class: "container",
-    })
-    .append(
-      $(document.createElement("h3"))
-        .attr({
-          class: "title",
-        })
-        .text(artist.name)
-    )
-    .append(
-      $(document.createElement("img")).attr({
-        class: "front_img",
-        src:
-          artist.images.length != 0 ? artist.images[1].url : "./img/pngegg.png",
-      })
-    )
-    .append(
-      $(document.createElement("p"))
-        .attr({
-          class: "followers",
-        })
-        .text("Followers: " + artist.followers.total)
-    )
-    .append(
-      $(document.createElement("p")).attr({
-        class: "genres",
-      })
-      /*         .append(getGenres(artist.genres))
-       */
-    )
-    .appendTo($("#results"));
-  console.log(getGenres(artist.genres));
-  console.log(artist);
-}
-
 //Search for information on an artist, adding the possibility of obtaining their albums.
 Spotify.prototype.getArtist = function (artist) {
   $.ajax({
@@ -66,7 +16,7 @@ Spotify.prototype.getArtist = function (artist) {
       Authorization: "Bearer " + access_token,
     },
   }).done(function (response) {
-    $("#num_results_artists").find("span").text(response.artists.total);
+    $("#num_results").find("span").text(response.artists.total);
     $(response.artists.items).each(function (i, artist) {
       createArtistCard(artist);
     });
@@ -82,6 +32,10 @@ Spotify.prototype.getArtistById = function (artistId) {
       Authorization: "Bearer " + access_token,
     },
   }).done(function (response) {
+    $("#num_results").find("span").text(response.total);
+    $(response.items).each(function (i, album) {
+      createAlbumsCard(album);
+    });
     console.log(response);
   });
 };
@@ -105,12 +59,135 @@ $(function () {
 
   var spotify = new Spotify();
 
+  $("#artistName").keyup(function () {
+    $("#results").empty();
+    spotify.getArtist($(this).val());
+  });
+
   $("#bgetArtist").on("click", function () {
-    $(".container").remove();
+    $("#results").empty();
     spotify.getArtist($("#artistName").val());
   });
 
   $("#results").on("click", ".artistId", function () {
-    spotify.getArtistById($(this).attr("data-id"));
+    let id = $(this).data("id");
+    $("#results").empty();
+    spotify.getArtistById(id);
   });
 });
+
+$.fn.addGenres = function (genres) {
+  var documentFragment = $(document.createDocumentFragment());
+  if (genres.length != 0)
+    $(genres).each(function (i, e) {
+      if (i < 5)
+        $(documentFragment).append($(document.createElement("span")).text(e));
+    });
+  $(this).append(documentFragment);
+};
+
+$.fn.addArtists = function (artists) {
+  var documentFragment = $(document.createDocumentFragment());
+  if (artists.length != 0)
+    $(artists).each(function (i, artist) {
+      $(artist).each(function (i, e) {
+        $(documentFragment).append(
+          $(document.createElement("span")).text(e.name)
+        );
+      });
+    });
+  $(this).append(documentFragment);
+};
+
+//display artist
+function createArtistCard(artist) {
+  $(document.createElement("div"))
+    .attr({
+      class: "container artistId",
+    })
+    .append(
+      $(document.createElement("h3"))
+        .attr({
+          class: "title",
+        })
+        .text(artist.name)
+    )
+    .append(
+      $(document.createElement("img")).attr({
+        class: "front_img",
+        src:
+          artist.images.length != 0 ? artist.images[1].url : "./img/pngegg.png",
+      })
+    )
+    .append(
+      $(document.createElement("p"))
+        .attr({
+          class: "followers",
+        })
+        .text("Followers: " + artist.followers.total)
+    )
+    .append(
+      $(document.createElement("div"))
+        .attr({
+          class: "genres",
+        })
+        .append(function () {
+          $(this).addGenres(artist.genres);
+        })
+    )
+    .append(
+      $(document.createElement("p"))
+        .attr({
+          class: "followers",
+        })
+        .text("Popularity: " + artist.popularity + "%")
+    )
+    .data("id", artist.id)
+    .appendTo($("#results"));
+  console.log(artist);
+}
+
+function createAlbumsCard(album) {
+  $(document.createElement("div"))
+    .attr({
+      class: "container",
+    })
+    .append(
+      $(document.createElement("h3"))
+        .attr({
+          class: "title",
+        })
+        .text(album.name)
+    )
+    .append(
+      $(document.createElement("img")).attr({
+        class: "front_img",
+        src:
+          album.images.length != 0 ? album.images[1].url : "./img/pngegg.png",
+      })
+    )
+    .append(
+      $(document.createElement("p"))
+        .attr({
+          class: "followers",
+        })
+        .text("Tracks: " + album.total_tracks)
+    )
+    .append(
+      $(document.createElement("p"))
+        .attr({
+          class: "followers",
+        })
+        .text("Released: " + album.release_date)
+    )
+    .append(
+      $(document.createElement("div"))
+        .attr({
+          class: "genres",
+        })
+        .append(function () {
+          $(this).addArtists(album.artists);
+        })
+    )
+    .appendTo($("#results"));
+}

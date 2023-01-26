@@ -2,6 +2,7 @@
   --black: #191414;
   --black-light: #252323;
 }
+
 * {
   margin: 0;
   padding: 0;
@@ -16,8 +17,9 @@ body {
 
 input,
 button {
-  height: 2em;
-  padding: 0.4em;
+  height: 2.3em;
+  padding: 0.6em;
+  font-size: large;
   outline: none;
   border: none;
 }
@@ -30,7 +32,7 @@ nav {
   align-items: center;
   background-color: var(--black);
   height: 4em;
-  margin-bottom: 2em;
+  margin: 2em 0em;
 }
 
 input {
@@ -41,7 +43,7 @@ button {
   cursor: pointer;
   border-radius: 0px 10px 10px 0px;
 }
-button:active{
+button:active {
   background-color: #ffffffb4;
 }
 
@@ -54,43 +56,67 @@ button:active{
 
 #results {
   display: grid;
-  grid-template-columns: repeat(5,1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 1em;
   text-align: center;
   margin: 2em 5em 0em 2em;
 }
 
-
+@media (max-width: 1400px) {
+  #results {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media (max-width: 1200px) {
+  #results {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 850px) {
+  #results {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 
 /*CONTAINER*/
 
 .container {
+  cursor: pointer;
   border: 3px solid var(--black-light);
-  height: 20em;
-  width: 15em;
+  height: 25em;
+  width: 16em;
   background-color: var(--black);
+  transition: 0.5s;
+}
+.container:hover {
+  box-shadow: 3px 3px 5px white;
+  background-color: var(--black-light);
 }
 
-.title, .front_img, .followers, .genres{
+.title,
+.front_img,
+.followers,
+.genres {
   margin-top: 1em;
 }
 
-.front_img{
+.front_img {
   border: 1px solid black;
   width: 10em;
   height: 10em;
 }
 
-.title, .followers, .genres, #num_results_artists{
-  color: #FFF;
+.title,
+.followers,
+.genres,
+#num_results {
+  color: #fff;
 }
 
-.genres span{
+.genres > span {
   font-style: italic;
   border-radius: 10px;
   padding: 0.2em 0.5em;
   margin: 0em 0.2em;
   background-color: var(--black-light);
 }
-
-
