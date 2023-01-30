@@ -1,0 +1,30 @@
+body {
+  display: flex;
+}
+.container {
+  width: 50%;
+  height: 500px;
+}
+
+
+.element{
+  width: 30%;
+  height: 50px;
+  margin: 1em;
+  font-size: larger;
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+.num{
+  background-color: green;
+}
+
+.char{
+  background-color: rgb(0, 211, 0);
+}
+
+.zone {
+  background-color: greenyellow;
+}

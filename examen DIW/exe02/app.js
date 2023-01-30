@@ -1,0 +1,2 @@
+$(".element").draggable();
+$(".zone").droppable();
