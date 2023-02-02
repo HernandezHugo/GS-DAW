@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>act01</title>
+  </head>
+  <body>
+    <div id="app">
+      <div v-for="(item, index) in items" class="container"></div>
+      <button v-on:click="asd">json</button>
+    </div>
+    <script>
+      const { createApp } = Vue;
+      function getData() {
+        fetch("./data.json")
+          .then((response) => response.json())
+          .then((json) => {
+            app.setData(json);
+          });
+      }
+
+      let app = createApp({
+        data() {
+          return {
+            data: [],
+          };
+        },
+        methods: {
+          setData(json) {
+            this.data = json;
+          },
+
+          asd() {
+            this.getData();
+            console.log(this.data);
+          },
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>
+<!-- For this first activity you have to generate some random products with this 
+tool:
+https://json-generator.com/ or a similar one and get a json. Attached to the 
+activity you have an example with all the necessary fields.
+Then, create an application with VueJs and render the information of this json to
+simulate an e-commerce.
+In this first page you have to create a top bar menu where you will show the title 
+of the page.
+In the central part you will show all the available products and for each of them 
+you will show the name of the product, an image, the price, stock and tags.
+Only products that are active or in stock will be rendered. -->
