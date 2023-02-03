@@ -9,33 +9,31 @@
   </head>
   <body>
     <div id="app">
-      <div v-for="(item, index) in items" class="container"></div>
+      <div v-for="item in items">
+        
+      </div>
       <button v-on:click="asd">json</button>
     </div>
     <script>
       const { createApp } = Vue;
-      function getData() {
-        fetch("./data.json")
-          .then((response) => response.json())
-          .then((json) => {
-            app.setData(json);
-          });
-      }
 
       let app = createApp({
         data() {
           return {
-            data: [],
+            items: this.getData(),
           };
         },
         methods: {
           setData(json) {
-            this.data = json;
+            this.items = json;
           },
-
+          getData() {
+            fetch("./data.json")
+              .then((response) => response.json())
+              .then((json) => this.setData(json));
+          },
           asd() {
-            this.getData();
-            console.log(this.data);
+            console.log(this.items);
           },
         },
       }).mount("#app");
