@@ -4,15 +4,24 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <title>act01</title>
   </head>
   <body>
+    <nav>
+      <img src="./img/fedora-guy.png" alt="" />
+      <h1>Fedora</h1>
+    </nav>
     <div id="app">
-      <div v-for="item in items">
-        
+      <div v-for="item in items" class="container">
+        <h3>{{ item.product }}</h3>
+        <img v-bind:src="item.picture" />
+        <p>{{ item.price }}€</p>
+        <p>
+          <span v-for="tag in item.tags">#{{ tag }}</span>
+        </p>
       </div>
-      <button v-on:click="asd">json</button>
     </div>
     <script>
       const { createApp } = Vue;
@@ -32,22 +41,8 @@
               .then((response) => response.json())
               .then((json) => this.setData(json));
           },
-          asd() {
-            console.log(this.items);
-          },
         },
       }).mount("#app");
     </script>
   </body>
 </html>
-<!-- For this first activity you have to generate some random products with this 
-tool:
-https://json-generator.com/ or a similar one and get a json. Attached to the 
-activity you have an example with all the necessary fields.
-Then, create an application with VueJs and render the information of this json to
-simulate an e-commerce.
-In this first page you have to create a top bar menu where you will show the title 
-of the page.
-In the central part you will show all the available products and for each of them 
-you will show the name of the product, an image, the price, stock and tags.
-Only products that are active or in stock will be rendered. -->
