@@ -9,19 +9,21 @@
     <title>act01</title>
   </head>
   <body>
-    <nav>
-      <img src="./img/fedora-guy.png" alt="" />
-      <h1>Fedora</h1>
-    </nav>
     <div id="app">
-      <div v-for="item in items" class="container">
-        <h3>{{ item.product }}</h3>
-        <img v-bind:src="item.picture" />
-        <p>{{ item.price }}€</p>
-        <p>
-          <span v-for="tag in item.tags">#{{ tag }}</span>
-        </p>
-      </div>
+      <nav>
+        <img src="./img/fedora-guy.png" alt="" />
+        <h1>Fedora</h1>
+      </nav>
+      <main>
+        <div v-for="item in items" class="container">
+          <h3>{{ item.product }}</h3>
+          <img v-bind:src="item.picture" />
+          <p>{{ item.price }}€</p>
+          <p>
+            <span v-for="tag in item.tags">#{{ tag }}</span>
+          </p>
+        </div>
+      </main>
     </div>
     <script>
       const { createApp } = Vue;

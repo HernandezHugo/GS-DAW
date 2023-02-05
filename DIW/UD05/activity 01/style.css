@@ -24,15 +24,16 @@ nav {
   padding: 1em;
 }
 
-#app {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+main {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .container {
   margin: 1em;
   padding: 2em;
-  width: 80%;
+  width: 20em;
   text-align: center;
   border-radius: 10px;
 }
