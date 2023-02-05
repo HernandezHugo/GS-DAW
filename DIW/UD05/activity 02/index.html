@@ -11,8 +11,15 @@
   <body>
     <div id="app">
       <nav>
-        <img src="./img/fedora-guy.png" alt="" />
-        <h1>Fedora</h1>
+        <div class="logo">
+          <img src="./img/fedora-guy.png" alt="" />
+          <h1>Fedora</h1>
+        </div>
+        <div class="tags">
+          <p id="nickname">{{ nickname }}</p>
+          <a id="log">Login</a>
+          <a id="register">Register</a>
+        </div>
       </nav>
       <main>
         <div v-for="item in items" class="container">
@@ -31,6 +38,7 @@
       let app = createApp({
         data() {
           return {
+            nickname: "",
             items: this.getData(),
           };
         },

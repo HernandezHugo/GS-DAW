@@ -11,17 +11,35 @@
   box-sizing: border-box;
 }
 
+.container,
+.logo,
+a {
+  cursor: pointer;
+}
+
 body {
   background-color: var(--background-body);
 }
 
 nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-style: italic;
   font-size: larger;
   text-align: center;
   color: white;
   background-color: var(--background-nav);
   padding: 1em;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+a{
+  margin: 0 0.5em;
 }
 
 main {
