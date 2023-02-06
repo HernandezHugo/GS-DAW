@@ -16,13 +16,40 @@
           <h1>Fedora</h1>
         </div>
         <div class="tags">
-          <p id="nickname">{{ nickname }}</p>
-          <a id="log">Login</a>
-          <a id="register">Register</a>
+          <p id="name">{{ name }}</p>
+          <a @click="toggleLogin()">Login</a>
+          <a @click="toggleRegister()">Register</a>
         </div>
       </nav>
+      <section v-show="register || login">
+        <form @submit.prevent="printValue">
+          <label v-show="register" for="name">Name</label>
+          <input
+            v-show="register"
+            @change="e => checkInput(e)"
+            type="text"
+            name="name"
+            placeholder="Add your name"
+          />
+          <label for="email">Email</label>
+          <input
+            @change="e => checkEmail(e)"
+            type="email"
+            name="email"
+            placeholder="Add your email"
+          />
+          <label for="pass">Password</label>
+          <input type="password" name="pass" placeholder="Add your password" />
+          <label @change="e => checkInput(e)" v-show="register" for="re-pass"
+            >Repeat your password</label
+          >
+          <input v-show="register" type="password" name="re-pass" />
+          <button v-show="register" @click="printValue()">Register</button>
+          <button v-show="login" @click="printValue()">login</button>
+        </form>
+      </section>
       <main>
-        <div v-for="item in items" class="container">
+        <div v-if="!login && !register" v-for="item in items" class="container">
           <h3>{{ item.product }}</h3>
           <img v-bind:src="item.picture" />
           <p>{{ item.price }}€</p>
@@ -38,7 +65,12 @@
       let app = createApp({
         data() {
           return {
-            nickname: "",
+            logged: false,
+            login: false,
+            register: false,
+            name: "",
+            email: "",
+            password: "",
             items: this.getData(),
           };
         },
@@ -50,6 +82,31 @@
             fetch("./data.json")
               .then((response) => response.json())
               .then((json) => this.setData(json));
+          },
+          toggleRegister() {
+            this.register = !this.register;
+            this.login ? (this.login = !this.login) : this.login;
+          },
+          toggleLogin() {
+            this.login = !this.login;
+            this.register ? (this.register = !this.register) : this.register;
+          },
+          printValue() {
+            console.log(this);
+          },
+          checkInput(e) {
+            let checkNaN = isNaN(e.target.value.trim());
+            let checkEmpty = e.target.value.trim().length > 0;
+            console.log(checkEmpty + " " + checkNaN);
+          },
+          checkEmail(e) {
+            let regex =
+              /[-0-9!#$%&'*+/=?^_`{|}~A-Za-z]+(?:\.[-0-9!#$%&'*+/=?^_`{|}~A-Za-z]+)*@(?:[0-9A-Za-z](?:[-0-9A-Za-z]*[0-9A-Za-z])?\.)+[0-9A-Za-z](?:[-0-9A-Za-z]*[0-9A-Za-z])?/i;
+            let checkIsEmail = regex.test(e.target.value.trim());
+            console.log(checkIsEmail);
+          },
+          comparePass(e) {
+            //compare re-pass with pass
           },
         },
       }).mount("#app");
