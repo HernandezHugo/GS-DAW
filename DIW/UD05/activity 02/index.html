@@ -56,7 +56,7 @@
             @change="e => comparePass(e)"
             v-show="register"
             type="password"
-            name="re-pass"
+            name="re_pass"
           />
           <!-- errors -->
           <div v-show="errors.length > 0" class="errors">
@@ -128,11 +128,10 @@
               localStorage.setItem("users", JSON.stringify(this.users));
 
               e.target.form.reset();
-              this.password = "";
-
-              e.target.form.reset();
               this.register = !this.register;
             }
+            this.password = "";
+            e.target.form.re_pass.value = "";
           },
           checkRegisterForm(e) {
             let nameNotEmpty = e.target.form.name.value.trim().length > 0;
@@ -158,10 +157,10 @@
               this.email = e.target.form.email.value;
               let pos = this.users.findIndex((e) => e.email === this.email);
               this.name = this.users[pos].name;
+              e.target.form.reset();
+              this.password = "";
               this.login = !this.login;
               this.logged = !this.logged;
-
-              e.target.form.reset();
             }
           },
           checkLoginForm(e) {
@@ -186,7 +185,7 @@
               : this.addError("This email does not exists");
           },
           checkPassToLog(email) {
-            let pos = this.users.findIndex((e) => e.email === email)
+            let pos = this.users.findIndex((e) => e.email === email);
             this.users[pos].password === this.password
               ? this.removeError("This password is incorrect")
               : this.addError("This password is incorrect");
@@ -198,10 +197,12 @@
           },
           toggleRegister() {
             this.register = !this.register;
+            this.errors = [];
             this.login ? (this.login = !this.login) : this.login;
           },
           toggleLogin() {
             this.login = !this.login;
+            this.errors = [];
             this.register ? (this.register = !this.register) : this.register;
           },
           checkName(e) {
