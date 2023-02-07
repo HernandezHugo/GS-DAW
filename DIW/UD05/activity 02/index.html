@@ -16,7 +16,7 @@
           <h1>Fedora</h1>
         </div>
         <div class="tags">
-          <p v-show="logged">Hello, {{ name }}</p>
+          <p v-show="logged" id="welcome">Hello, {{ name }}</p>
           <a v-show="!logged" @click="toggleLogin()">Login</a>
           <a v-show="!logged" @click="toggleRegister()">Register</a>
           <a v-show="logged" @click="logOut()">Log Out</a>
@@ -186,7 +186,7 @@
               : this.addError("This email does not exists");
           },
           checkPassToLog(email) {
-            let pos = this.users.find((e) => e.email === email)
+            let pos = this.users.findIndex((e) => e.email === email)
             this.users[pos].password === this.password
               ? this.removeError("This password is incorrect")
               : this.addError("This password is incorrect");
@@ -269,14 +269,3 @@
     </script>
   </body>
 </html>
-<!-- Following the page created in the previous activity, add two buttons in the menu: one
-to register and one to log in.
-When you press the button to register a new user, the container with the products
-will be hidden, and, instead, another container with a form to register will be shown.
-In this form there will be an email, a nickname and a password (x2). The data will be
-checked and saved in the browser's localstorage.
-On the other hand, clicking on the login button will hide the products container (or the
-registration form) and will show a form with the email and password fields. To login
-you will have to check that the email entered exists in the localstorage. If the process
-is successful, the products will be shown again and, in addition, the top bar will
-display a text like: Hello, John (where John is the nickname of the registered user). -->
