@@ -4,6 +4,7 @@
   --background-body-light: #f6f8fa;
   --background-tag: #846a6a;
   --shadow: #c6c7c4;
+  --error: #c40101;
 }
 
 * {
@@ -45,9 +46,16 @@ h1 {
   align-items: center;
 }
 
+.tags{
+  display: flex;
+  align-items: center;
+}
+
 a {
   margin: 0 0.5em;
 }
+
+/*PRODUCTS*/
 
 main {
   display: flex;
@@ -55,7 +63,6 @@ main {
   flex-wrap: wrap;
 }
 
-/*PRODUCTS*/
 
 .container {
   margin: 1em;
@@ -118,6 +125,10 @@ input {
   border: 1px solid black;
 }
 
+input.danger {
+  border: 1px solid var(--error);
+}
+
 input:focus {
   outline: none;
   border: 1px solid rgb(86, 136, 212);
@@ -129,4 +140,10 @@ button {
   padding: 5px 0;
   width: 20%;
   font-size: 0.9em;
+}
+
+/* ERRORS */
+
+.error {
+  color: var(--error);
 }
