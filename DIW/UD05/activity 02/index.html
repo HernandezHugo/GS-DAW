@@ -24,7 +24,7 @@
       </nav>
       <section v-show="register || login">
         <!-- form -->
-        <form @submit.prevent="registerUser, loginUser">
+        <form @submit.prevent="">
           <!-- name -->
           <label v-show="register" for="name">Name</label>
           <input
@@ -70,17 +70,16 @@
         </form>
       </section>
       <main>
-        <div v-if="!login && !register" v-for="item in items" class="container">
-          <h3>{{ item.product }}</h3>
-          <img v-bind:src="item.picture" />
-          <p>{{ item.price }}€</p>
-          <p>
-            <span v-for="tag in item.tags">#{{ tag }}</span>
-          </p>
-        </div>
+        <Products
+          v-if="!login && !register"
+          v-for="item in items"
+          :item="item"
+        />
       </main>
     </div>
-    <script>
+    <script type="module">
+      import Products from "./products.js";
+
       const { createApp } = Vue;
 
       let app = createApp({
@@ -96,6 +95,9 @@
             users: [],
             items: this.getData(),
           };
+        },
+        components: {
+          Products,
         },
         methods: {
           setData(json) {
