@@ -7,17 +7,27 @@ let app = createApp({
     return {
       list: false,
       wronginput: false,
+      showNum: false,
       error: "",
+      number: "",
+      numPressed: 0,
       numbers: [],
     };
   },
   methods: {
+    getNum(num) {
+      this.numPressed = num;
+      this.showNum = true;
+      console.log(this.numPressed);
+    },
     addNumber(value) {
       if (!this.list) this.list = !this.list;
       this.numbers.push(value);
     },
     control(e) {
-      let value = e.target.form.num.value;
+      let value = this.number;
+
+      this.number = "";
       e.target.form.reset();
       this.wronginput = false;
       this.error = "";
@@ -42,11 +52,7 @@ let app = createApp({
 
 app.mount("#app");
 
-/*input number
-only integers -chars,-decimals
--repeat numbers
-control errors
-
+/*
 List of numbers:
 buttons ==> indicate which numbers is pressed
 */

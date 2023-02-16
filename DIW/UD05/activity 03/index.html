@@ -12,11 +12,17 @@
     <div id="app">
       <h3>Enter an integer:</h3>
       <form @submit.prevent="">
-        <input name="num" type="number" />
+        <input name="num" v-model="number" />
         <button @click="(e) => control(e)">Submit</button>
       </form>
-      <p v-show="wronginput">{{ error }}</p>
-      <numbuttons v-show="list" :numbers="numbers" />
+      <p id="error" v-show="wronginput">{{ error }}</p>
+
+      <numbuttons
+        v-show="list"
+        @sending-data="getNum"
+        :numbers="numbers"
+      ></numbuttons>
+      <p id="msg" v-show="showNum">The number pressed is: {{ numPressed }}</p>
     </div>
     <script type="module" src="app.js"></script>
   </body>

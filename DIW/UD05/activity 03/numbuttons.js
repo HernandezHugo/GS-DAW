@@ -8,13 +8,13 @@ export default {
     <button 
     v-for="number in numbers" 
     class="btn"
-    @click="e => test(e)"
+    @click="e => sendData(e)"
     >{{number}}</button>
     </div>
     `,
     methods:{
-      test(e){
-        console.log(e.target.innerHTML);
+      sendData(e){
+        this.$emit("sending-data", +e.target.innerHTML)
       }
     }
 };
