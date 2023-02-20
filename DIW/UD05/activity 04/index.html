@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>act02</title>
+  </head>
+  <body>
+    <div id="app">
+      <nav-header
+        :name="name"
+        :logged="logged"
+      ></nav-header>
+      <Login
+        v-show="login"
+        :password="password"
+        :email="email"
+      ></Login>
+      <!-- <Registration v-show="register"
+          @toggle-register="toggleRegister"
+          ></Registration> -->
+      <main>
+        <Products
+          v-if="!login && !register"
+          v-for="item in items"
+          :item="item"
+        ></Products>
+      </main>
+    </div>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
+
+<!-- 
+create a component for the header.
+registering: if logged in ==> msg with the user's nickname is shown. 
+msg should be maintained after refreshed. (lifecylcle hooks)
+If logged in: only a logout button should appear,
+components: registration form, login form and products.
+default view to the login view (if logged in ==> show products view).
+If login view: only the register button will be visible.
+If registration view: only the login button will be visible.
+If product view (logged in) ==> only the logout button will be displayed. 
+-->
