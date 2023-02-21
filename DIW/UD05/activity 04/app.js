@@ -18,13 +18,14 @@ let app = createApp({
       users: [],
       items: this.getData(),
       notShow: false,
+      dataObject: {},
     };
   },
   components: {
-    Products,
+    navHeader,
     Login,
     Registration,
-    navHeader,
+    Products,
   },
   methods: {
     setData(json) {
@@ -72,8 +73,9 @@ let app = createApp({
 
       if (correctForm) this.removeError("There's 1 empty section at least.");
     },
-    loginInfo(args) {
-      console.log(args);
+    setLoginInfo(value){
+      this.email = value.email
+      this.password = value.password
     },
     loginUser(e) {
       this.checkLoginForm(e);

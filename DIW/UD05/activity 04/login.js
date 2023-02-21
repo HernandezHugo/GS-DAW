@@ -1,7 +1,11 @@
 export default {
-  props: {
-    email: String,
-    password: String,
+  data() {
+    return {
+      email: "",
+      password: "",
+      data: {},
+      
+    };
   },
   template: `
     <form @submit.prevent="">
@@ -21,11 +25,16 @@ export default {
           name="pass"
           placeholder="Add your password"
         />
-        <button @click="e => loginUser(e)">login</button>
+        <button @click="loginUser">login</button>
     </form>
       `,
   methods: {
-    sendData() {
+    loginUser() {
+      this.data = {
+        email: this.email,
+        password: this.password,
+      };
+      this.$emit("setLoginInfo", this.data);
     },
   },
 };

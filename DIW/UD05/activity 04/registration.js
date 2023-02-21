@@ -36,7 +36,7 @@ export default {
       name="re_pass"
     />
     <!-- errors -->
-    <div v-show="errors.length > 0" class="errors">
+    <div v-if="errors.length > 0" class="errors">
       <p v-for="error in errors" class="error">{{error}}</p>
     </div>
     <!-- buttons -->

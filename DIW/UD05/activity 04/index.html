@@ -13,15 +13,15 @@
       <nav-header
         :name="name"
         :logged="logged"
+        @front-page="frontPage"
+        @toggle-login="toggleLogin"
       ></nav-header>
-      <Login
-        v-show="login"
-        :password="password"
-        :email="email"
-      ></Login>
-      <!-- <Registration v-show="register"
-          @toggle-register="toggleRegister"
-          ></Registration> -->
+      <Login v-if="login" 
+      @set-login-info="setLoginInfo"></Login>
+      <Registration
+        v-if="register"
+        @toggle-register="toggleRegister"
+      ></Registration>
       <main>
         <Products
           v-if="!login && !register"
