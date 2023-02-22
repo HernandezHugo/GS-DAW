@@ -2,6 +2,8 @@ export default {
   props: {
     name: String,
     logged: Boolean,
+    login: Boolean,
+    register: Boolean,
   },
   template: `
     <nav>
@@ -11,8 +13,8 @@ export default {
         </div>
         <div class="tags">
           <p v-if="logged" id="welcome">Hello, {{ name }}</p>
-          <a v-if="!logged" @click="toggleLogin()">Login</a>
-          <a v-if="!logged" @click="toggleRegister()">Register</a>
+          <a v-if="!login" @click="toggleLogin()">Login</a>
+          <a v-if="!register" @click="toggleRegister()">Register</a>
           <a v-if="logged" @click="logOut()">Log Out</a>
         </div>
     </nav>
@@ -23,6 +25,9 @@ export default {
     },
     toggleLogin() {
       this.$emit("toggleLogin");
+    },
+    toggleRegister() {
+      this.$emit("toggleRegister");
     },
   },
 };

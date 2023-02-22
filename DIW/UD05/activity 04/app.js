@@ -1,7 +1,7 @@
-import Products from "./products.js";
+import navHeader from "./header.js";
 import Login from "./login.js";
 import Registration from "./registration.js";
-import navHeader from "./header.js";
+import Products from "./products.js";
 
 const { createApp } = Vue;
 
@@ -11,9 +11,12 @@ let app = createApp({
       logged: false,
       login: false,
       register: false,
-      name: "",
-      email: "",
-      password: "",
+      user: {
+        name: "",
+        email: "",
+        password: "",
+      },
+      rePass: "",
       errors: [],
       users: [],
       items: this.getData(),
@@ -73,15 +76,20 @@ let app = createApp({
 
       if (correctForm) this.removeError("There's 1 empty section at least.");
     },
-    setLoginInfo(value){
-      this.email = value.email
-      this.password = value.password
+    setLoginInfo(value) {
+      this.user.email = value.email;
+      this.user.password = value.password;
+    },
+    setRegisterInfo(value) {
+      this.user.email = value.email;
+      this.user.password = value.password;
     },
     loginUser(e) {
       this.checkLoginForm(e);
+      
       this.checkLocalStorage();
-      this.checkEmailToLog(this.email);
-      this.checkPassToLog(this.email);
+      this.checkEmailToLog(this.user.email);
+      this.checkPassToLog(this.user.email);
 
       let errors = this.errors.length > 0;
 

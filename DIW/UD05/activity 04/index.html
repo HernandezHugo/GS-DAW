@@ -11,14 +11,16 @@
   <body>
     <div id="app">
       <nav-header
-        :name="name"
+        :name="user.name"
         :logged="logged"
+        :login="login"
+        :register="register"
         @front-page="frontPage"
         @toggle-login="toggleLogin"
-      ></nav-header>
-      <Login v-if="login" 
-      @set-login-info="setLoginInfo"></Login>
-      <Registration
+        @toggle-register="toggleRegister"
+        ></nav-header>
+        <Login v-if="login" @set-login-info="setLoginInfo"></Login>
+        <Registration
         v-if="register"
         @toggle-register="toggleRegister"
       ></Registration>

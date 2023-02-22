@@ -4,7 +4,6 @@ export default {
       email: "",
       password: "",
       data: {},
-      
     };
   },
   template: `
@@ -14,7 +13,6 @@ export default {
         <input
           v-model.trim="email"
           type="email"
-          name="email"
           placeholder="Add your email"
         />
         <!-- password -->
@@ -22,9 +20,13 @@ export default {
         <input
           v-model.trim="password"
           type="password"
-          name="pass"
           placeholder="Add your password"
         />
+        <!-- errors -->
+        <div v-if="errors.length > 0" class="errors">
+          <p v-for="error in errors" class="error">{{error}}</p>
+        </div>
+        <!-- buttons -->
         <button @click="loginUser">login</button>
     </form>
       `,
