@@ -29,5 +29,8 @@ export default {
     toggleRegister() {
       this.$emit("toggleRegister");
     },
+    LogOut() {
+      this.$emit("logOut");
+    },
   },
 };
