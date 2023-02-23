@@ -10,6 +10,7 @@ export default {
       users: [],
     };
   },
+  emits: ["setUserInfo"],
   template: `
     <form>
         <!-- email -->

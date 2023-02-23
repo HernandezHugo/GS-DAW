@@ -1,6 +1,6 @@
 export default {
-  data(){
-    return{}
+  data() {
+    return {};
   },
   props: {
     name: String,
@@ -10,7 +10,7 @@ export default {
   },
   template: `
     <nav>
-        <div @click="frontPage()" class="logo">
+        <div class="logo">
           <img src="./img/fedora-guy.png" />
           <h1>Fedora</h1>
         </div>
@@ -23,17 +23,17 @@ export default {
     </nav>
         `,
   methods: {
-    frontPage() {
-      this.$emit("frontPage");
-    },
     toggleLogin() {
       this.$emit("toggleLogin");
+      this.$router.push("/login");
     },
     toggleRegister() {
       this.$emit("toggleRegister");
+      this.$router.push("/registration");
     },
     logOut() {
       this.$emit("logOut");
+      this.$router.push("/");
     },
   },
 };

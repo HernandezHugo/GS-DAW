@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/vue-router@4.0.15/dist/vue-router.global.js"></script>
     <title>act04</title>
   </head>
   <body>
@@ -20,14 +21,11 @@
         @toggle-login="toggleLogin"
         @log-out="logOut"
       ></nav-header>
-      <Login v-if="login && !logged" @set-user-info="setUserInfo"></Login>
-      <Registration
-        v-if="register && !logged"
-        @set-user-info="setUserInfo"
-      ></Registration>
+
       <main>
-        <h2 v-if="!logged">Home</h2>
-        <Products v-if="logged" v-for="item in items" :item="item"></Products>
+        <router-view @set-user-info="setUserInfo"></router-view>
+        <!--         <Products v-if="logged" v-for="item in items" :item="item"></Products>
+ -->
       </main>
     </div>
     <script type="module" src="app.js"></script>

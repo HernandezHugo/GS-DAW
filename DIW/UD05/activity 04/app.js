@@ -1,6 +1,5 @@
+import Router from "./router.js";
 import navHeader from "./components/header.js";
-import Login from "./components/login.js";
-import Registration from "./components/registration.js";
 import Products from "./components/products.js";
 
 const { createApp } = Vue;
@@ -17,24 +16,14 @@ let app = createApp({
         password: "",
       },
       rePass: "",
-      items: this.getData(),
+      
     };
   },
   components: {
     navHeader,
-    Login,
-    Registration,
     Products,
   },
   methods: {
-    setData(json) {
-      this.items = json;
-    },
-    getData() {
-      fetch("./data.json")
-        .then((response) => response.json())
-        .then((json) => this.setData(json));
-    },
     frontPage() {
       this.login = false;
       this.register = false;
@@ -43,8 +32,8 @@ let app = createApp({
       this.user.name = value.name;
       this.user.email = value.email;
       this.user.password = value.password;
-
       this.logged = true;
+      this.$router.push("/products");
     },
     toggleRegister() {
       this.register = !this.register;
@@ -62,4 +51,6 @@ let app = createApp({
       this.frontPage();
     },
   },
-}).mount("#app");
+});
+app.use(Router);
+app.mount("#app");
