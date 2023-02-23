@@ -1,4 +1,7 @@
 export default {
+  data(){
+    return{}
+  },
   props: {
     name: String,
     logged: Boolean,
@@ -13,8 +16,8 @@ export default {
         </div>
         <div class="tags">
           <p v-if="logged" id="welcome">Hello, {{ name }}</p>
-          <a v-if="!login" @click="toggleLogin()">Login</a>
-          <a v-if="!register" @click="toggleRegister()">Register</a>
+          <a v-if="!login && !logged" @click="toggleLogin()">Login</a>
+          <a v-if="!register && !logged" @click="toggleRegister()">Register</a>
           <a v-if="logged" @click="logOut()">Log Out</a>
         </div>
     </nav>
@@ -29,7 +32,7 @@ export default {
     toggleRegister() {
       this.$emit("toggleRegister");
     },
-    LogOut() {
+    logOut() {
       this.$emit("logOut");
     },
   },

@@ -12,7 +12,7 @@ export default {
     };
   },
   template: `
-    <form @submit.prevent="">
+    <form>
       <!-- name -->
       <label for="name">Name</label>
       <input
@@ -46,7 +46,7 @@ export default {
         <p v-for="error in errors" class="error">{{error}}</p>
       </div>
       <!-- buttons -->
-      <button  @click="registerUser">Register</button>
+      <button  @click.prevent="registerUser">Register</button>
     </form>
         `,
   watch: {
@@ -90,10 +90,10 @@ export default {
     },
   },
   methods: {
-    async addError(error) {
+    addError(error) {
       if (!this.errors.includes(error)) this.errors.push(error);
     },
-    async removeError(error) {
+    removeError(error) {
       let index = this.errors.indexOf(error);
       if (index !== -1) this.errors.splice(index, 1);
     },
@@ -132,8 +132,11 @@ export default {
         this.users.push(dataUser);
         localStorage.setItem("users", JSON.stringify(this.users));
 
-        this.$emit('setUserInfo', this.user)
+        this.sendData();
       }
+    },
+    sendData() {
+      this.$emit("setUserInfo", this.user);
     },
   },
 };

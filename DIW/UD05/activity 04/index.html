@@ -20,19 +20,14 @@
         @toggle-login="toggleLogin"
         @log-out="logOut"
       ></nav-header>
-      <Login 
-      v-if="login && !logged" 
-      @set-user-info="setUserInfo"
-      ></Login>
+      <Login v-if="login && !logged" @set-user-info="setUserInfo"></Login>
       <Registration
         v-if="register && !logged"
         @set-user-info="setUserInfo"
       ></Registration>
       <main>
-        <Products
-          v-for="item in items"
-          :item="item"
-        ></Products>
+        <h2 v-if="!logged">Home</h2>
+        <Products v-if="logged" v-for="item in items" :item="item"></Products>
       </main>
     </div>
     <script type="module" src="app.js"></script>
