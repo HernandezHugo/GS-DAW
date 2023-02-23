@@ -47,9 +47,15 @@ export default {
       let passNotEmpty = this.user.password.length > 0;
       let correctForm = emailNotEmpty && passNotEmpty;
 
-      if (!correctForm) this.addError("There's 1 empty section at least.");
+      if (!correctForm) {
+        this.addError("There's 1 empty section at least.");
+        return false;
+      }
 
-      if (correctForm) this.removeError("There's 1 empty section at least.");
+      if (correctForm) {
+        this.removeError("There's 1 empty section at least.");
+        return true;
+      }
     },
     checkEmailToLog() {
       this.users.some((e) => e.email === this.user.email)
@@ -67,11 +73,13 @@ export default {
         this.users = JSON.parse(localStorage.getItem("users"));
     },
     loginUser() {
-      this.checkLoginForm();
-
       this.checkLocalStorage();
-      this.checkEmailToLog(this.user.email);
-      this.checkPassToLog(this.user.email);
+      
+      if (this.checkLoginForm()) {
+        this.checkEmailToLog(this.user.email);
+        //check if email
+        this.checkPassToLog(this.user.email);
+      }
 
       let errors = this.errors.length > 0;
 
