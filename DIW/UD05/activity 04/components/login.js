@@ -47,20 +47,22 @@ export default {
       let passNotEmpty = this.user.password.length > 0;
       let correctForm = emailNotEmpty && passNotEmpty;
 
-      if (!correctForm) {
-        this.addError("There's 1 empty section at least.");
-        return false;
-      }
-
       if (correctForm) {
         this.removeError("There's 1 empty section at least.");
         return true;
+      } else {
+        this.addError("There's 1 empty section at least.");
+        return false;
       }
     },
     checkEmailToLog() {
-      this.users.some((e) => e.email === this.user.email)
-        ? this.removeError("This email does not exists")
-        : this.addError("This email does not exists");
+      if (this.users.some((e) => e.email === this.user.email)) {
+        this.removeError("This email does not exists");
+        return true;
+      } else {
+        this.addError("This email does not exists");
+        return false;
+      }
     },
     checkPassToLog() {
       let pos = this.users.findIndex((e) => e.email === this.user.email);
@@ -74,12 +76,10 @@ export default {
     },
     loginUser() {
       this.checkLocalStorage();
-      
-      if (this.checkLoginForm()) {
-        this.checkEmailToLog(this.user.email);
-        //check if email
-        this.checkPassToLog(this.user.email);
-      }
+
+      if (this.checkLoginForm())
+        if (this.checkEmailToLog(this.user.email))
+          this.checkPassToLog(this.user.email);
 
       let errors = this.errors.length > 0;
 

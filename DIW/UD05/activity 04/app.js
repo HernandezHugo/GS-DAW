@@ -1,7 +1,7 @@
-import navHeader from "./header.js";
-import Login from "./login.js";
-import Registration from "./registration.js";
-import Products from "./products.js";
+import navHeader from "./components/header.js";
+import Login from "./components/login.js";
+import Registration from "./components/registration.js";
+import Products from "./components/products.js";
 
 const { createApp } = Vue;
 
