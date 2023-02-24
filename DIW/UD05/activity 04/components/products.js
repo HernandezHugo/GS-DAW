@@ -4,6 +4,7 @@ export default {
       items: this.getData(),
     }
   },
+  emits: ["setUserInfo"],
   methods: {
     setData(json) {
       this.items = json;

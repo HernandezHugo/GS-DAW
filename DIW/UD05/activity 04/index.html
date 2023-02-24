@@ -14,18 +14,11 @@
       <nav-header
         :name="user.name"
         :logged="logged"
-        :login="login"
-        :register="register"
-        @front-page="frontPage"
-        @toggle-register="toggleRegister"
-        @toggle-login="toggleLogin"
         @log-out="logOut"
       ></nav-header>
 
       <main>
         <router-view @set-user-info="setUserInfo"></router-view>
-        <!--         <Products v-if="logged" v-for="item in items" :item="item"></Products>
- -->
       </main>
     </div>
     <script type="module" src="app.js"></script>

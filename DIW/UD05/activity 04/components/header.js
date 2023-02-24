@@ -1,12 +1,13 @@
 export default {
   data() {
-    return {};
+    return {
+      login: false,
+      register: false,
+    };
   },
   props: {
     name: String,
     logged: Boolean,
-    login: Boolean,
-    register: Boolean,
   },
   template: `
     <nav>
@@ -16,19 +17,29 @@ export default {
         </div>
         <div class="tags">
           <p v-if="logged" id="welcome">Hello, {{ name }}</p>
-          <a v-if="!login && !logged" @click="toggleLogin()">Login</a>
-          <a v-if="!register && !logged" @click="toggleRegister()">Register</a>
+          <a v-if="!login && !logged" @click="goToLogin()">Login</a>
+          <a v-if="!register && !logged" @click="goToRegister()">Register</a>
           <a v-if="logged" @click="logOut()">Log Out</a>
         </div>
     </nav>
         `,
+  watch: {
+    "$route.query.q": {
+      handler(newURL) {
+        if (newURL != undefined) this.login = newURL === "true";
+      },
+      immediate: true,
+    },
+  },
   methods: {
-    toggleLogin() {
-      this.$emit("toggleLogin");
+    goToLogin() {
+      this.login = !this.login;
+      this.register ? (this.register = !this.register) : this.register;
       this.$router.push("/login");
     },
-    toggleRegister() {
-      this.$emit("toggleRegister");
+    goToRegister() {
+      this.register = !this.register;
+      this.login ? (this.login = !this.login) : this.login;
       this.$router.push("/registration");
     },
     logOut() {
