@@ -1,22 +1,24 @@
 export default {
   data() {
     return {
+      logged: false,
       login: false,
       register: false,
+      user: {
+        name: "",
+        email: "",
+        password: "",
+      },
     };
-  },
-  props: {
-    name: String,
-    logged: Boolean,
   },
   template: `
     <nav>
-        <div class="logo">
+        <div @click="goToProducts" class="logo">
           <img src="./img/fedora-guy.png" />
           <h1>Fedora</h1>
         </div>
         <div class="tags">
-          <p v-if="logged" id="welcome">Hello, {{ name }}</p>
+          <p v-if="logged" id="welcome">Hello, {{ user.name }}</p>
           <a v-if="!login && !logged" @click="goToLogin()">Login</a>
           <a v-if="!register && !logged" @click="goToRegister()">Register</a>
           <a v-if="logged" @click="logOut()">Log Out</a>
@@ -25,13 +27,38 @@ export default {
         `,
   watch: {
     "$route.query.q": {
-      handler(newURL) {
-        if (newURL != undefined) this.login = newURL === "true";
+      handler(newValue) {
+        newValue === "true" && newValue != undefined && this.checkUserLogged()
+          ? (this.logged = newValue === "true")
+          : this.logged;
+      },
+      immediate: true,
+    },
+    logged: {
+      handler() {
+        if (this.checkUserLogged()) {
+          this.logged = true;
+          this.goToProducts();
+        } else {
+          this.logged = false;
+          this.goToLogin();
+        }
       },
       immediate: true,
     },
   },
   methods: {
+    checkUserLogged() {
+      if (localStorage.hasOwnProperty("user_logged")) {
+        this.user = JSON.parse(localStorage.getItem("user_logged"));
+        return true;
+      } else return false;
+    },
+    goToProducts() {
+      this.login = false;
+      this.register = false;
+      this.$router.push("/products");
+    },
     goToLogin() {
       this.login = !this.login;
       this.register ? (this.register = !this.register) : this.register;
@@ -43,7 +70,13 @@ export default {
       this.$router.push("/registration");
     },
     logOut() {
-      this.$emit("logOut");
+      this.user.name = "";
+      this.user.email = "";
+      this.user.password = "";
+
+      localStorage.removeItem("user_logged");
+
+      this.logged = false;
       this.$router.push("/");
     },
   },

@@ -11,28 +11,12 @@
   </head>
   <body>
     <div id="app">
-      <nav-header
-        :name="user.name"
-        :logged="logged"
-        @log-out="logOut"
-      ></nav-header>
-
+      <nav-header></nav-header>
       <main>
-        <router-view @set-user-info="setUserInfo"></router-view>
+        <router-view></router-view>
       </main>
     </div>
     <script type="module" src="app.js"></script>
   </body>
 </html>
 
-<!-- 
-create a component for the header.
-registering: if logged in ==> msg with the user's nickname is shown. 
-msg should be maintained after refreshed. (lifecylcle hooks)
-If logged in: only a logout button should appear,
-components: registration form, login form and products.
-default view to the login view (if logged in ==> show products view).
-If login view: only the register button will be visible.
-If registration view: only the login button will be visible.
-If product view (logged in) ==> only the logout button will be displayed. 
--->

@@ -11,7 +11,6 @@ export default {
       users: [],
     };
   },
-  emits: ["setUserInfo"],
   template: `
     <form>
       <!-- name -->
@@ -109,7 +108,7 @@ export default {
       if (correctForm) this.removeError("There's 1 empty section at least.");
     },
     checkLocalStorage() {
-      if (localStorage.length != 0)
+      if (localStorage.hasOwnProperty("users"))
         this.users = JSON.parse(localStorage.getItem("users"));
     },
     checkEmailToReg() {
@@ -124,20 +123,13 @@ export default {
 
       let errors = this.errors.length > 0;
       if (!errors) {
-        const dataUser = {
-          name: this.user.name,
-          email: this.user.email,
-          password: this.user.password,
-        };
-
-        this.users.push(dataUser);
+        this.users.push(this.user);
         localStorage.setItem("users", JSON.stringify(this.users));
 
-        this.sendData();
+        localStorage.setItem("user_logged", JSON.stringify(this.user));
+
+        this.$router.push("/products?q=true");
       }
-    },
-    sendData() {
-      this.$emit("setUserInfo", this.user);
     },
   },
 };

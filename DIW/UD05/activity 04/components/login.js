@@ -10,7 +10,6 @@ export default {
       users: [],
     };
   },
-  emits: ["setUserInfo"],
   template: `
     <form>
         <!-- email -->
@@ -72,7 +71,7 @@ export default {
         : this.addError("This password is incorrect");
     },
     checkLocalStorage() {
-      if (localStorage.length != 0)
+      if (localStorage.hasOwnProperty("users"))
         this.users = JSON.parse(localStorage.getItem("users"));
     },
     loginUser() {
@@ -88,11 +87,10 @@ export default {
         let pos = this.users.findIndex((e) => e.email === this.user.email);
         this.user.name = this.users[pos].name;
 
-        this.sendData();
+        localStorage.setItem("user_logged", JSON.stringify(this.user));
+
+        this.$router.push("/products?q=true");
       }
-    },
-    sendData() {
-      this.$emit("setUserInfo", this.user);
     },
   },
 };

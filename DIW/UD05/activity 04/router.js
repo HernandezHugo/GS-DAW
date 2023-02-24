@@ -4,7 +4,7 @@ import Products from "./components/products.js";
 
 
 const routes = [
-  { path: "/", name: "Home",  redirect: "/login?q=true" },
+  { path: "/", name: "Home" },
   { path: "/login", component: Login },
   { path: "/registration", component: Registration },
   { path: "/products", component: Products,},
