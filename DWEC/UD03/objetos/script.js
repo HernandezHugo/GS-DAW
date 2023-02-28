@@ -9,7 +9,7 @@ console.log(cadena);
 console.log(cadena2);
 
 let unCliente = {
-  nombre: "Jander Clander",
+  nombre: "Hernández",
   "direccion del cliente": "c/ Desconocida 123",
   "-++++--+-+-": "wtf",
   pagos: {

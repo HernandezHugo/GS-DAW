@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Associació D'Amics del Futbol</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="shortcut icon" href="#" type="image/x-icon">
+  </head>
+  <body>
+    <!-- Aquesta és la nostra capçalera principal que s'utilitza
+        en totes les pàgines del nostre lloc web -->
+    <header>
+      <h1>Associació d’Amics del Futbol</h1>
+    </header>
+
+    <nav>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="#">Travessa</a></li>
+        <li><a href="#">Jornada</a></li>
+        <li><a href="#">Contacte</a></li>
+      </ul>
+
+      <!-- Un formulari de cerca és una altra manera no lineal
+        de navegar a través d'un lloc web. -->
+      <form>
+        <input type="search" name="q" placeholder="Cerca..." />
+        <input type="submit" value="cerca" />
+      </form>
+    </nav>
+
+    <!-- Aquest és el contingut principal de la nostra pàgina -->
+    <main>
+      <!-- Pot contenir un o més articles -->
+      <article id="">
+        <h2>Jornadas</h2>
+        <div>
+          <ul>
+            <h3>Equipos</h3>
+            <li>
+              Equipos masculinos
+              <ul id="machos"></ul>
+            </li>
+            <li>
+              Equipos femeninos
+              <ul id="feminas"></ul>
+            </li>
+          </ul>
+          <div id="jornadas">
+            <div id="masc">
+              <h3 id="primera_masculina">Primera Masculina</h3>
+            </div>
+            <div id="fem">
+              <h3 id="primera_femenina">Primera Femenina</h3></div>
+            </div>
+        </div>
+      </article>
+
+      <!-- El contingut de "aside" es pot imbricar dins del contingut principal
+        (també pot estar fora) -->
+      <aside>
+        <h2>Herramientas</h2>
+        <ul>
+          <li id="generar_jornadas"><a href="#">Generar jornadas</a></li>
+          <li><a href="#">Borrar jornadas</a></li>
+          <li><a href="#" id="quiniela">Eina 3</a></li>
+          <li><a href="#">Eina 4</a></li>
+          <li><a href="#">Eina 5</a></li>
+        </ul>
+      </aside>
+    </main>
+
+    <!-- I aquest és el nostre peu principal que s'utilitza
+        a totes les pàgines del nostre lloc web -->
+    <footer>
+      <p>Hernández :: DWEC :: DAWB :: 22/23</p>
+    </footer>
+    <script src="../scripts/funcionalidades.js"></script>
+    <script src="../scripts/script.js"></script>
+  </body>
+</html>
