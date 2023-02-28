@@ -42,8 +42,6 @@ let jornadaM = [];
 let jornadaF = [];
 let resultsM = [];
 let resultsF = [];
-let quinielaResultsM = [];
-let quinielaResultsF = [];
 
 function makeMatches(newArray, array) {
   let teams = array;
@@ -87,14 +85,14 @@ function storeQuinielaResults(quiniela, array) {
 }
 
 //stores jornada on localStorage
-function storeJornada() {
+function storeJornada(qResultsM, qResultsF) {
   let jornada = {
     masc: jornadaM,
     fem: jornadaF,
     resultsMasc: resultsM,
     resultsFem: resultsF,
-    qResultsMasc: quinielaResultsM,
-    qResultsFem: quinielaResultsF,
+    qResultsMasc: qResultsM,
+    qResultsFem: qResultsF,
   };
   localStorage.setItem("jornada", JSON.stringify(jornada));
 }
@@ -110,13 +108,15 @@ let btn_show_res_f = document.querySelector("#show_res_f");
 //generates a jornada
 if (btn_gen_jornada != null) {
   btn_gen_jornada.addEventListener("click", (e) => {
+    let quinielaResultsM = [];
+    let quinielaResultsF = [];
     makeMatches(jornadaM, primeraMasc);
     makeMatches(jornadaF, primeraFem);
     makeResults(resultsM, jornadaM);
     makeResults(resultsF, jornadaF);
     storeQuinielaResults(quinielaResultsM, resultsM);
     storeQuinielaResults(quinielaResultsF, resultsF);
-    storeJornada();
+    storeJornada(quinielaResultsM, quinielaResultsF);
   });
 }
 
@@ -154,41 +154,47 @@ if (btn_show_res_f != null) {
 let rows = document.querySelectorAll(".tbRow");
 let btnVerify = document.querySelector("#verify");
 
-function createQuiniela() {
-  let gamesM = JSON.parse(localStorage.getItem("jornada")).masc;
-  let gamesF = JSON.parse(localStorage.getItem("jornada")).fem;
+function createQuiniela(rows) {
+  let matchesM = JSON.parse(localStorage.getItem("jornada")).masc;
+  let matchesF = JSON.parse(localStorage.getItem("jornada")).fem;
+  let qResultsM = JSON.parse(localStorage.getItem("jornada")).qResultsMasc;
+  let qResultsF = JSON.parse(localStorage.getItem("jornada")).qResultsFem;
   //indexes of each match (female)
   let femIndexes = [0, 2, 4, 6, 8, 10, 12];
-  let maxFemTeams = 4;
+  let femMatches = 4;
 
   //add matches to quiniela (males)
   let j = 0;
-  for (let i = 0; i < gamesM.length; i++) {
-    rows[j].innerHTML += "<td>" + gamesM[i] + " VS " + gamesM[i + 1] + "</td>";
+  for (let i = 0; i < matchesM.length; i++) {
+    rows[j].innerHTML +=
+      "<td>" + matchesM[i] + " VS " + matchesM[i + 1] + "</td>";
     addRadioButtons(rows[j], j);
+    addQResults(rows[j], j, qResultsM);
     i++;
     j++;
   }
 
   //add matches to quiniela (females)
   femIndexes.sort();
-  for (let i = 0; i < maxFemTeams; i++) {
+  for (let i = 0; i < femMatches; i++) {
+    let k = femIndexes[i] > 0 ? femIndexes[i] / 2 : femIndexes[i];
     rows[j].innerHTML +=
       "<td>" +
-      gamesF[femIndexes[i]] +
+      matchesF[femIndexes[i]] +
       " VS " +
-      gamesF[femIndexes[i] + 1] +
+      matchesF[femIndexes[i] + 1] +
       "</td>";
     addRadioButtons(rows[j], j);
+    addQResults(rows[j], k, qResultsF);
     j++;
   }
 }
 
 function addRadioButtons(row, id) {
   let fragment = document.createDocumentFragment();
-  let maxRadioBtn = 3;
+  let radioBtnOptions = 3;
 
-  for (let i = 0; i < maxRadioBtn; i++) {
+  for (let i = 0; i < radioBtnOptions; i++) {
     let newTd = document.createElement("td");
     let radioBtn = document.createElement("input");
 
@@ -202,22 +208,60 @@ function addRadioButtons(row, id) {
   row.appendChild(fragment);
 }
 
-if (rows != null) createQuiniela();
+function addQResults(row, id, qResults) {
+  let newTd = document.createElement("td");
+  let qMatchResult = document.createElement("p");
+
+  if (qResults[id] == 0) qMatchResult.textContent = "1";
+  else if (qResults[id] == 1) qMatchResult.textContent = "X";
+  else if (qResults[id] == 2) qMatchResult.textContent = "2";
+
+  qMatchResult.dataset.value = qResults[id];
+  qMatchResult.setAttribute("class", "match hide");
+  newTd.appendChild(qMatchResult);
+  row.appendChild(newTd);
+}
+
+if (rows != null) createQuiniela(rows);
 
 if (btnVerify != null)
   btnVerify.addEventListener("click", (e) => {
     e.preventDefault();
     let radioButtons = [...document.querySelectorAll("input[type=radio]")];
-    let myQuiniela = [];
+    let hiddenResults = [...document.querySelectorAll(".match")];
+    let auxArray = [];
+    let myResults = [];
+    let msg = document.querySelector("#msg_results");
+    let nResults = document.querySelector("#nResults");
+    let nResultsValue = 0;
 
-    while (radioButtons.length != 0) myQuiniela.push(radioButtons.splice(0, 3));
+    //split radiobuttons to order them by name (every 3 inputs has diff name)
+    while (radioButtons.length != 0) auxArray.push(radioButtons.splice(0, 3));
 
-    myQuiniela.forEach((element) => {
+    //stores user results
+    auxArray.forEach((element) => {
       for (let i = 0; i < element.length; i++) {
-        if (element[i].checked == true)
-          console.log("nivel " + element[i].name + " - " + i);
+        if (element[i].checked == true) {
+          myResults.push(i);
+        }
       }
     });
 
-    console.log(myQuiniela);
+    //show Jornada results
+    if (myResults.length != 0)
+      hiddenResults.forEach((element) => {
+        element.classList.remove("hide");
+      });
+
+    //compare my results with jornadas'
+    for (let i = 0; i < myResults.length; i++) {
+      if (myResults[i] == hiddenResults[i].dataset.value) {
+        hiddenResults[i].classList.add("correct");
+        nResultsValue += 1;
+      } else hiddenResults[i].classList.add("wrong");
+    }
+
+    //print msg with the num of correct answers
+    nResults.textContent = nResultsValue;
+    msg.classList.remove("hide");
   });

@@ -1,3 +1,33 @@
-ul{
-    list-style: none;
+ul {
+  list-style: none;
+}
+
+.hide {
+  display: none;
+}
+
+.correct {
+  background-color: rgba(0, 192, 0, 0.432);
+}
+
+.wrong {
+  background-color: rgba(214, 0, 0, 0.39);
+}
+
+#msg_results {
+  margin-top: 1em;
+}
+
+p {
+  text-align: center;
+}
+
+.bg-secondary {
+  background-color: rgb(25, 49, 45) !important;
+}
+.bg-light {
+  background-color: rgb(178, 224, 217) !important;
+}
+.nav-link {
+  color: black;
 }
