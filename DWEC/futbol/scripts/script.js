@@ -52,7 +52,7 @@ function makeMatches(newArray, array) {
   }
 }
 
-function makeList(array, id) {
+function makeList(array, id, teams) {
   let list = document.getElementById(id);
 
   //Make a list of Matches
@@ -60,7 +60,18 @@ function makeList(array, id) {
     list.innerHTML = "";
     for (let i = 0; i < array.length; i++) {
       let li = document.createElement("li");
-      li.textContent = array[i] + " VS " + array[i + 1];
+      let p = document.createElement("p");
+      p.innerHTML =
+        "<img src='../img/" +
+        teams[i] +
+        ".png'><span>" +
+        array[i] +
+        "</span><span> VS </span><span>" +
+        array[i + 1] +
+        "</span><img src='../img/" +
+        teams[i + 1] +
+        ".png'>";
+      li.appendChild(p);
       list.appendChild(li);
       i++;
     }
@@ -93,6 +104,7 @@ function storeJornada(qResultsM, qResultsF) {
     resultsFem: resultsF,
     qResultsMasc: qResultsM,
     qResultsFem: qResultsF,
+    played: false,
   };
   localStorage.setItem("jornada", JSON.stringify(jornada));
 }
@@ -104,6 +116,29 @@ let btn_show_res_m = document.querySelector("#show_res_m");
 
 let btn_show_matches_f = document.querySelector("#show_matches_f");
 let btn_show_res_f = document.querySelector("#show_res_f");
+
+let r_masc = document.querySelector("#r_masc");
+let r_fem = document.querySelector("#r_fem");
+
+function checkResultsBtn() {
+  let check_masc = r_masc != null;
+  let check_fem = r_fem != null;
+  let played = JSON.parse(localStorage.getItem("jornada")).played;
+
+  if (played && check_masc) {
+    r_masc.classList.remove("hide");
+  } else if (!played && check_masc) {
+    r_masc.classList.add("hide");
+  }
+
+  if (played && check_fem) {
+    r_fem.classList.remove("hide");
+  } else if (!played && check_fem) {
+    r_fem.classList.add("hide");
+  }
+}
+
+window.addEventListener("load", checkResultsBtn);
 
 //generates a jornada
 if (btn_gen_jornada != null) {
@@ -124,30 +159,32 @@ if (btn_gen_jornada != null) {
 if (btn_show_matches_m != null) {
   btn_show_matches_m.addEventListener("click", (e) => {
     let jornadaM = JSON.parse(localStorage.getItem("jornada")).masc;
-    makeList(jornadaM, "masc_list");
+    makeList(jornadaM, "masc_list", jornadaM);
   });
 }
 
 //prints results of the matches (male)
 if (btn_show_res_m != null) {
   btn_show_res_m.addEventListener("click", (e) => {
+    let jornadaM = JSON.parse(localStorage.getItem("jornada")).masc;
     let resultsM = JSON.parse(localStorage.getItem("jornada")).resultsMasc;
-    makeList(resultsM, "results_masc_list");
+    makeList(resultsM, "results_masc_list", jornadaM);
   });
 }
 //prints a list of matches (females)
 if (btn_show_matches_f != null) {
   btn_show_matches_f.addEventListener("click", (e) => {
     let jornadaF = JSON.parse(localStorage.getItem("jornada")).fem;
-    makeList(jornadaF, "fem_list");
+    makeList(jornadaF, "fem_list", jornadaF);
   });
 }
 
 //prints results of the matches (female)
 if (btn_show_res_f != null) {
   btn_show_res_f.addEventListener("click", (e) => {
+    let jornadaF = JSON.parse(localStorage.getItem("jornada")).fem;
     let resultsF = JSON.parse(localStorage.getItem("jornada")).resultsFem;
-    makeList(resultsF, "results_fem_list");
+    makeList(resultsF, "results_fem_list", jornadaF);
   });
 }
 
@@ -167,7 +204,15 @@ function createQuiniela(rows) {
   let j = 0;
   for (let i = 0; i < matchesM.length; i++) {
     rows[j].innerHTML +=
-      "<td>" + matchesM[i] + " VS " + matchesM[i + 1] + "</td>";
+      "<td><p><img src='../img/" +
+      matchesM[i] +
+      ".png'><span>" +
+      matchesM[i] +
+      "</span><span> VS </span><span>" +
+      matchesM[i + 1] +
+      "</span><img src='../img/" +
+      matchesM[i + 1] +
+      ".png'></p></td>";
     addRadioButtons(rows[j], j);
     addQResults(rows[j], j, qResultsM);
     i++;
@@ -179,11 +224,15 @@ function createQuiniela(rows) {
   for (let i = 0; i < femMatches; i++) {
     let k = femIndexes[i] > 0 ? femIndexes[i] / 2 : femIndexes[i];
     rows[j].innerHTML +=
-      "<td>" +
+      "<td><p><img src='../img/" +
       matchesF[femIndexes[i]] +
-      " VS " +
+      ".png'><span>" +
+      matchesF[femIndexes[i]] +
+      "</span><span> VS </span><span>" +
       matchesF[femIndexes[i] + 1] +
-      "</td>";
+      "</span><img src='../img/" +
+      matchesF[femIndexes[i] + 1] +
+      ".png'></p></td>";
     addRadioButtons(rows[j], j);
     addQResults(rows[j], k, qResultsF);
     j++;
@@ -264,4 +313,8 @@ if (btnVerify != null)
     //print msg with the num of correct answers
     nResults.textContent = nResultsValue;
     msg.classList.remove("hide");
+
+    let jornada = JSON.parse(localStorage.getItem("jornada"));
+    jornada.played = true;
+    localStorage.setItem("jornada", JSON.stringify(jornada));
   });

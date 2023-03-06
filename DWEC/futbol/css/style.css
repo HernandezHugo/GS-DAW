@@ -18,7 +18,18 @@ ul {
   margin-top: 1em;
 }
 
-p {
+img {
+  height: 100px;
+}
+
+li > p,
+td > p {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: center;
+}
+
+span {
   text-align: center;
 }
 
@@ -30,4 +41,11 @@ p {
 }
 .nav-link {
   color: black;
+}
+
+#masc_list,
+#fem_list,
+#results_masc_list,
+#results_fem_list {
+  margin-top: 2em;
 }
