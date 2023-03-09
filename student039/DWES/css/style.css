@@ -1,0 +1,30 @@
+h2 {
+  text-align: center;
+}
+
+.img-fluid {
+  height: 100%;
+}
+.portada {
+  background-color: black;
+}
+
+.card-img-top {
+  max-height: 275px;
+}
+
+.weather {
+  height: 80px;
+  width: 80px;
+  background-color: rgba(20, 66, 134, 0.658);
+  padding-top: 0.6em;
+  top: 20%;
+  left: 5%;
+  z-index: 2000;
+}
+
+.temperature {
+  text-align: center;
+  color: white;
+  font-weight: 700;
+}

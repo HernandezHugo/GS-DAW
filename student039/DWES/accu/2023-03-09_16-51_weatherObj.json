@@ -1,0 +1,17 @@
+[
+  {
+    "LocalObservationDateTime": "2023-03-09T16:32:00 01:00",
+    "EpochTime": 1678375920,
+    "WeatherText": "Mostly cloudy",
+    "WeatherIcon": 6,
+    "HasPrecipitation": false,
+    "PrecipitationType": null,
+    "IsDayTime": true,
+    "Temperature": {
+      "Metric": { "Value": 17.9, "Unit": "C", "UnitType": 17 },
+      "Imperial": { "Value": 64.0, "Unit": "F", "UnitType": 18 }
+    },
+    "MobileLink": "http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us",
+    "Link": "http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us"
+  }
+]
