@@ -81,3 +81,7 @@ mysqli_free_result($result);
 <?php
 require($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/templates/footer.php');
 ?>
+
+</body>
+
+</html>

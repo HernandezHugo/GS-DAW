@@ -51,3 +51,7 @@ require($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/db_booking_insert.php')
 <?php
 require($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/templates/footer.php');
 ?>
+
+</body>
+
+</html>

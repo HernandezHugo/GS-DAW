@@ -81,3 +81,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/forms/form_reservations_se
 <?php
 require($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/templates/footer.php');
 ?>
+
+</body>
+
+</html>

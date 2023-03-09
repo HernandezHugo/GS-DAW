@@ -1,5 +1,5 @@
 <?php
-require ($_SERVER['DOCUMENT_ROOT'].'/student039/dwes/templates/header.php');
+require($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/templates/header.php');
 
 //category:link to its own page
 //pages: descrip, categories, profile, about us, contact, payment.
@@ -16,5 +16,10 @@ require ($_SERVER['DOCUMENT_ROOT'].'/student039/dwes/templates/header.php');
 
 
 <?php
-require ($_SERVER['DOCUMENT_ROOT'].'/student039/dwes/templates/footer.php');
+require($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/templates/footer.php');
+require($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/scripts/ajax_accu_weather.php');
 ?>
+
+</body>
+
+</html>
