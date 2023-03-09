@@ -15,7 +15,7 @@ $url = $_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/scripts/save_accu_weather.p
     xhr.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         console.log("documento de tiempo adquirido");
-        saveWeather(this.responseText);
+        //saveWeather(this.responseText);
       }
     };
     xhr.open("GET", URL + locationkey + "?apikey=" + key, true);
@@ -24,7 +24,7 @@ $url = $_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/scripts/save_accu_weather.p
 
   function saveWeather(res) {
 
-    let URL = '<?php echo $url; ?>'
+    let URL = './scripts/save_accu_weather.php'
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
@@ -33,5 +33,9 @@ $url = $_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/scripts/save_accu_weather.p
     };
     xhr.open("GET", URL + res, true);
     xhr.send();
+  }
+
+  function printWeather(res){
+    
   }
 </script>
