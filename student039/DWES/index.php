@@ -2,9 +2,8 @@
 require($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/templates/header.php');
 
 //category:link to its own page
-//pages: descrip, categories, profile, about us, contact, payment.
+//pages: profile
 //1. Dinamización de páginas web con AJAX, para evitar la secuencia form>action en todo momento.
-//2. Obtención de información de servidores externos mediante AJAX y utilización en página propia. Almacenamiento histórico de dicha información (ficheros, base de datos...).
 //3. Gestión del sistema de ficheros mediante PHP: Subida de un fichero, subida de múltiples ficheros mediante formularios.
 //4. Gestión PHP del almacenamiento de ficheros en carpetas (read, write, scan), en la base de datos (pointer, binary) o en ambos sitios.
 //5. Utilización de COOKIES en PHP (superglobal $_COOKIE)
@@ -13,7 +12,7 @@ require($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/templates/header.php');
 <div id="carouselExampleAutoplaying" class="carousel slide portada" data-bs-ride="carousel">
   <div class="position-relative ">
     <div id="img_container" class="position-absolute weather">
-  </div>
+    </div>
   </div>
   <div class="carousel-inner ">
     <div class="carousel-item">
@@ -36,7 +35,7 @@ require($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/templates/header.php');
   </button>
 </div>
 <main class="container">
-<div class="row">
+  <div class="row">
     <div class="col">
       <section>
         <h2>Habitaciones</h2>
@@ -115,8 +114,8 @@ require($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/templates/header.php');
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="offcanvasBottomLabel">Cookies</h5>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-</div>
-<div class="offcanvas-body small">
+  </div>
+  <div class="offcanvas-body small">
     <p>We use cookies to make Hotelsito great. By using our site, you agree to our cookie policy.</p>
     <button name="settingCookie" type="submit" class="btn btn-outline-primary" data-bs-dismiss="offcanvas" aria-label="Close">Accept</button>
   </div>

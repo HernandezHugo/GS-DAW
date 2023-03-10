@@ -36,7 +36,7 @@ if (isset($_POST['submit'])) {
         //make sure email is not registered yet
         if ($result_email->num_rows) {
             $errors[] = 'This Email is already registered';
-        } else if ($result_email->num_rows) {
+        } else if ($result_username->num_rows) {
             $errors[] = 'This Username is already registered';
         } else {
             //write query
