@@ -1,8 +1,11 @@
 <?php
 require($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/templates/header.php');
 include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/connect_db.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/cookies/cookies_booking.php');
 require($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/db_booking_select.php');
 require($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/db_booking_insert.php');
+
+
 
 ?>
 <main class="container">

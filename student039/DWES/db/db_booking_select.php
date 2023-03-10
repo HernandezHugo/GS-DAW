@@ -2,8 +2,18 @@
 
 $available_categories = [];
 
-$initial_date = '';
-$final_date = '';
+
+//check if our date exists on cookies
+if (isset($_COOKIE["initial_date"]) != false)
+    $initial_date = $_COOKIE["initial_date"];
+else
+    $initial_date = '';
+
+if (isset($_COOKIE["final_date"]) != false)
+    $final_date = $_COOKIE["final_date"];
+else
+    $final_date = '';
+
 
 if (isset($_POST['submit'])) {
 

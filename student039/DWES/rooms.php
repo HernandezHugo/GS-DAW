@@ -6,9 +6,8 @@ include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/verify_admin.php');
 //msg success at insert
 $msg = $_GET['msg'] ?? null;
 
-
 // write query
-$sql = "SELECT * FROM 039_rooms";
+$sql = "SELECT * FROM 039_rooms_view";
 // make query and result
 $result = mysqli_query($conn, $sql);
 // fetch the resulting rows as an array

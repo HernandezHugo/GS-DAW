@@ -1,3 +1,21 @@
+<!-- show cookies section just one time -->
+<?php if ($cookie == 1) :
+    setcookie("use", 0, time() + 86400) ?>
+    <div class="offcanvas show offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasBottomLabel">Cookies</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body small">
+            <p>We use cookies to make Hotelsito great. By using our site, you agree to our cookie policy.</p>
+            <form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="POST">
+                <button name="settingCookie" type="submit" class="btn btn-outline-primary" data-bs-dismiss="offcanvas" aria-label="Close">Accept</button>
+                <button class="btn btn-outline-primary" data-bs-dismiss="offcanvas" aria-label="Close">Close</button>
+            </form>
+        </div>
+    </div>
+<?php endif; ?>
+
 <footer class="text-center text-white bg-secondary">
     <!-- Grid container -->
     <div class="container">

@@ -10,6 +10,16 @@ if (empty($_SESSION['type'])) {
   $_SESSION['type'] = $type_default;
 }
 
+//initialize Cookies
+ob_start();
+$cookie = $_COOKIE["use"] ?? 1;
+$stateCookie = $_COOKIE["stateCookie"] ?? 0;
+
+//setting our cookies that has been accepted
+if (isset($_POST["settingCookie"])) {
+  setcookie("stateCookie", 1);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +40,7 @@ if (empty($_SESSION['type'])) {
   <header>
     <nav class="navbar navbar-expand-lg bg-light">
       <div class="container-fluid">
-        
+
         <a href="/student039/dwes/index.php"><img class="navbar-brand" src="/student039/dwes/img/logo_hotel_navbar.png" alt="logo Hotel"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
