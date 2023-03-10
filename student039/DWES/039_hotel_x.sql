@@ -23,6 +23,7 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `039_reservations`;
 DROP TABLE IF EXISTS `039_rooms_view`;
+DROP VIEW IF EXISTS `039_rooms_view`;
 DROP TABLE IF EXISTS `039_rooms`;
 DROP TABLE IF EXISTS `039_categories_to_show`;
 DROP TABLE IF EXISTS `039_categories`;
@@ -425,19 +426,6 @@ INSERT INTO `039_rooms` (`ID_room`, `ID_category`, `capacity`) VALUES
 (8, 8, 3),
 (9, 9, 2);
 
--- --------------------------------------------------------
-
---
--- Estructura Stand-in para la vista `039_rooms_view`
--- (Véase abajo para la vista actual)
---
-CREATE TABLE IF NOT EXISTS `039_rooms_view` (
-`ID_room` int(11)
-,`category_name` varchar(60)
-,`capacity` int(11)
-);
-
--- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `039_services`
@@ -524,7 +512,7 @@ INSERT INTO `039_users` (`ID_user`, `username`, `email`, `pwd`, `user_pfp`) VALU
 --
 
 
-CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `039_rooms_view`  AS SELECT `r`.`ID_room` AS `ID_room`, `c`.`category_name` AS `category_name`, `r`.`capacity` AS `capacity` FROM (`039_rooms` `r` join `039_categories` `c` on(`r`.`ID_category` = `c`.`ID_category`)) ;
+CREATE VIEW IF NOT EXISTS `039_rooms_view` AS SELECT `r`.`ID_room` AS `ID_room`, `c`.`category_name` AS `category_name`, `r`.`capacity` AS `capacity` FROM (`039_rooms` `r` join `039_categories` `c` on(`r`.`ID_category` = `c`.`ID_category`)) ;
 
 --
 -- Índices para tablas volcadas

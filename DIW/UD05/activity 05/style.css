@@ -1,0 +1,154 @@
+:root {
+  --background-nav: #353b3c;
+  --background-body: #eef0f2;
+  --background-body-light: #f6f8fa;
+  --background-tag: #846a6a;
+  --shadow: #c6c7c4;
+  --error: #c40101;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container,
+.logo,
+a,
+button {
+  cursor: pointer;
+}
+
+body {
+  background-color: var(--background-body);
+}
+
+/*NAV*/
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: larger;
+  text-align: center;
+  color: white;
+  background-color: var(--background-nav);
+  padding: 1em;
+}
+
+h1 {
+  font-style: italic;
+}
+
+#welcome{
+  margin: 0.1em 2em 0 0;
+  border-bottom: 1px solid white;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.tags{
+  display: flex;
+  align-items: center;
+}
+
+a {
+  margin: 0 0.5em;
+}
+
+/*PRODUCTS*/
+
+main {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+
+.container {
+  margin: 1em;
+  padding: 2em;
+  width: 20em;
+  text-align: center;
+  border-radius: 10px;
+}
+.container:hover {
+  box-shadow: 5px 5px 10px #c6c7c4;
+}
+
+h3,
+p {
+  margin: 0.5em 0;
+}
+
+img {
+  width: 100px;
+}
+
+p {
+  word-wrap: break-word;
+}
+
+span {
+  padding: 0.2em;
+  margin-right: 0.2em;
+  font-style: italic;
+  border-radius: 5px;
+  color: white;
+  background-color: var(--background-tag);
+}
+
+/*FORM*/
+
+section {
+  width: 70%;
+  margin: 3em auto;
+  font-size: 1.1em;
+  background-color: var(--background-body-light);
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px var(--shadow);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  padding: 3em;
+  row-gap: 0.6em;
+  margin: 0 auto;
+  width: 35em;
+}
+
+input {
+  line-height: 2em;
+  border-radius: 5px;
+  padding: 0 0.5em;
+  outline: none;
+  border: 1px solid black;
+}
+
+input.danger {
+  border: 1px solid var(--error);
+}
+
+input:focus {
+  outline: none;
+  border: 1px solid rgb(86, 136, 212);
+  box-shadow: 0 0 5px var(--shadow);
+}
+
+button {
+  margin: 10px auto;
+  padding: 5px 0;
+  width: 20%;
+  font-size: 0.9em;
+}
+
+/* ERRORS */
+
+.error {
+  color: var(--error);
+}
