@@ -2,6 +2,10 @@
 
 include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/connect_db.php');
 
+if ($_SESSION['type'] == $type_admin || $_SESSION['type'] == $type_client) {
+    header('Location: /student039/dwes/index.php');
+}
+
 $errors = [];
 
 if (isset($_POST['submit'])) {
@@ -30,7 +34,8 @@ if (isset($_POST['submit'])) {
             //success
             $user = mysqli_fetch_assoc($result);
             $_SESSION['type'] = $type_admin;
-            $_SESSION['user'] = $user['username'];
+            $_SESSION['user'] = ['name' => $user['username'], 'pfp' => $user['user_pfp']];
+
             header('Location: /student039/dwes/index.php');
         } else {
             //error

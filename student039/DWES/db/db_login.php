@@ -4,6 +4,11 @@ include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/connect_db.php');
 
 $errors = [];
 
+if ($_SESSION['type'] == $type_admin || $_SESSION['type'] == $type_client) {
+    header('Location: /student039/dwes/index.php');
+}
+
+
 if (isset($_POST['submit'])) {
 
     $login_name = mysqli_real_escape_string($conn, $_POST['login_name']);
@@ -25,8 +30,8 @@ if (isset($_POST['submit'])) {
         $result = mysqli_query($conn, $sql);
 
         //check if user exists
-         if ($result->num_rows) {
-            $client= mysqli_fetch_assoc($result);
+        if ($result->num_rows) {
+            $client = mysqli_fetch_assoc($result);
             $_SESSION['type'] = $type_client;
             $_SESSION['user_id'] = $client['ID_client'];
             $_SESSION['user_email'] = $client['email'];

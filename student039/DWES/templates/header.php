@@ -42,6 +42,10 @@ if (isset($_POST["settingCookie"])) {
       <div class="container-fluid">
 
         <a href="/student039/dwes/index.php"><img class="navbar-brand" src="/student039/dwes/img/logo_hotel_navbar.png" alt="logo Hotel"></a>
+        <?php if($_SESSION['type'] == $type_admin):?>
+        <img id="user_pfp" class="navbar-brand" src="/student039/dwes/user_pfp/<?php echo $_SESSION['user']['pfp']?>" alt="logo Hotel">
+        <?php endif;?>
+
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>

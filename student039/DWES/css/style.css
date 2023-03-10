@@ -2,6 +2,12 @@ h2 {
   text-align: center;
 }
 
+#user_pfp{
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+}
+
 .img-fluid {
   height: 100%;
 }

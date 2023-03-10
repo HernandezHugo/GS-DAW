@@ -1,10 +1,6 @@
 <?php
 require($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/templates/header.php');
 
-//pages: profile
-//3. Gestión del sistema de ficheros mediante PHP: Subida de un fichero, subida de múltiples ficheros mediante formularios.
-//4. Gestión PHP del almacenamiento de ficheros en carpetas (read, write, scan), en la base de datos (pointer, binary) o en ambos sitios.
-
 ?>
 <div id="carouselExampleAutoplaying" class="carousel slide portada" data-bs-ride="carousel">
   <div class="position-relative ">
