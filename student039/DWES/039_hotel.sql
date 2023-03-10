@@ -22,6 +22,7 @@ SET time_zone = "+00:00";
 --
 
 DROP TABLE IF EXISTS `039_reservations`;
+DROP TABLE IF EXISTS `039_rooms_view`;
 DROP TABLE IF EXISTS `039_rooms`;
 DROP TABLE IF EXISTS `039_categories_to_show`;
 DROP TABLE IF EXISTS `039_categories`;
@@ -31,6 +32,7 @@ DROP TABLE IF EXISTS `039_services`;
 DROP TABLE IF EXISTS `039_status`;
 DROP TABLE IF EXISTS `039_users`;
 DROP TABLE IF EXISTS `039_amenities`;
+DROP TABLE IF EXISTS `039_documents_json`;
 DROP PROCEDURE IF EXISTS `039_availableCategoriesByDate`;
 DROP PROCEDURE IF EXISTS `039_addToCart`;
 DROP PROCEDURE IF EXISTS `039_ticket`;

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-03-2023 a las 07:03:41
+-- Tiempo de generación: 10-03-2023 a las 13:56:32
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.1
 
@@ -21,12 +21,27 @@ SET time_zone = "+00:00";
 -- Base de datos: `039_hotel`
 --
 
+DROP TABLE IF EXISTS `039_reservations`;
+DROP TABLE IF EXISTS `039_rooms_view`;
+DROP TABLE IF EXISTS `039_rooms`;
+DROP TABLE IF EXISTS `039_categories_to_show`;
+DROP TABLE IF EXISTS `039_categories`;
+DROP TABLE IF EXISTS `039_clients`;
+DROP TABLE IF EXISTS `039_cart`;
+DROP TABLE IF EXISTS `039_services`;
+DROP TABLE IF EXISTS `039_status`;
+DROP TABLE IF EXISTS `039_users`;
+DROP TABLE IF EXISTS `039_amenities`;
+DROP TABLE IF EXISTS `039_documents_json`;
+DROP PROCEDURE IF EXISTS `039_availableCategoriesByDate`;
+DROP PROCEDURE IF EXISTS `039_addToCart`;
+DROP PROCEDURE IF EXISTS `039_ticket`;
+
 DELIMITER $$
 --
 -- Procedimientos
 --
-DROP PROCEDURE IF EXISTS `039_addToCart`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `039_addToCart` (IN `var_id_reservation` INT, IN `var_service_name` VARCHAR(60), IN `var_qty` INT)  BEGIN
+CREATE PROCEDURE `039_addToCart` (IN `var_id_reservation` INT, IN `var_service_name` VARCHAR(60), IN `var_qty` INT)  BEGIN
 DECLARE var_id_service INT;
 DECLARE var_total DECIMAL(10,2);
 
@@ -43,8 +58,7 @@ VALUES (var_id_reservation, var_id_service, var_qty, var_total);
 
 END$$
 
-DROP PROCEDURE IF EXISTS `039_availableCategoriesByDate`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `039_availableCategoriesByDate` (IN `var_initial_date` DATE, IN `var_final_date` DATE)  BEGIN
+CREATE PROCEDURE `039_availableCategoriesByDate` (IN `var_initial_date` DATE, IN `var_final_date` DATE)  BEGIN
 DECLARE var_qty_on_category, var_capacity, var_qty_categories, var_counter, aux_counter, i, j, var_number_of_days INT;
 DECLARE aux_initial_day, aux_final_day DATE;
 
@@ -109,8 +123,7 @@ END WHILE;
 
 END$$
 
-DROP PROCEDURE IF EXISTS `039_ticket`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `039_ticket` (IN `var_id_reservation` INT)  BEGIN 
+CREATE PROCEDURE `039_ticket` (IN `var_id_reservation` INT)  BEGIN 
 DECLARE present INT;
 
 SET present = 0;
@@ -140,8 +153,7 @@ DELIMITER ;
 -- Estructura de tabla para la tabla `039_amenities`
 --
 
-DROP TABLE IF EXISTS `039_amenities`;
-CREATE TABLE `039_amenities` (
+CREATE TABLE IF NOT EXISTS `039_amenities` (
   `ID_amenity` int(11) NOT NULL,
   `amenity_name` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -176,8 +188,7 @@ INSERT INTO `039_amenities` (`ID_amenity`, `amenity_name`) VALUES
 -- Estructura de tabla para la tabla `039_cart`
 --
 
-DROP TABLE IF EXISTS `039_cart`;
-CREATE TABLE `039_cart` (
+CREATE TABLE IF NOT EXISTS `039_cart` (
   `ID_reservation` int(11) NOT NULL,
   `ID_service` int(11) NOT NULL,
   `qty` int(11) NOT NULL,
@@ -209,8 +220,7 @@ INSERT INTO `039_cart` (`ID_reservation`, `ID_service`, `qty`, `total`) VALUES
 -- Estructura de tabla para la tabla `039_categories`
 --
 
-DROP TABLE IF EXISTS `039_categories`;
-CREATE TABLE `039_categories` (
+CREATE TABLE IF NOT EXISTS `039_categories` (
   `ID_category` int(11) NOT NULL,
   `category_name` varchar(60) NOT NULL,
   `category_description` text NOT NULL,
@@ -243,8 +253,7 @@ INSERT INTO `039_categories` (`ID_category`, `category_name`, `category_descript
 -- Estructura de tabla para la tabla `039_categories_to_show`
 --
 
-DROP TABLE IF EXISTS `039_categories_to_show`;
-CREATE TABLE `039_categories_to_show` (
+CREATE TABLE IF NOT EXISTS `039_categories_to_show` (
   `ID_category` int(11) NOT NULL,
   `category_name` varchar(60) NOT NULL,
   `category_description` varchar(60) NOT NULL,
@@ -278,8 +287,7 @@ INSERT INTO `039_categories_to_show` (`ID_category`, `category_name`, `category_
 -- Estructura de tabla para la tabla `039_clients`
 --
 
-DROP TABLE IF EXISTS `039_clients`;
-CREATE TABLE `039_clients` (
+CREATE TABLE IF NOT EXISTS `039_clients` (
   `ID_client` int(11) NOT NULL,
   `dni` varchar(9) NOT NULL,
   `firstname` varchar(60) NOT NULL,
@@ -323,8 +331,7 @@ INSERT INTO `039_clients` (`ID_client`, `dni`, `firstname`, `surname`, `email`, 
 -- Estructura de tabla para la tabla `039_documents_json`
 --
 
-DROP TABLE IF EXISTS `039_documents_json`;
-CREATE TABLE `039_documents_json` (
+CREATE TABLE IF NOT EXISTS `039_documents_json` (
   `ID_document_json` int(11) NOT NULL,
   `document_name` varchar(60) NOT NULL,
   `document_json` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`document_json`)),
@@ -341,13 +348,13 @@ TRUNCATE TABLE `039_documents_json`;
 --
 
 INSERT INTO `039_documents_json` (`ID_document_json`, `document_name`, `document_json`, `document_date`) VALUES
-(11, '2023-03-10 02-06-57_weatherObj.json', '[{\"LocalObservationDateTime\":\"2023-03-10T01:58:00 01:00\",\"EpochTime\":1678409880,\"WeatherText\":\"Clear\",\"WeatherIcon\":33,\"HasPrecipitation\":false,\"PrecipitationType\":null,\"IsDayTime\":false,\"Temperature\":{\"Metric\":{\"Value\":14.8,\"Unit\":\"C\",\"UnitType\":17},\"Imperial\":{\"Value\":59.0,\"Unit\":\"F\",\"UnitType\":18}},\"MobileLink\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\",\"Link\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\"}]', '2023-03-10 01:43:10'),
-(12, '2023-03-10 02-13-12_weatherObj.json', '[{\"LocalObservationDateTime\":\"2023-03-10T01:58:00 01:00\",\"EpochTime\":1678409880,\"WeatherText\":\"Clear\",\"WeatherIcon\":33,\"HasPrecipitation\":false,\"PrecipitationType\":null,\"IsDayTime\":false,\"Temperature\":{\"Metric\":{\"Value\":14.8,\"Unit\":\"C\",\"UnitType\":17},\"Imperial\":{\"Value\":59.0,\"Unit\":\"F\",\"UnitType\":18}},\"MobileLink\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\",\"Link\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\"}]', '2023-03-10 02:13:12'),
-(13, '2023-03-10 04-24-29_weatherObj.json', '[{\"LocalObservationDateTime\":\"2023-03-10T04:17:00 01:00\",\"EpochTime\":1678418220,\"WeatherText\":\"Partly cloudy\",\"WeatherIcon\":35,\"HasPrecipitation\":false,\"PrecipitationType\":null,\"IsDayTime\":false,\"Temperature\":{\"Metric\":{\"Value\":14.1,\"Unit\":\"C\",\"UnitType\":17},\"Imperial\":{\"Value\":57.0,\"Unit\":\"F\",\"UnitType\":18}},\"MobileLink\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\",\"Link\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\"}]', '2023-03-10 04:24:29'),
-(14, '2023-03-10 04-55-17_weatherObj.json', '[{\"LocalObservationDateTime\":\"2023-03-10T04:47:00 01:00\",\"EpochTime\":1678420020,\"WeatherText\":\"Partly cloudy\",\"WeatherIcon\":35,\"HasPrecipitation\":false,\"PrecipitationType\":null,\"IsDayTime\":false,\"Temperature\":{\"Metric\":{\"Value\":14.9,\"Unit\":\"C\",\"UnitType\":17},\"Imperial\":{\"Value\":59.0,\"Unit\":\"F\",\"UnitType\":18}},\"MobileLink\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\",\"Link\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\"}]', '2023-03-10 04:55:17'),
-(15, '2023-03-10 05-28-40_weatherObj.json', '[{\"LocalObservationDateTime\":\"2023-03-10T05:17:00 01:00\",\"EpochTime\":1678421820,\"WeatherText\":\"Mostly clear\",\"WeatherIcon\":34,\"HasPrecipitation\":false,\"PrecipitationType\":null,\"IsDayTime\":false,\"Temperature\":{\"Metric\":{\"Value\":14.1,\"Unit\":\"C\",\"UnitType\":17},\"Imperial\":{\"Value\":57.0,\"Unit\":\"F\",\"UnitType\":18}},\"MobileLink\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\",\"Link\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\"}]', '2023-03-10 05:28:40'),
-(16, '2023-03-10 06-03-19_weatherObj.json', '[{\"LocalObservationDateTime\":\"2023-03-10T05:52:00 01:00\",\"EpochTime\":1678423920,\"WeatherText\":\"Mostly clear\",\"WeatherIcon\":34,\"HasPrecipitation\":false,\"PrecipitationType\":null,\"IsDayTime\":false,\"Temperature\":{\"Metric\":{\"Value\":14.3,\"Unit\":\"C\",\"UnitType\":17},\"Imperial\":{\"Value\":58.0,\"Unit\":\"F\",\"UnitType\":18}},\"MobileLink\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\",\"Link\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\"}]', '2023-03-10 06:03:19'),
-(17, '2023-03-10 06-37-59_weatherObj.json', '[{\"LocalObservationDateTime\":\"2023-03-10T06:23:00 01:00\",\"EpochTime\":1678425780,\"WeatherText\":\"Mostly cloudy\",\"WeatherIcon\":38,\"HasPrecipitation\":false,\"PrecipitationType\":null,\"IsDayTime\":false,\"Temperature\":{\"Metric\":{\"Value\":14.3,\"Unit\":\"C\",\"UnitType\":17},\"Imperial\":{\"Value\":58.0,\"Unit\":\"F\",\"UnitType\":18}},\"MobileLink\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\",\"Link\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\"}]', '2023-03-10 06:37:59');
+(1, '2023-03-10 02-06-57_weatherObj.json', '[{\"LocalObservationDateTime\":\"2023-03-10T01:58:00 01:00\",\"EpochTime\":1678409880,\"WeatherText\":\"Clear\",\"WeatherIcon\":33,\"HasPrecipitation\":false,\"PrecipitationType\":null,\"IsDayTime\":false,\"Temperature\":{\"Metric\":{\"Value\":14.8,\"Unit\":\"C\",\"UnitType\":17},\"Imperial\":{\"Value\":59.0,\"Unit\":\"F\",\"UnitType\":18}},\"MobileLink\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\",\"Link\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\"}]', '2023-03-10 01:43:10'),
+(2, '2023-03-10 02-13-12_weatherObj.json', '[{\"LocalObservationDateTime\":\"2023-03-10T01:58:00 01:00\",\"EpochTime\":1678409880,\"WeatherText\":\"Clear\",\"WeatherIcon\":33,\"HasPrecipitation\":false,\"PrecipitationType\":null,\"IsDayTime\":false,\"Temperature\":{\"Metric\":{\"Value\":14.8,\"Unit\":\"C\",\"UnitType\":17},\"Imperial\":{\"Value\":59.0,\"Unit\":\"F\",\"UnitType\":18}},\"MobileLink\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\",\"Link\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\"}]', '2023-03-10 02:13:12'),
+(3, '2023-03-10 04-24-29_weatherObj.json', '[{\"LocalObservationDateTime\":\"2023-03-10T04:17:00 01:00\",\"EpochTime\":1678418220,\"WeatherText\":\"Partly cloudy\",\"WeatherIcon\":35,\"HasPrecipitation\":false,\"PrecipitationType\":null,\"IsDayTime\":false,\"Temperature\":{\"Metric\":{\"Value\":14.1,\"Unit\":\"C\",\"UnitType\":17},\"Imperial\":{\"Value\":57.0,\"Unit\":\"F\",\"UnitType\":18}},\"MobileLink\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\",\"Link\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\"}]', '2023-03-10 04:24:29'),
+(4, '2023-03-10 04-55-17_weatherObj.json', '[{\"LocalObservationDateTime\":\"2023-03-10T04:47:00 01:00\",\"EpochTime\":1678420020,\"WeatherText\":\"Partly cloudy\",\"WeatherIcon\":35,\"HasPrecipitation\":false,\"PrecipitationType\":null,\"IsDayTime\":false,\"Temperature\":{\"Metric\":{\"Value\":14.9,\"Unit\":\"C\",\"UnitType\":17},\"Imperial\":{\"Value\":59.0,\"Unit\":\"F\",\"UnitType\":18}},\"MobileLink\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\",\"Link\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\"}]', '2023-03-10 04:55:17'),
+(5, '2023-03-10 05-28-40_weatherObj.json', '[{\"LocalObservationDateTime\":\"2023-03-10T05:17:00 01:00\",\"EpochTime\":1678421820,\"WeatherText\":\"Mostly clear\",\"WeatherIcon\":34,\"HasPrecipitation\":false,\"PrecipitationType\":null,\"IsDayTime\":false,\"Temperature\":{\"Metric\":{\"Value\":14.1,\"Unit\":\"C\",\"UnitType\":17},\"Imperial\":{\"Value\":57.0,\"Unit\":\"F\",\"UnitType\":18}},\"MobileLink\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\",\"Link\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\"}]', '2023-03-10 05:28:40'),
+(6, '2023-03-10 06-03-19_weatherObj.json', '[{\"LocalObservationDateTime\":\"2023-03-10T05:52:00 01:00\",\"EpochTime\":1678423920,\"WeatherText\":\"Mostly clear\",\"WeatherIcon\":34,\"HasPrecipitation\":false,\"PrecipitationType\":null,\"IsDayTime\":false,\"Temperature\":{\"Metric\":{\"Value\":14.3,\"Unit\":\"C\",\"UnitType\":17},\"Imperial\":{\"Value\":58.0,\"Unit\":\"F\",\"UnitType\":18}},\"MobileLink\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\",\"Link\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\"}]', '2023-03-10 06:03:19'),
+(7, '2023-03-10 06-37-59_weatherObj.json', '[{\"LocalObservationDateTime\":\"2023-03-10T06:23:00 01:00\",\"EpochTime\":1678425780,\"WeatherText\":\"Mostly cloudy\",\"WeatherIcon\":38,\"HasPrecipitation\":false,\"PrecipitationType\":null,\"IsDayTime\":false,\"Temperature\":{\"Metric\":{\"Value\":14.3,\"Unit\":\"C\",\"UnitType\":17},\"Imperial\":{\"Value\":58.0,\"Unit\":\"F\",\"UnitType\":18}},\"MobileLink\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\",\"Link\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\"}]', '2023-03-10 06:37:59');
 
 -- --------------------------------------------------------
 
@@ -355,8 +362,7 @@ INSERT INTO `039_documents_json` (`ID_document_json`, `document_name`, `document
 -- Estructura de tabla para la tabla `039_reservations`
 --
 
-DROP TABLE IF EXISTS `039_reservations`;
-CREATE TABLE `039_reservations` (
+CREATE TABLE IF NOT EXISTS `039_reservations` (
   `ID_reservation` int(11) NOT NULL,
   `ID_client` int(11) NOT NULL,
   `ID_room` int(11) DEFAULT NULL,
@@ -393,8 +399,7 @@ INSERT INTO `039_reservations` (`ID_reservation`, `ID_client`, `ID_room`, `ID_ca
 -- Estructura de tabla para la tabla `039_rooms`
 --
 
-DROP TABLE IF EXISTS `039_rooms`;
-CREATE TABLE `039_rooms` (
+CREATE TABLE IF NOT EXISTS `039_rooms` (
   `ID_room` int(11) NOT NULL,
   `ID_category` int(11) NOT NULL,
   `capacity` int(11) NOT NULL
@@ -426,8 +431,7 @@ INSERT INTO `039_rooms` (`ID_room`, `ID_category`, `capacity`) VALUES
 -- Estructura Stand-in para la vista `039_rooms_view`
 -- (Véase abajo para la vista actual)
 --
-DROP VIEW IF EXISTS `039_rooms_view`;
-CREATE TABLE `039_rooms_view` (
+CREATE TABLE IF NOT EXISTS `039_rooms_view` (
 `ID_room` int(11)
 ,`category_name` varchar(60)
 ,`capacity` int(11)
@@ -439,8 +443,7 @@ CREATE TABLE `039_rooms_view` (
 -- Estructura de tabla para la tabla `039_services`
 --
 
-DROP TABLE IF EXISTS `039_services`;
-CREATE TABLE `039_services` (
+CREATE TABLE IF NOT EXISTS `039_services` (
   `ID_service` int(11) NOT NULL,
   `service_name` varchar(60) NOT NULL,
   `service_price` decimal(10,2) NOT NULL
@@ -466,8 +469,7 @@ INSERT INTO `039_services` (`ID_service`, `service_name`, `service_price`) VALUE
 -- Estructura de tabla para la tabla `039_status`
 --
 
-DROP TABLE IF EXISTS `039_status`;
-CREATE TABLE `039_status` (
+CREATE TABLE IF NOT EXISTS `039_status` (
   `ID_status` int(11) NOT NULL,
   `status_name` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -493,8 +495,7 @@ INSERT INTO `039_status` (`ID_status`, `status_name`) VALUES
 -- Estructura de tabla para la tabla `039_users`
 --
 
-DROP TABLE IF EXISTS `039_users`;
-CREATE TABLE `039_users` (
+CREATE TABLE IF NOT EXISTS `039_users` (
   `ID_user` int(11) NOT NULL,
   `username` varchar(60) NOT NULL,
   `email` varchar(60) NOT NULL,
@@ -521,10 +522,9 @@ INSERT INTO `039_users` (`ID_user`, `username`, `email`, `pwd`, `user_pfp`) VALU
 --
 -- Estructura para la vista `039_rooms_view`
 --
-DROP TABLE IF EXISTS `039_rooms_view`;
 
-DROP VIEW IF EXISTS `039_rooms_view`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `039_rooms_view`  AS SELECT `r`.`ID_room` AS `ID_room`, `c`.`category_name` AS `category_name`, `r`.`capacity` AS `capacity` FROM (`039_rooms` `r` join `039_categories` `c` on(`r`.`ID_category` = `c`.`ID_category`)) ;
+
+CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `039_rooms_view`  AS SELECT `r`.`ID_room` AS `ID_room`, `c`.`category_name` AS `category_name`, `r`.`capacity` AS `capacity` FROM (`039_rooms` `r` join `039_categories` `c` on(`r`.`ID_category` = `c`.`ID_category`)) ;
 
 --
 -- Índices para tablas volcadas
