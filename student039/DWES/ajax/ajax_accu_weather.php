@@ -3,7 +3,7 @@
   window.addEventListener("load", checkInfoWeather())
 
   function checkInfoWeather() {
-    let URL = './scripts/check_accu_weather.php';
+    let URL = './ajax/check_accu_weather.php';
     let xhr = new XMLHttpRequest();
 
     xhr.open("GET", URL, true);
@@ -41,7 +41,7 @@
 
   function saveWeather(res) {
 
-    let URL = './scripts/save_accu_weather.php';
+    let URL = './ajax/save_accu_weather.php';
     let xhr = new XMLHttpRequest();
 
     xhr.open("GET", URL + '?q=' + res, true);

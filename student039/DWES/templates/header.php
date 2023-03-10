@@ -22,7 +22,7 @@ if (empty($_SESSION['type'])) {
   <link rel="shortcut icon" href="#">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="/student039/dwes/css/style.css">
   <title>hotelsito</title>
 </head>
 
@@ -31,7 +31,7 @@ if (empty($_SESSION['type'])) {
     <nav class="navbar navbar-expand-lg bg-light">
       <div class="container-fluid">
         
-        <a href="/student039/dwes/index.php"><img class="navbar-brand" src="./img/logo_hotel_navbar.png" alt="logo Hotel"></a>
+        <a href="/student039/dwes/index.php"><img class="navbar-brand" src="/student039/dwes/img/logo_hotel_navbar.png" alt="logo Hotel"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
