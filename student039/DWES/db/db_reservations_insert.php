@@ -4,11 +4,13 @@ include ($_SERVER['DOCUMENT_ROOT'].'/student039/dwes/db/connect_db.php');
 
 $errors = [];
 
+//get clients to dropdown select
 $sql = "SELECT * FROM 039_clients";
 $result = mysqli_query($conn, $sql);
 $clients = mysqli_fetch_all($result, MYSQLI_ASSOC);
 mysqli_free_result($result);
 
+//get categories to dropdown select
 $sql = "SELECT * FROM 039_categories";
 $result = mysqli_query($conn, $sql);
 $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);

@@ -18,16 +18,10 @@ $result = mysqli_query($conn, $sql);
 $clients = mysqli_fetch_all($result, MYSQLI_ASSOC);
 mysqli_free_result($result);
 
-//get rooms to dropdown
+//get categories to dropdown
 $sql = "SELECT * FROM 039_categories";
 $result = mysqli_query($conn, $sql);
 $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
-mysqli_free_result($result);
-
-//get categories to dropdown
-$sql = "SELECT ID_room, CONCAT(ID_category , '', ID_room) AS name_room FROM 039_rooms";
-$result = mysqli_query($conn, $sql);
-$rooms = mysqli_fetch_all($result, MYSQLI_ASSOC);
 mysqli_free_result($result);
 
 //get every data from ID_reservation and put it as default
@@ -41,15 +35,9 @@ $total_price = $reservation_selected['total_price'];
 $id_status = $reservation_selected['ID_status'];
 
 //get name from clients to dropdown value selected
-$sql = "SELECT firstname FROM 039_clients WHERE ID_client = '$id_client'";
+$sql = "SELECT * FROM 039_clients WHERE ID_client = '$id_client'";
 $result = mysqli_query($conn, $sql);
 $client_selected = mysqli_fetch_assoc($result);
-mysqli_free_result($result);
-
-//get name from rooms to dropdown value selected
-$sql = "SELECT CONCAT(ID_category , '', ID_room) AS name_room FROM 039_rooms WHERE ID_room = '$id_room'";
-$result = mysqli_query($conn, $sql);
-$room_selected = mysqli_fetch_assoc($result);
 mysqli_free_result($result);
 
 //get name from rooms to dropdown value selected

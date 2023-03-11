@@ -1,7 +1,7 @@
 <script>
   function getRooms() {
-    let URL = '../ajax/get_rooms_reserv_ins.php';
-    let hint = document.querySelector('#category_selected_ins').value ?? '';
+    let URL = '../ajax/get_rooms_reserv_upd_ins.php';
+    let hint = document.querySelector('#category_selected_upd_ins').value ?? '';
     let xhr = new XMLHttpRequest();
 
     xhr.open("GET", URL + '?q=' + hint, true);
