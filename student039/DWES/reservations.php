@@ -2,6 +2,7 @@
 require($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/templates/header.php');
 include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/connect_db.php');
 include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/verify_admin.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/db_checkout.php');
 
 //msg success at insert
 $msg = $_GET['msg'] ?? null;
@@ -60,16 +61,20 @@ include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/forms/form_reservations_se
                 <?php foreach ($reservations as $reservation) : ?>
                     <tr>
                         <?php
-                        $id = $reservation['ID_reservation'];
+                        $id_reservation = $reservation['ID_reservation'];
                         foreach ($reservation as $reservation_data) : ?>
                             <td>
-                                <?php 
+                                <?php
                                 echo $reservation_data ?? 'No room assigned'; ?>
                             </td>
                         <?php endforeach; ?>
                         <td>
-                            <a class="w-100 m-1 btn btn-outline-warning btn-sm" href="/student039/dwes/forms/form_reservations_update.php?result=<?php echo $id ?>">Update</a>
-                            <a class="w-100 m-1 btn btn-outline-danger btn-sm" href="/student039/dwes/forms/form_reservations_delete.php?result=<?php echo $id ?>">Delete</a>
+                            <a class="w-100 m-1 btn btn-outline-warning btn-sm" href="/student039/dwes/forms/form_reservations_update.php?result=<?php echo $id_reservation ?>">Update</a>
+                            <form method="POST">
+                                <input type="hidden" name="id_reservation" value="<?php echo $id_reservation ?>">
+                                <button type="submit" name="checkout" class="w-100 m-1 btn btn-warning btn-sm">Check-out</button>
+                            </form>
+                            <a class="w-100 m-1 btn btn-outline-danger btn-sm" href="/student039/dwes/forms/form_reservations_delete.php?result=<?php echo $id_reservation ?>">Delete</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
