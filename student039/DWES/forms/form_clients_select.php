@@ -8,7 +8,6 @@ include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/db_clients_select.php')
         <div class="mb-3">
             <label class="form-label" for="Client_name">Client name:</label>
             <input id="client_input" class="form-control form-control-sm" type="text" name="Client_name" oninput="getClients()">
-            <!-- <input class="btn btn-outline-primary my-3" type="submit" name="submit" value="Submit"> -->
         </div>
     </form>
 </div>

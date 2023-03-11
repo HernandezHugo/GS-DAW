@@ -72,7 +72,7 @@ require($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/templates/header.php');
         <div class="row row-cols-1 row-cols-md-3 g-4">
           <div class="col">
             <div class="card">
-              <img src="./img/restaurant.jpg" class="card-img-top" alt="...">
+              <img src="./img/Restaurant.jpg" class="card-img-top" alt="...">
               <div class="card-body">
                 <h5 class="card-title">Restaurant</h5>
                 <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -81,7 +81,7 @@ require($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/templates/header.php');
           </div>
           <div class="col">
             <div class="card">
-              <img src="./img/spa.jpg" class="card-img-top" alt="...">
+              <img src="./img/Spa.jpg" class="card-img-top" alt="...">
               <div class="card-body">
                 <h5 class="card-title">Spa</h5>
                 <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -90,7 +90,7 @@ require($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/templates/header.php');
           </div>
           <div class="col">
             <div class="card">
-              <img src="./img/bar.jpg" class="card-img-top" alt="...">
+              <img src="./img/Bar.jpg" class="card-img-top" alt="...">
               <div class="card-body">
                 <h5 class="card-title">Bar</h5>
                 <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>

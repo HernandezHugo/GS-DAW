@@ -1,13 +1,13 @@
 <script>
   function getClients() {
     let URL = './ajax/get_clients.php';
-    let hint = document.querySelector('#client_input').value
+    let hint = document.querySelector('#client_input').value ?? '';
     let xhr = new XMLHttpRequest();
 
     xhr.open("GET", URL + '?q=' + hint, true);
 
     xhr.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
+      if (this.readyState == 4 && this.status == 200 && hint != '') {
         printClients(JSON.parse(this.responseText))
       }
     };
