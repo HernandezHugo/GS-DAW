@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-12-2022 a las 05:24:49
+-- Tiempo de generación: 10-03-2023 a las 13:56:32
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.1
 
@@ -23,6 +23,7 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `039_reservations`;
 DROP TABLE IF EXISTS `039_rooms_view`;
+DROP VIEW IF EXISTS `039_rooms_view`;
 DROP TABLE IF EXISTS `039_rooms`;
 DROP TABLE IF EXISTS `039_categories_to_show`;
 DROP TABLE IF EXISTS `039_categories`;
@@ -132,6 +133,7 @@ SELECT COUNT(*) INTO present
 FROM 039_cart
 WHERE ID_reservation = var_id_reservation AND ID_service = 0;
 
+
 IF present = 0 THEN
 
 	INSERT INTO 039_cart(ID_reservation, ID_service, qty, total)
@@ -140,6 +142,7 @@ IF present = 0 THEN
 	WHERE ID_reservation = var_id_reservation;
 
 END IF;
+
 
 END$$
 
@@ -152,10 +155,9 @@ DELIMITER ;
 --
 
 CREATE TABLE IF NOT EXISTS `039_amenities` (
-  `ID_amenity` int(11) NOT NULL AUTO_INCREMENT,
-  `amenity_name` varchar(60) NOT NULL,
-  PRIMARY KEY (`ID_amenity`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
+  `ID_amenity` int(11) NOT NULL,
+  `amenity_name` varchar(60) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Truncar tablas antes de insertar `039_amenities`
@@ -208,7 +210,10 @@ INSERT INTO `039_cart` (`ID_reservation`, `ID_service`, `qty`, `total`) VALUES
 (1, 2, 1, '15.00'),
 (1, 0, 2, '300.00'),
 (14, 0, 1, '300.00'),
-(15, 0, 3, '300.00');
+(15, 0, 3, '300.00'),
+(16, 0, 1, '230.00'),
+(27, 0, 1, '230.00'),
+(28, 0, 1, '240.00');
 
 -- --------------------------------------------------------
 
@@ -217,12 +222,11 @@ INSERT INTO `039_cart` (`ID_reservation`, `ID_service`, `qty`, `total`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `039_categories` (
-  `ID_category` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_category` int(11) NOT NULL,
   `category_name` varchar(60) NOT NULL,
   `category_description` text NOT NULL,
-  `category_price` decimal(10,2) NOT NULL,
-  PRIMARY KEY (`ID_category`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+  `category_price` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Truncar tablas antes de insertar `039_categories`
@@ -285,16 +289,15 @@ INSERT INTO `039_categories_to_show` (`ID_category`, `category_name`, `category_
 --
 
 CREATE TABLE IF NOT EXISTS `039_clients` (
-  `ID_client` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_client` int(11) NOT NULL,
   `dni` varchar(9) NOT NULL,
   `firstname` varchar(60) NOT NULL,
   `surname` varchar(60) NOT NULL,
   `email` varchar(60) NOT NULL,
   `phone_number` int(11) NOT NULL,
   `birthday` date NOT NULL,
-  `pwd` varchar(60) NOT NULL,
-  PRIMARY KEY (`ID_client`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
+  `pwd` varchar(60) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Truncar tablas antes de insertar `039_clients`
@@ -326,11 +329,42 @@ INSERT INTO `039_clients` (`ID_client`, `dni`, `firstname`, `surname`, `email`, 
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `039_documents_json`
+--
+
+CREATE TABLE IF NOT EXISTS `039_documents_json` (
+  `ID_document_json` int(11) NOT NULL,
+  `document_name` varchar(60) NOT NULL,
+  `document_json` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`document_json`)),
+  `document_date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Truncar tablas antes de insertar `039_documents_json`
+--
+
+TRUNCATE TABLE `039_documents_json`;
+--
+-- Volcado de datos para la tabla `039_documents_json`
+--
+
+INSERT INTO `039_documents_json` (`ID_document_json`, `document_name`, `document_json`, `document_date`) VALUES
+(1, '2023-03-10 02-06-57_weatherObj.json', '[{\"LocalObservationDateTime\":\"2023-03-10T01:58:00 01:00\",\"EpochTime\":1678409880,\"WeatherText\":\"Clear\",\"WeatherIcon\":33,\"HasPrecipitation\":false,\"PrecipitationType\":null,\"IsDayTime\":false,\"Temperature\":{\"Metric\":{\"Value\":14.8,\"Unit\":\"C\",\"UnitType\":17},\"Imperial\":{\"Value\":59.0,\"Unit\":\"F\",\"UnitType\":18}},\"MobileLink\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\",\"Link\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\"}]', '2023-03-10 01:43:10'),
+(2, '2023-03-10 02-13-12_weatherObj.json', '[{\"LocalObservationDateTime\":\"2023-03-10T01:58:00 01:00\",\"EpochTime\":1678409880,\"WeatherText\":\"Clear\",\"WeatherIcon\":33,\"HasPrecipitation\":false,\"PrecipitationType\":null,\"IsDayTime\":false,\"Temperature\":{\"Metric\":{\"Value\":14.8,\"Unit\":\"C\",\"UnitType\":17},\"Imperial\":{\"Value\":59.0,\"Unit\":\"F\",\"UnitType\":18}},\"MobileLink\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\",\"Link\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\"}]', '2023-03-10 02:13:12'),
+(3, '2023-03-10 04-24-29_weatherObj.json', '[{\"LocalObservationDateTime\":\"2023-03-10T04:17:00 01:00\",\"EpochTime\":1678418220,\"WeatherText\":\"Partly cloudy\",\"WeatherIcon\":35,\"HasPrecipitation\":false,\"PrecipitationType\":null,\"IsDayTime\":false,\"Temperature\":{\"Metric\":{\"Value\":14.1,\"Unit\":\"C\",\"UnitType\":17},\"Imperial\":{\"Value\":57.0,\"Unit\":\"F\",\"UnitType\":18}},\"MobileLink\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\",\"Link\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\"}]', '2023-03-10 04:24:29'),
+(4, '2023-03-10 04-55-17_weatherObj.json', '[{\"LocalObservationDateTime\":\"2023-03-10T04:47:00 01:00\",\"EpochTime\":1678420020,\"WeatherText\":\"Partly cloudy\",\"WeatherIcon\":35,\"HasPrecipitation\":false,\"PrecipitationType\":null,\"IsDayTime\":false,\"Temperature\":{\"Metric\":{\"Value\":14.9,\"Unit\":\"C\",\"UnitType\":17},\"Imperial\":{\"Value\":59.0,\"Unit\":\"F\",\"UnitType\":18}},\"MobileLink\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\",\"Link\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\"}]', '2023-03-10 04:55:17'),
+(5, '2023-03-10 05-28-40_weatherObj.json', '[{\"LocalObservationDateTime\":\"2023-03-10T05:17:00 01:00\",\"EpochTime\":1678421820,\"WeatherText\":\"Mostly clear\",\"WeatherIcon\":34,\"HasPrecipitation\":false,\"PrecipitationType\":null,\"IsDayTime\":false,\"Temperature\":{\"Metric\":{\"Value\":14.1,\"Unit\":\"C\",\"UnitType\":17},\"Imperial\":{\"Value\":57.0,\"Unit\":\"F\",\"UnitType\":18}},\"MobileLink\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\",\"Link\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\"}]', '2023-03-10 05:28:40'),
+(6, '2023-03-10 06-03-19_weatherObj.json', '[{\"LocalObservationDateTime\":\"2023-03-10T05:52:00 01:00\",\"EpochTime\":1678423920,\"WeatherText\":\"Mostly clear\",\"WeatherIcon\":34,\"HasPrecipitation\":false,\"PrecipitationType\":null,\"IsDayTime\":false,\"Temperature\":{\"Metric\":{\"Value\":14.3,\"Unit\":\"C\",\"UnitType\":17},\"Imperial\":{\"Value\":58.0,\"Unit\":\"F\",\"UnitType\":18}},\"MobileLink\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\",\"Link\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\"}]', '2023-03-10 06:03:19'),
+(7, '2023-03-10 06-37-59_weatherObj.json', '[{\"LocalObservationDateTime\":\"2023-03-10T06:23:00 01:00\",\"EpochTime\":1678425780,\"WeatherText\":\"Mostly cloudy\",\"WeatherIcon\":38,\"HasPrecipitation\":false,\"PrecipitationType\":null,\"IsDayTime\":false,\"Temperature\":{\"Metric\":{\"Value\":14.3,\"Unit\":\"C\",\"UnitType\":17},\"Imperial\":{\"Value\":58.0,\"Unit\":\"F\",\"UnitType\":18}},\"MobileLink\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\",\"Link\":\"http://www.accuweather.com/en/es/mao/305482/current-weather/305482?lang=en-us\"}]', '2023-03-10 06:37:59');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `039_reservations`
 --
 
 CREATE TABLE IF NOT EXISTS `039_reservations` (
-  `ID_reservation` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_reservation` int(11) NOT NULL,
   `ID_client` int(11) NOT NULL,
   `ID_room` int(11) DEFAULT NULL,
   `ID_category` int(11) NOT NULL,
@@ -338,13 +372,8 @@ CREATE TABLE IF NOT EXISTS `039_reservations` (
   `final_date` date NOT NULL,
   `number_guests` int(11) NOT NULL,
   `total_price` int(11) NOT NULL,
-  `ID_status` int(11) NOT NULL DEFAULT 1,
-  PRIMARY KEY (`ID_reservation`),
-  KEY `ID_client` (`ID_client`),
-  KEY `ID_room` (`ID_room`),
-  KEY `ID_status` (`ID_status`),
-  KEY `ID_category` (`ID_category`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4;
+  `ID_status` int(11) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Truncar tablas antes de insertar `039_reservations`
@@ -359,10 +388,10 @@ INSERT INTO `039_reservations` (`ID_reservation`, `ID_client`, `ID_room`, `ID_ca
 (1, 1, 1, 1, '2022-06-17', '2022-06-19', 2, 300, 3),
 (14, 1, 2, 2, '2022-06-18', '2022-06-19', 2, 300, 3),
 (15, 1, 3, 3, '2022-06-21', '2022-06-24', 2, 300, 3),
-(16, 1, 1, 1, '2022-12-07', '2022-12-08', 2, 230, 2),
-(24, 3, NULL, 2, '2022-12-07', '2022-12-09', 2, 480, 1),
-(27, 1, 1, 1, '2022-12-09', '2022-12-10', 2, 230, 2),
-(28, 1, 2, 2, '2022-12-21', '2022-12-22', 2, 240, 2),
+(16, 1, 1, 1, '2022-12-07', '2022-12-08', 2, 230, 3),
+(24, 3, 5, 2, '2022-12-07', '2022-12-09', 2, 480, 1),
+(27, 1, 1, 1, '2022-12-09', '2022-12-10', 2, 230, 3),
+(28, 1, 2, 2, '2022-12-21', '2022-12-22', 2, 240, 3),
 (29, 1, 4, 4, '2022-12-23', '2022-12-24', 4, 500, 2);
 
 -- --------------------------------------------------------
@@ -372,12 +401,10 @@ INSERT INTO `039_reservations` (`ID_reservation`, `ID_client`, `ID_room`, `ID_ca
 --
 
 CREATE TABLE IF NOT EXISTS `039_rooms` (
-  `ID_room` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_room` int(11) NOT NULL,
   `ID_category` int(11) NOT NULL,
-  `capacity` int(11) NOT NULL,
-  PRIMARY KEY (`ID_room`),
-  KEY `ID_category` (`ID_category`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+  `capacity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Truncar tablas antes de insertar `039_rooms`
@@ -399,18 +426,16 @@ INSERT INTO `039_rooms` (`ID_room`, `ID_category`, `capacity`) VALUES
 (8, 8, 3),
 (9, 9, 2);
 
--- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `039_services`
 --
 
 CREATE TABLE IF NOT EXISTS `039_services` (
-  `ID_service` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_service` int(11) NOT NULL,
   `service_name` varchar(60) NOT NULL,
-  `service_price` decimal(10,2) NOT NULL,
-  PRIMARY KEY (`ID_service`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+  `service_price` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Truncar tablas antes de insertar `039_services`
@@ -433,10 +458,9 @@ INSERT INTO `039_services` (`ID_service`, `service_name`, `service_price`) VALUE
 --
 
 CREATE TABLE IF NOT EXISTS `039_status` (
-  `ID_status` int(11) NOT NULL AUTO_INCREMENT,
-  `status_name` varchar(10) NOT NULL,
-  PRIMARY KEY (`ID_status`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+  `ID_status` int(11) NOT NULL,
+  `status_name` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Truncar tablas antes de insertar `039_status`
@@ -460,14 +484,12 @@ INSERT INTO `039_status` (`ID_status`, `status_name`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `039_users` (
-  `ID_user` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_user` int(11) NOT NULL,
   `username` varchar(60) NOT NULL,
   `email` varchar(60) NOT NULL,
   `pwd` varchar(60) NOT NULL,
-  PRIMARY KEY (`ID_user`),
-  UNIQUE KEY `username` (`username`),
-  UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+  `user_pfp` varchar(60) NOT NULL DEFAULT 'default.png'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Truncar tablas antes de insertar `039_users`
@@ -478,9 +500,142 @@ TRUNCATE TABLE `039_users`;
 -- Volcado de datos para la tabla `039_users`
 --
 
-INSERT INTO `039_users` (`ID_user`, `username`, `email`, `pwd`) VALUES
-(1, 'dwesteacher', 'dwesteacher@correo.com', 'enrique'),
-(2, 'hugo', 'correo@correo.com', '123');
+INSERT INTO `039_users` (`ID_user`, `username`, `email`, `pwd`, `user_pfp`) VALUES
+(1, 'dwesteacher', 'dwesteacher@correo.com', 'enrique', 'enrique.jpg'),
+(2, 'hugo', 'correo@correo.com', '123', 'default.png'),
+(7, 'abc', 'a@a.a', '123', '906ae00e589cedfbcf8a9ae3be32337f.png');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `039_rooms_view`
+--
+
+
+CREATE VIEW IF NOT EXISTS `039_rooms_view` AS SELECT `r`.`ID_room` AS `ID_room`, `c`.`category_name` AS `category_name`, `r`.`capacity` AS `capacity` FROM (`039_rooms` `r` join `039_categories` `c` on(`r`.`ID_category` = `c`.`ID_category`)) ;
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `039_amenities`
+--
+ALTER TABLE `039_amenities`
+  ADD PRIMARY KEY (`ID_amenity`);
+
+--
+-- Indices de la tabla `039_categories`
+--
+ALTER TABLE `039_categories`
+  ADD PRIMARY KEY (`ID_category`);
+
+--
+-- Indices de la tabla `039_clients`
+--
+ALTER TABLE `039_clients`
+  ADD PRIMARY KEY (`ID_client`);
+
+--
+-- Indices de la tabla `039_documents_json`
+--
+ALTER TABLE `039_documents_json`
+  ADD PRIMARY KEY (`ID_document_json`);
+
+--
+-- Indices de la tabla `039_reservations`
+--
+ALTER TABLE `039_reservations`
+  ADD PRIMARY KEY (`ID_reservation`),
+  ADD KEY `ID_client` (`ID_client`),
+  ADD KEY `ID_room` (`ID_room`),
+  ADD KEY `ID_status` (`ID_status`),
+  ADD KEY `ID_category` (`ID_category`);
+
+--
+-- Indices de la tabla `039_rooms`
+--
+ALTER TABLE `039_rooms`
+  ADD PRIMARY KEY (`ID_room`),
+  ADD KEY `ID_category` (`ID_category`);
+
+--
+-- Indices de la tabla `039_services`
+--
+ALTER TABLE `039_services`
+  ADD PRIMARY KEY (`ID_service`);
+
+--
+-- Indices de la tabla `039_status`
+--
+ALTER TABLE `039_status`
+  ADD PRIMARY KEY (`ID_status`);
+
+--
+-- Indices de la tabla `039_users`
+--
+ALTER TABLE `039_users`
+  ADD PRIMARY KEY (`ID_user`),
+  ADD UNIQUE KEY `username` (`username`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `039_amenities`
+--
+ALTER TABLE `039_amenities`
+  MODIFY `ID_amenity` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT de la tabla `039_categories`
+--
+ALTER TABLE `039_categories`
+  MODIFY `ID_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT de la tabla `039_clients`
+--
+ALTER TABLE `039_clients`
+  MODIFY `ID_client` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT de la tabla `039_documents_json`
+--
+ALTER TABLE `039_documents_json`
+  MODIFY `ID_document_json` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT de la tabla `039_reservations`
+--
+ALTER TABLE `039_reservations`
+  MODIFY `ID_reservation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- AUTO_INCREMENT de la tabla `039_rooms`
+--
+ALTER TABLE `039_rooms`
+  MODIFY `ID_room` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT de la tabla `039_services`
+--
+ALTER TABLE `039_services`
+  MODIFY `ID_service` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `039_status`
+--
+ALTER TABLE `039_status`
+  MODIFY `ID_status` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `039_users`
+--
+ALTER TABLE `039_users`
+  MODIFY `ID_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Restricciones para tablas volcadas
