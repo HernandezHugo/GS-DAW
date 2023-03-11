@@ -9,21 +9,21 @@ include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/db_reservations_update.
 <div class="container bg-light mt-3 w-75">
     <form class="mt-3 " action="" method="POST">
         <label class="form-label mt-3">Client</label>
-        <select class="input-group" name="id_client">
+        <select class="form-select" aria-label="Default select example" name="id_client">
             <option value="<?php echo $id_client; ?>" selected><?php echo $client_selected['firstname']; ?></option>
             <?php foreach ($clients as $client) : ?>
                 <option value="<?php echo $client['ID_client']; ?>"><?php echo $client['firstname']; ?></option>
             <?php endforeach; ?>
         </select>
         <label class="form-label mt-3">room</label>
-        <select class="input-group" name="id_room">
+        <select class="form-select" aria-label="Default select example" name="id_room">
             <option value="<?php echo $id_room ?? ''; ?>" selected><?php echo $room_selected['name_room'] ?? ''; ?></option>
             <?php foreach ($rooms as $room) : ?>
                 <option value="<?php echo $room['ID_room']; ?>"><?php echo $room['name_room']; ?></option>
             <?php endforeach; ?>
         </select>
         <label class="form-label mt-3">category</label>
-        <select class="input-group" name="id_category">
+        <select class="form-select" aria-label="Default select example" name="id_category">
             <option value="<?php echo $id_category; ?>" selected><?php echo $category_selected['category_name']; ?></option>
             <?php foreach ($categories as $category) : ?>
                 <option value="<?php echo $category['ID_category']; ?>"><?php echo $category['category_name']; ?></option>

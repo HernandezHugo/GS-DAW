@@ -41,7 +41,7 @@ mysqli_free_result($result);
     <div class="row p-5">
         <div class="col">
             <label class="form-label mt-3">Reservation</label>
-            <select class="input-group" name="id_reservation">
+            <select class="form-select" aria-label="Default select example" name="id_reservation">
                 <option value="" selected></option>
                 <?php foreach ($reservations as $reservation) : ?>
                     <option value="<?php echo $reservation['ID_reservation']; ?>">
