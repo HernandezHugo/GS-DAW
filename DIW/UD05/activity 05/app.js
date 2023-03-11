@@ -1,11 +1,14 @@
-import Router from "./router.js";
-import store from "./store.js";
+import router from "./router.js";
 import navHeader from "./components/header.js";
 import Products from "./components/products.js";
 
-const { createApp } = Vue;
+const { createApp, markRaw } = Vue;
 
 const pinia = Pinia.createPinia();
+
+pinia.use(({ store }) => {
+  store.$router = markRaw(router);
+});
 
 let app = createApp({
   components: {
@@ -15,5 +18,5 @@ let app = createApp({
 });
 
 app.use(pinia);
-app.use(Router);
+app.use(router);
 app.mount("#app");

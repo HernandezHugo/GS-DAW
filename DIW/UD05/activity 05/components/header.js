@@ -1,14 +1,11 @@
+import store from "../store.js";
+
 export default {
   data() {
     return {
       logged: false,
       login: false,
       register: false,
-      user: {
-        name: "",
-        email: "",
-        password: "",
-      },
     };
   },
   template: `
@@ -18,7 +15,7 @@ export default {
           <h1>Fedora</h1>
         </div>
         <div class="tags">
-          <p v-if="logged" id="welcome">Hello, {{ user.name }}</p>
+          <p v-if="logged" id="welcome">Hello, {{ name }}</p>
           <a v-if="!login && !logged" @click="goToLogin()">Login</a>
           <a v-if="!register && !logged" @click="goToRegister()">Register</a>
           <a v-if="logged" @click="logOut()">Log Out</a>
@@ -46,6 +43,9 @@ export default {
       },
       immediate: true,
     },
+  },
+  computed: {
+    ...Pinia.mapState(store, ["name"]),
   },
   methods: {
     checkUserLogged() {
