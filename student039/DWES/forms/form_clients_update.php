@@ -26,7 +26,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/db_clients_update.php')
         <label class="form-label mt-3">Birthday</label>
         <input type="date" name="birthday" value="<?php echo $birthday; ?>">
         <br>
-        
+
         <input class="my-3 btn btn-outline-primary btn-sm" type="submit" name="submit" value="Submit">
     </form>
 
@@ -40,3 +40,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/db/db_clients_update.php')
 <?php
 require($_SERVER['DOCUMENT_ROOT'] . '/student039/dwes/templates/footer.php');
 ?>
+
+</body>
+
+</html>
