@@ -86,52 +86,50 @@
         <div class="row border border-success p-2 mb-2 border-opacity-25">
           <div class="col">
             <section>
-                <h1>Habitaciones</h1>
-                <p>Los documentos de SIUD (SELECT, INSERT UPDATE y DELETE) </p>
-                <img src="./img/siud_habitaciones.png" alt="">
+                <h1>AccuWeather</h1>
+                <p>Los documentos relacionados con AJAX y la petición a APIs de terceros son: </p>
+                <img src="./img/AJAX_docs_accuweather.png" alt="">
             </section>
           </div>
         </div>
         <div class="row border border-success p-2 mb-2 border-opacity-25">
           <div class="col">
             <section>
-                <h3>Select</h3>
+                <h3>Scripts AJAX</h3>
               <p>
-                Obtienes las habitaciones de la base de datos.
+                Aplicamos AJAX para realizar una peticion a la API de AccuWeather. Esto hará que enseñe el tiempo de la zona del hotel y está representado en la esquina superior izquierda de la portada, en la página inicial
               </p>
-              <img src="./img/habitaciones_select.png" alt="">
-            </section>
-          </div>
-        </div>
-        <div class="row border border-success p-2 mb-2 border-opacity-25">
-          <div class="col">
-            <section>
-                <h3>Insert</h3>
               <p>
-                Añades una habitacion a la base de datos.
+                Con el script primero hacemos una peticion al archivo "check_accu_weather.php" y, dependiendo de la respuesta, haremos una peticion a la API de AccuWeather o utilizamos la información que hay en nuestra base de datos.
               </p>
-              <img src="./img/habitaciones_insert.png" alt="">
+              <p>Una vez tengamos la información necesaria, procedemos a; guardar el JSON del tiempo en la base de datos, si hemos hecho la peticion a AccuWeather, y más tarde enseñarlo en la portada; o enseñarlo directamente en la portada, porque significará que no hemos hecho una peticion a la API. </p>
+              <img src="./img/AJAX_script_accuweather-1.png" alt="">
+              <img src="./img/AJAX_script_accuweather-2.png" alt="">
             </section>
           </div>
         </div>
+        
         <div class="row border border-success p-2 mb-2 border-opacity-25">
           <div class="col">
             <section>
-                <h3>Update</h3>
-              <p>Te permite actualizar las habitaciones.</p>
-              <img src="./img/habitaciones_update-1.png" alt="">
-              <img src="./img/habitaciones_update-2.png" alt="">
-            </section>
-          </div>
-        </div>
-        <div class="row border border-success p-2 mb-2 border-opacity-25">
-          <div class="col">
-            <section>
-                <h3>Delete</h3>
+              <h3>PHP Docs</h3>
               <p>
-                  Eliminas la habitacion.
+                En el primer archivo php, comprobamos si existe un documento JSON con la información del tiempo en nuestra base de datos con un margen de tiempo de treinta minutos, respecto a la última peticion a AccuWeather.
               </p>
-              <img src="./img/habitaciones_delete.png" alt="">
+              <p>Le enviamos una respuesta al script de la peticion para determinar si hacer una peticion a AccuWeather o no.</p>
+              <img src="./img/AJAX_php_accuweather-1.png" alt="">
+            </section>
+          </div>
+        </div>
+        <div class="row border border-success p-2 mb-2 border-opacity-25">
+          <div class="col">
+            <section>
+              <p>
+                Obtenemos el JSON desde el script de AJAX. Después, obtenemos la fecha y hora actual (año-mes-dia hora-min), para añadirlo al nombre del documento, como información relevante.
+              </p>
+              <p>Por último, hacemos un "INSERT" con la información relevante del documento: nombre del archivo, archivo(.json) y la fecha de obtencion.
+              </p>
+              <img src="./img/AJAX_php_accuweather-2.png" alt="">
             </section>
           </div>
         </div>

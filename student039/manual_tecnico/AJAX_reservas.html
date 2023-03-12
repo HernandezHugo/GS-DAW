@@ -86,52 +86,54 @@
         <div class="row border border-success p-2 mb-2 border-opacity-25">
           <div class="col">
             <section>
-                <h1>Habitaciones</h1>
-                <p>Los documentos de SIUD (SELECT, INSERT UPDATE y DELETE) </p>
-                <img src="./img/siud_habitaciones.png" alt="">
+                <h1>Reservas</h1>
+                <p>Los documentos relacionados con AJAX y las reservas son: </p>
+                <img src="./img/AJAX_docs_reserv.png" alt="">
             </section>
           </div>
         </div>
         <div class="row border border-success p-2 mb-2 border-opacity-25">
           <div class="col">
             <section>
-                <h3>Select</h3>
+                <h3>Scripts AJAX</h3>
               <p>
-                Obtienes las habitaciones de la base de datos.
+                Aplicamos AJAX en las reservas a la hora de hacer "INSERT" y "UPDATE". Esto es necesario para rellenar los formularios de una forma coherente.
               </p>
-              <img src="./img/habitaciones_select.png" alt="">
-            </section>
-          </div>
-        </div>
-        <div class="row border border-success p-2 mb-2 border-opacity-25">
-          <div class="col">
-            <section>
-                <h3>Insert</h3>
               <p>
-                Añades una habitacion a la base de datos.
+                Con el primer script obtendremos la lista de habitaciones después de haber seleccionado la categoria desea. La lista estará representa en un "dropdown" del formulario.
               </p>
-              <img src="./img/habitaciones_insert.png" alt="">
+              <img src="./img/AJAX_script_reserv-1.png" alt="">
             </section>
           </div>
         </div>
         <div class="row border border-success p-2 mb-2 border-opacity-25">
           <div class="col">
             <section>
-                <h3>Update</h3>
-              <p>Te permite actualizar las habitaciones.</p>
-              <img src="./img/habitaciones_update-1.png" alt="">
-              <img src="./img/habitaciones_update-2.png" alt="">
-            </section>
-          </div>
-        </div>
-        <div class="row border border-success p-2 mb-2 border-opacity-25">
-          <div class="col">
-            <section>
-                <h3>Delete</h3>
               <p>
-                  Eliminas la habitacion.
+                Con el segundo script obtendremos el coste del servicio "room" después de haber introducido categoria, fecha inicial y fecha final en el formulario.
               </p>
-              <img src="./img/habitaciones_delete.png" alt="">
+              <img src="./img/AJAX_script_reserv-2.png" alt="">
+            </section>
+          </div>
+        </div>
+        <div class="row border border-success p-2 mb-2 border-opacity-25">
+          <div class="col">
+            <section>
+                <h3>PHP Docs</h3>
+              <p>
+                Obtenemos la lista de habitaciones segun la categoria seleccionada en el formulario. Después, enviamos la lista para poder mostrarla en un "dropdown" más tarde.
+              </p>
+              <img src="./img/AJAX_php_reserv-1.png" alt="">
+            </section>
+          </div>
+        </div>
+        <div class="row border border-success p-2 mb-2 border-opacity-25">
+          <div class="col">
+            <section>
+              <p>
+                Obtenemos el resultado de noches * categoria. Esto será representado más tarde en el input number del formulario como precio final del servicio "room".
+              </p>
+              <img src="./img/AJAX_php_reserv-2.png" alt="">
             </section>
           </div>
         </div>
