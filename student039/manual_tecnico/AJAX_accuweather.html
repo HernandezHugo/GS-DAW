@@ -22,7 +22,7 @@
                         SIUD
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="./SIUD_clientes.html">Clientes</a></li>
+                            <li><a class="dropdown-item" href="./SIUD_usuarios.html">Usuarios</a></li>
                             <li><a class="dropdown-item" href="./SIUD_habitaciones.html">Habitaciones</a></li>
                             <li><a class="dropdown-item" href="./SIUD_reservas.html">Reservas</a></li>
                         </ul>
@@ -65,7 +65,7 @@
                         </a>
                         <ul class="dropdown-menu">
                           <li><a class="dropdown-item" href="./ficheros_imagenes.html">Imágenes</a></li>
-                          <li><a class="dropdown-item" href="./ficheros_jsons.html">JSONs</a></li>
+                          
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -73,7 +73,8 @@
                           Seguridad
                         </a>
                         <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="./seguridad_imagenes.html#seguridad">Usuarios</a></li>
+                          <li><a class="dropdown-item" href="./seguridad.html">Usuarios</a></li><li><a class="dropdown-item" href="./login.html">Login y Logout</a></li>
+
                         </ul>
                     </li>
                 </ul>
@@ -88,7 +89,7 @@
             <section>
                 <h1>AccuWeather</h1>
                 <p>Los documentos relacionados con AJAX y la petición a APIs de terceros son: </p>
-                <img src="./img/AJAX_docs_accuweather.png" alt="">
+                <img src="./img/AJAX_docs_accuweather.png" >
             </section>
           </div>
         </div>
@@ -103,8 +104,8 @@
                 Con el script primero hacemos una peticion al archivo "check_accu_weather.php" y, dependiendo de la respuesta, haremos una peticion a la API de AccuWeather o utilizamos la información que hay en nuestra base de datos.
               </p>
               <p>Una vez tengamos la información necesaria, procedemos a; guardar el JSON del tiempo en la base de datos, si hemos hecho la peticion a AccuWeather, y más tarde enseñarlo en la portada; o enseñarlo directamente en la portada, porque significará que no hemos hecho una peticion a la API. </p>
-              <img src="./img/AJAX_script_accuweather-1.png" alt="">
-              <img src="./img/AJAX_script_accuweather-2.png" alt="">
+              <img src="./img/AJAX_script_accuweather-1.png" >
+              <img src="./img/AJAX_script_accuweather-2.png" >
             </section>
           </div>
         </div>
@@ -117,7 +118,7 @@
                 En el primer archivo php, comprobamos si existe un documento JSON con la información del tiempo en nuestra base de datos con un margen de tiempo de treinta minutos, respecto a la última peticion a AccuWeather.
               </p>
               <p>Le enviamos una respuesta al script de la peticion para determinar si hacer una peticion a AccuWeather o no.</p>
-              <img src="./img/AJAX_php_accuweather-1.png" alt="">
+              <img src="./img/AJAX_php_accuweather-1.png" >
             </section>
           </div>
         </div>
@@ -129,7 +130,7 @@
               </p>
               <p>Por último, hacemos un "INSERT" con la información relevante del documento: nombre del archivo, archivo(.json) y la fecha de obtencion.
               </p>
-              <img src="./img/AJAX_php_accuweather-2.png" alt="">
+              <img src="./img/AJAX_php_accuweather-2.png" >
             </section>
           </div>
         </div>

@@ -73,8 +73,8 @@
                           Seguridad
                         </a>
                         <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="./seguridad.html">Usuarios</a></li><li><a class="dropdown-item" href="./login.html">Login y Logout</a></li>
-
+                          <li><a class="dropdown-item" href="./seguridad.html">Usuarios</a></li>
+                          <li><a class="dropdown-item" href="./login.html">Login y Logout</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -84,49 +84,62 @@
 
     
     <main class="container">
-      <div class="row border border-success p-2 mb-2 border-opacity-25">
-        <div class="col">
-          <section>
-              <h1>Añadir servicios</h1>
-          </section>
+        <div class="row border border-success p-2 mb-2 border-opacity-25">
+          <div class="col">
+            <section>
+                <h1>Subida de archivos</h1>
+            </section>
+          </div>
         </div>
-      </div>
-      <div class="row border border-success p-2 mb-2 border-opacity-25">
-        <div class="col">
-          <section>
-              <h3>Display y SELECT</h3>
-              <p><b>Vista de cliente: </b>Como clientes, solo podemos ver en el "dropdown" nuestras reservas que estén en estado "checked-in", para poder añadir servicios a estas reservas.</p>
-              <p><b>Vista de administrador: </b>Como administradores, podemos ver todas las reservas en el "dropdown" que estén en estado "checked-in".</p>
-              <p>Hacemos display de los servicios disponibles en el hotel, para que el cliente o administrador puedan añadirlo a una reserva.</p>
-              <img src="./img/services_display-1.png" >
-              <img src="./img/services_display-2.png" >
-              <img src="./img/services_display-3.png" >
-          </section>
+        <div class="row border border-success p-2 mb-2 border-opacity-25">
+          <div class="col">
+            <section>
+                <h3>Inicialización de carpeta</h3>
+              <p>
+                Antes de intentar crear la carpeta que contendra todas las imagenes de perfil, compruebo que existe, si no, la creo.
+              </p>
+              <img src="./img/folder_initialize.png" >
+            </section>
+          </div>
         </div>
-      </div>
-      <div class="row border border-success p-2 mb-2 border-opacity-25">
-        <div class="col">
-          <section>
-            <h3>PHP Docs</h3>
-            <p>
-              Reunimos la información de los servicios seleccionados y los introducimos en el procedimiento "039_addToCart", para procesarlo más tarde.
-            </p>
-            <img src="./img/services_insert.png" >
-          </section>
+        <div class="row border border-success p-2 mb-2 border-opacity-25">
+          <div class="col">
+            <section>
+              <h3>Asignación de nombre de la imagen</h3>
+              <p>
+                Separo el nombre del archivo de su formato, para hacerle hash. Con esto conseguiremos un nombre único para el archivo.
+              </p>
+              <img src="./img/file_name.png" >
+            </section>
+          </div>
         </div>
-      </div>
-      <div class="row border border-success p-2 mb-2 border-opacity-25">
-        <div class="col">
-          <section>
-            <h3>SQL Docs</h3>
-            <p>
-              Se introduce cada servicio en la tabla "039_cart" con la ID del servicio, la ID del cliente y el precio del servicio * las veces que haya sido contrato.  
-            </p>            
-            <img src="./img/services_procedure.png" >
-          </section>
+        <div class="row border border-success p-2 mb-2 border-opacity-25">
+          <div class="col">
+            <section>
+              <h1>Confirmación</h1>
+              <p>
+                Confirmamos que el archivo tiene contenido.
+              </p>
+              <img src="./img/file_confirm.png" >
+            </section>
+          </div>
         </div>
-      </div>
-    </main>
+        <div class="row border border-success p-2 mb-2 border-opacity-25">
+          <div class="col">
+            <section>
+              <h1>Guadar imagen</h1>
+              <p>
+                Casi al final, guardamos el archivo en la carpeta que creamos previamente.
+              </p>
+              <img src="./img/file_store.png" >
+              <p>
+                Por último, hacemos "INSERT" del admin con el nombre hasheado de la imagen subida, para poder acceder a ella más adelante.
+              </p>
+              <img src="./img/file_insert.png" >
+            </section>
+          </div>
+        </div>
+      </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>

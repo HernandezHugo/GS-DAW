@@ -22,7 +22,7 @@
                         SIUD
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="./SIUD_clientes.html">Clientes</a></li>
+                            <li><a class="dropdown-item" href="./SIUD_usuarios.html">Usuarios</a></li>
                             <li><a class="dropdown-item" href="./SIUD_habitaciones.html">Habitaciones</a></li>
                             <li><a class="dropdown-item" href="./SIUD_reservas.html">Reservas</a></li>
                         </ul>
@@ -65,7 +65,7 @@
                         </a>
                         <ul class="dropdown-menu">
                           <li><a class="dropdown-item" href="./ficheros_imagenes.html">Imágenes</a></li>
-                          <li><a class="dropdown-item" href="./ficheros_jsons.html">JSONs</a></li>
+                          
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -73,7 +73,8 @@
                           Seguridad
                         </a>
                         <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="./seguridad_imagenes.html#seguridad">Usuarios</a></li>
+                          <li><a class="dropdown-item" href="./seguridad.html">Usuarios</a></li><li><a class="dropdown-item" href="./login.html">Login y Logout</a></li>
+
                         </ul>
                     </li>
                 </ul>
@@ -95,8 +96,8 @@
             <section>
                 <h3>Display</h3>
               <p>Mostramos las categorias que estan disponibles según la fecha que introduzcas en los inputs que hay en el centro de la sección de "Booking".</p>
-              <img src="./img/booking_includes.png" alt="">
-              <img src="./img/booking_display.png" alt="">
+              <img src="./img/booking_includes.png" >
+              <img src="./img/booking_display.png" >
             </section>
           </div>
         </div>
@@ -108,7 +109,7 @@
                 Este fragmento de código está incluido en el documento "Booking.php", porque inicializa la fecha inicial y final con las cookies (si no las rechazaste en la página inicial).
               </p>
               <p>Cuando el cliente confirma la fecha inicial y la fecha final de su estadia en el hotel, se pasarán las fechas al procedimiento "039_caregories_to_show" para poder enseñar las categorias disponibles.</p>
-              <img src="./img/booking_select.png" alt="">
+              <img src="./img/booking_select.png" >
             </section>
           </div>
         </div>
@@ -120,7 +121,7 @@
               </p>
               <p>Cuando el cliente clicka sobre "book" en una de las categorias que se hayan enseñado, se registrará la ID del cliente que esta guardada en la variable global "$_SESSION" para relacionar al cliente con la categoria elegida y registrar una reserva más tarde. Después, se hará un "INSERT", a la base de datos, con los datos recogidos del cliente y de la caregoria seleccionada.</p>
               <p>Cuando el admin clicka en "book" la ID de cliente, que se usará más tarde para insertar datos, será una aleatoria de entre los clientes que están registrados en la base de datos. Esto fue pensado así para poder añadir reservas desde "Booking.php" con la perspectiva de cliente</p>
-              <img src="./img/booking_insert.png" alt="">
+              <img src="./img/booking_insert.png" >
             </section>
           </div>
         </div>
@@ -133,8 +134,8 @@
               </p>
               <p>El objetivo de este procedimiento es conseguir la lista de categorias que tengan, como mínimo, 1 habitacion disponible. Después, se guardarán en una tabla que, más tarde, será mostrada en la página "Booking". </p>
               
-              <img src="./img/booking_procedure-1.png" alt="">
-              <img src="./img/booking_procedure-2.png" alt="">
+              <img src="./img/booking_procedure-1.png" >
+              <img src="./img/booking_procedure-2.png" >
             </section>
           </div>
         </div>
