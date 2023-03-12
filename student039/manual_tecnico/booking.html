@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">  
+    <title>Manual técnico</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="./index.html">Manual técnico Sito</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        SIUD
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="./SIUD_clientes.html">Clientes</a></li>
+                            <li><a class="dropdown-item" href="./SIUD_habitaciones.html">Habitaciones</a></li>
+                            <li><a class="dropdown-item" href="./SIUD_reservas.html">Reservas</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Formularios
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="./formularios_clientes.html">Clientes</a></li>
+                            <li><a class="dropdown-item" href="./formularios_habitaciones.html">Habitaciones</a></li>
+                            <li><a class="dropdown-item" href="./formularios_reservas.html">Reservas</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Booking
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="./booking.html">Realizar reserva</a></li>
+                            <li><a class="dropdown-item" href="./cliente_reservas.html">Ver tus reservas</a></li>
+                            <li><a class="dropdown-item" href="./servicios.html">Añadir servicios</a></li>
+                            <li><a class="dropdown-item" href="./ticket.html">Obtener ticket</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          AJAX
+                        </a>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="./AJAX_clientes.html">Clientes</a></li>
+                          <li><a class="dropdown-item" href="./AJAX_habitaciones.html">Habitaciones</a></li>
+                          <li><a class="dropdown-item" href="./AJAX_reservas.html">Reservas</a></li>
+                          <li><a class="dropdown-item" href="./AJAX_accuweather.html">AccuWeather</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Gestión de ficheros
+                        </a>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="./ficheros_imagenes.html">Imágenes</a></li>
+                          <li><a class="dropdown-item" href="./ficheros_jsons.html">JSONs</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Seguridad
+                        </a>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="./seguridad_imagenes.html#seguridad">Usuarios</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    
+    <main class="container">
+        <div class="row border border-success p-2 mb-2 border-opacity-25">
+          <div class="col">
+            <section>
+                <h1>Realizar reserva</h1>
+            </section>
+          </div>
+        </div>
+        <div class="row border border-success p-2 mb-2 border-opacity-25">
+          <div class="col">
+            <section>
+                <h3>Display</h3>
+              <p>Mostramos las categorias que estan disponibles según la fecha que introduzcas en los inputs que hay en el centro de la sección de "Booking".</p>
+              <img src="./img/booking_includes.png" alt="">
+              <img src="./img/booking_display.png" alt="">
+            </section>
+          </div>
+        </div>
+        <div class="row border border-success p-2 mb-2 border-opacity-25">
+          <div class="col">
+            <section>
+              <h3>PHP Docs</h3>
+              <p>
+                Este fragmento de código está incluido en el documento "Booking.php", porque inicializa la fecha inicial y final con las cookies (si no las rechazaste en la página inicial).
+              </p>
+              <p>Cuando el cliente confirma la fecha inicial y la fecha final de su estadia en el hotel, se pasarán las fechas al procedimiento "039_caregories_to_show" para poder enseñar las categorias disponibles.</p>
+              <img src="./img/booking_select.png" alt="">
+            </section>
+          </div>
+        </div>
+        <div class="row border border-success p-2 mb-2 border-opacity-25">
+          <div class="col">
+            <section>
+              <p>
+                Este fragmento de código tambien está incluido en el documento "Booking.php".
+              </p>
+              <p>Cuando el cliente clicka sobre "book" en una de las categorias que se hayan enseñado, se registrará la ID del cliente que esta guardada en la variable global "$_SESSION" para relacionar al cliente con la categoria elegida y registrar una reserva más tarde. Después, se hará un "INSERT", a la base de datos, con los datos recogidos del cliente y de la caregoria seleccionada.</p>
+              <p>Cuando el admin clicka en "book" la ID de cliente, que se usará más tarde para insertar datos, será una aleatoria de entre los clientes que están registrados en la base de datos. Esto fue pensado así para poder añadir reservas desde "Booking.php" con la perspectiva de cliente</p>
+              <img src="./img/booking_insert.png" alt="">
+            </section>
+          </div>
+        </div>
+        <div class="row border border-success p-2 mb-2 border-opacity-25">
+          <div class="col">
+            <section>
+              <h3>SQL Docs</h3>
+              <p>
+                Este código está guardado en el documento de "039_hotel.sql".
+              </p>
+              <p>El objetivo de este procedimiento es conseguir la lista de categorias que tengan, como mínimo, 1 habitacion disponible. Después, se guardarán en una tabla que, más tarde, será mostrada en la página "Booking". </p>
+              
+              <img src="./img/booking_procedure-1.png" alt="">
+              <img src="./img/booking_procedure-2.png" alt="">
+            </section>
+          </div>
+        </div>
+      </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
